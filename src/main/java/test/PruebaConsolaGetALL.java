@@ -1,9 +1,10 @@
+package test;
 import java.util.ArrayList;
 
 import modelo.Pais;
 import modelo.PaisDAOImp;
 
-public class pruebaPaisDAOImp {
+public class PruebaConsolaGetALL {
 
 	public static void main(String[] args) throws Exception {
 		

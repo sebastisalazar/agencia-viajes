@@ -3,12 +3,12 @@ package modelo;
 public class Pais {
 
 	
-	private String name;
+	private String nombre;
 	private int id;
 	
 	public Pais() {
 		super();
-		this.name ="";
+		this.nombre ="";
 		this.id =0;
 	}
 
@@ -18,17 +18,17 @@ public class Pais {
 	}
 
 	
-	public Pais(String name, int id) {
-		this.name = name;
+	public Pais(String nombre, int id) {
+		this.nombre = nombre;
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(String nombre) {
+		this.nombre = nombre;
 	}
 
 	public int getId() {
@@ -41,7 +41,7 @@ public class Pais {
 	
 	@Override
 	public String toString() {
-		return "Pais [name=" + name + ", id=" + id + "]";
+		return "Pais [nombre=" + nombre + ", id=" + id + "]";
 	}
 	
 	
