@@ -46,12 +46,26 @@ public class RegistroPaisController extends HttpServlet {
 		ArrayList<String> requeridos=new ArrayList<String>();
 		String nombrePais=request.getParameter("paisnuevo");
 		
-		//Validacion del input nombre, minimo 3 caracteres 
-		if (nombrePais.length()<3) {
+		
+		if (("").equalsIgnoreCase(nombrePais)) {
+			
+			//añade el mensaje al array que va a pasar
+			requeridos.add("El campo nombre está en blanco, debe contener mínimo 3 caracteres");
+			
+			//pasa el array a la vista 
+			session.setAttribute("requeridos", requeridos);
+			
+			//redirecciona a la vista
+			response.sendRedirect("registro-pais.jsp");
+			
+		//Validacion del input nombre, minimo 3 caracteres
+		}else if (nombrePais.length()<3) {
 			
 			//añade el mensaje al array que va a pasar
 			requeridos.add("El nombre es demasiado corto, debe contener mínimo 3 caracteres");
 			
+			//Devuelve lo que se escribio en el campo para volver a mostrarlo en el input
+			session.setAttribute("nombreIntroducido", nombrePais);
 			//pasa el array a la vista 
 			session.setAttribute("requeridos", requeridos);
 			
@@ -63,6 +77,9 @@ public class RegistroPaisController extends HttpServlet {
 			
 			//añade el mensaje al array que va a pasar
 			requeridos.add("El nombre es demasiado largo, debe contener máximo 100 caracteres");
+			
+			//Devuelve lo que se escribio en el campo para volver a mostrarlo en el input
+			session.setAttribute("nombreIntroducido", nombrePais);
 			
 			//pasa el array a la vista 
 			session.setAttribute("requeridos", requeridos);
@@ -87,13 +104,15 @@ public class RegistroPaisController extends HttpServlet {
 				alerta= new Alerta("success","El registro se ha insertado correctamente");
 			} catch (Exception e) {
 				
+				//Devuelve lo que se escribio en el campo para volver a mostrarlo en el input
+				session.setAttribute("nombreIntroducido", nombrePais);
+				
 				//crea y atrapa el mensaje que devuelve el modelo cuando dé una excepcion
 				alerta= new Alerta("danger",e.getMessage());
 			}finally {
 				
 				//se pasa el mensaje del insert a la vista
 				session.setAttribute("alerta",alerta);
-				
 				
 				//se redirecciona a la vista
 				response.sendRedirect("registro-pais.jsp");

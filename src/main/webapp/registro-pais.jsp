@@ -17,26 +17,35 @@
 		
 	
 		<h1 class="text-primary text-center">Registro nuevo destino</h1>
+		
+		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
 		
+			<!-- lee los mensajes del array y los va escribiendo cada uno en etiqueta p -->
 			<c:forEach items="${requeridos}" var="r">
 				<p class="text-center text-danger">${r}</p>
 			</c:forEach>
 			
-			<%session.setAttribute("requeridos",null);%>
+			<!-- Una vez pintado borra los mensajes -->
+			<%session.removeAttribute("requeridos");%>
 		</c:if>
+		
+		
 	
 	<form class="form-inline justify-content-center my-5" action="registro-pais" method="POST">
 	  
 	  <div class="form-group mx-sm-3 mb-2">
-	  
-	  	
-		
-	    <label for="paisnuevo" class="sr-only">Nombre del pais destino</label>
-	    <input type="text" class="form-control" id="paisnuevo" name="paisnuevo" placeholder="Australia">
+	 
+	    <!-- VALUEE -> Pinta lo que se introdujo en caso de error-->
+	    <input type="text" class="form-control" id="paisnuevo" name="paisnuevo" placeholder="Introduce un nuevo pais" value="${nombreIntroducido}">
 	  </div>
 	  <button type="submit" class="btn btn-primary mb-2">Confirmar registro</button>
 	</form>
+	
+	<!-- Borra lo que se introdujo para que no se escriba si se refresca o se vuelva a esta pagina-->
+	<c:if test="${not empty nombreIntroducido}">
+		<%session.removeAttribute("nombreIntroducido"); %>
+	</c:if>
 	
 	</div>
 	
