@@ -87,7 +87,7 @@ public class RegistroPaisController extends HttpServlet {
 			//redirecciona a la vista
 			response.sendRedirect("registro-pais.jsp");
 			
-		//si el nombre no es mayor de 3 caracteres y menor de 100 entra por aquí
+		//si el nombre NO ES MAYOR de 3 caracteres Y ES MENOR de 100 entra por aquí
 		}else {
 			
 			PaisDAOImp dao= PaisDAOImp.getInstance();
