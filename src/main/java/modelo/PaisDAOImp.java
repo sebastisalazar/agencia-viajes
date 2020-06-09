@@ -106,7 +106,7 @@ public class PaisDAOImp implements PaisDAO {
 					
 					//si captura una excepcion de typo sql la lanza
 				}catch (Exception DBSQLException) {
-					throw new Exception("\nError, ya existe el pais "+pojo.getNombre()+"\n"+".");
+					throw new Exception("\nLo sentimos, el pais "+(pojo.getNombre()).toUpperCase()+"\n"+" ya está registrado.");
 				}
 					
 			} catch (Exception e) {
