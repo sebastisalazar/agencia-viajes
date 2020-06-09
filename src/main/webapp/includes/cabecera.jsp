@@ -26,6 +26,10 @@
 	<link rel="icon" href="/docs/4.5/assets/img/favicons/favicon.ico">
 	<meta name="msapplication-config" content="/docs/4.5/assets/img/favicons/browserconfig.xml">
 	<meta name="theme-color" content="#563d7c">
+	
+	
+	<!-- datatables -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css">
 
 
     <style>
@@ -66,7 +70,7 @@
   </div>
 </nav>
 
-</body>
+<body onload="init()">
 
 <main role="main" class="container">
 

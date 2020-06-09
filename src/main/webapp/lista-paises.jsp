@@ -16,7 +16,7 @@
 	<h1 class="text-primary text-center mb-3"> Paises destinos </h1>
 
 	
-	<table class="table">
+	<table class="table tabla">
 		<thead class="thead-dark">
 			<tr>
 				<th scope="col">ID</th>
