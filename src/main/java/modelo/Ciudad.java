@@ -1,27 +1,25 @@
 package modelo;
 
-public class Pais {
+public class Ciudad {
 
-	
 	private String nombre;
 	private int id;
-	private String bandera;
+	private Pais pais;
 	private Continente continente;
 	
-	public Pais() {
+	public Ciudad() {
 		super();
 		this.nombre ="";
 		this.id =0;
-		this.bandera="";
-		this.continente= new Continente();
+		this.pais = new Pais();
+		this.continente = new Continente();
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setName(String nombre) {
+	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
@@ -32,15 +30,14 @@ public class Pais {
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public String getBandera() {
-		return bandera;
+
+	public Pais getPais() {
+		return pais;
 	}
 
-	public void setBandera(String bandera) {
-		this.bandera = bandera;
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
-
 
 	public Continente getContinente() {
 		return continente;
@@ -50,10 +47,12 @@ public class Pais {
 		this.continente = continente;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	@Override
+	public String toString() {
+		return "Ciudad [nombre=" + nombre + ", id=" + id + ", pais=" + pais.getNombre() + ", continente=" + continente.getNombre() + "]";
 	}
 	
 	
 	
+
 }

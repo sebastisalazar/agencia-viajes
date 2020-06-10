@@ -32,13 +32,15 @@
 		
 		
 	
-	<form class="form-inline justify-content-center my-5" action="registro-pais" method="POST">
+	<form class="form-inline justify-content-center my-5" action="registro-ciudad" method="POST">
 	  
 	  <div class="form-group mx-sm-3 mb-2">
 	 
 	    <!-- VALUEE -> Pinta lo que se introdujo en caso de error-->
 	    <input type="text" class="form-control" id="paisnuevo" name="paisnuevo" placeholder="Introduce un nuevo pais" value="${nombreIntroducido}">
+	 
 	  </div>
+	  
 	  <button type="submit" class="btn btn-primary mb-2">Confirmar registro</button>
 	</form>
 	

@@ -2,18 +2,19 @@ package test;
 import java.util.ArrayList;
 
 import modelo.Pais;
-import modelo.PaisDAOImp;
+import modelo.Ciudad;
+import modelo.CiudadDAOImp;
 
 public class PruebaConsolaGetALL {
 
 	public static void main(String[] args) throws Exception {
 		
 		
-		PaisDAOImp dao= PaisDAOImp.getInstance();
-		ArrayList<Pais> lista=dao.getAll();
+		CiudadDAOImp dao= CiudadDAOImp.getInstance();
+		ArrayList<Ciudad> lista=dao.getAll();
 		
-		for (Pais pais : lista) {
-			System.out.println(pais);
+		for (Ciudad ciudad : lista) {
+			System.out.println(ciudad);
 		}
 
 	}

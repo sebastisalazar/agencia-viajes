@@ -14,7 +14,7 @@
 	 -->
 	 
 	<welcome-file-list>		
-		<welcome-file>listado-paises</welcome-file>		
+		<welcome-file>listado-ciudades</welcome-file>		
 	</welcome-file-list>
   
 </web-app>

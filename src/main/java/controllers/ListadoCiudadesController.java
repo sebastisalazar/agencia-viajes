@@ -10,16 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import modelo.Pais;
-import modelo.PaisDAOImp;
+import modelo.Ciudad;
+import modelo.CiudadDAOImp;
 
 /**
  * Servlet implementation class listadoPaisesController
  */
-@WebServlet("/listado-paises")
-public class ListadoPaisesController extends HttpServlet {
+@WebServlet("/listado-ciudades")
+public class ListadoCiudadesController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
     
-    public ListadoPaisesController() {
+    public ListadoCiudadesController() {
         super();
        
     }
@@ -28,8 +30,8 @@ public class ListadoPaisesController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-		PaisDAOImp dao = PaisDAOImp.getInstance();
-		ArrayList<Pais> lista= new ArrayList<Pais>();
+		CiudadDAOImp dao = CiudadDAOImp.getInstance();
+		ArrayList<Ciudad> lista= new ArrayList<Ciudad>();
 		try {
 			lista= dao.getAll();
 			
@@ -37,7 +39,7 @@ public class ListadoPaisesController extends HttpServlet {
 			e.printStackTrace();
 		}finally {
 			request.setAttribute("lista",lista);
-			request.getRequestDispatcher("lista-paises.jsp").forward(request, response);
+			request.getRequestDispatcher("lista-ciudades.jsp").forward(request, response);
 		}
 		
 		
