@@ -10,9 +10,16 @@ public class Continente {
 		this.id =0;
 		this.nombre = "";
 	}
+	
+
+	public Continente(int id) {
+		this();
+		this.id = id;
+	}
+
 
 	public Continente(int id, String nombre) {
-		super();
+		this();
 		this.id = id;
 		this.nombre = nombre;
 	}

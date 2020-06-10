@@ -3,6 +3,7 @@ package modelo;
 public class Pais {
 
 	
+
 	private String nombre;
 	private int id;
 	private String bandera;
@@ -21,9 +22,6 @@ public class Pais {
 		return nombre;
 	}
 
-	public void setName(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public int getId() {
 		return id;
@@ -54,6 +52,10 @@ public class Pais {
 		this.nombre = nombre;
 	}
 	
-	
+
+	@Override
+	public String toString() {
+		return "Pais [nombre=" + nombre + ", id=" + id + ", bandera=" + bandera + ", continente=" + continente.getId() + "]";
+	}
 	
 }

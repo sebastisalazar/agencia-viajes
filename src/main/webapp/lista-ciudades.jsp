@@ -24,6 +24,7 @@
 				<th scope="col">PAIS</th>
 				<th scope="col">BANDERA</th>
 				<th scope="col">CONTINENTE</th>
+				<th scope="col" colspan="2">OPCIONES</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -34,6 +35,8 @@
 					<td>${c.pais.nombre}</td>
 					<td><img src="https://picsum.photos/100"></td>
 					<td>${c.continente.nombre}</td>
+					<td><a href="editar-ciudad?id=${c.id}"> EDITAR</a></td>
+					<td><a href="eliminar-ciudad?id=${c.id}"> ELIMINAR</a></td>
 				</tr>
 			</c:forEach>
 		

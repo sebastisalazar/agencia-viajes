@@ -7,7 +7,7 @@
  
 <jsp:param name="pagina" value="Registro" />
  
-<jsp:param name="title" value="Registrar nuevo destino" /> 
+<jsp:param name="title" value="Registrar ciudad" /> 
  
 </jsp:include>
 
@@ -16,7 +16,7 @@
 	<div class="container">
 		
 	
-		<h1 class="text-primary text-center">Registro nuevo destino</h1>
+		<h1 class="text-primary text-center">Registro ciudad</h1>
 		
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
@@ -32,24 +32,36 @@
 		
 		
 	
-	<form class="form-inline justify-content-center my-5" action="registro-ciudad" method="POST">
-	  
-	  <div class="form-group mx-sm-3 mb-2">
-	 
-	    <!-- VALUEE -> Pinta lo que se introdujo en caso de error-->
-	    <input type="text" class="form-control" id="paisnuevo" name="paisnuevo" placeholder="Introduce un nuevo pais" value="${nombreIntroducido}">
-	 
+	<form>
+	  <div class="form-group">
+	    <label for="nombreciudad">Nombre ciudad:</label>
+	    <input type="text" class="form-control" id="nombreciudad" placeholder="Valencia">
+	    
 	  </div>
 	  
-	  <button type="submit" class="btn btn-primary mb-2">Confirmar registro</button>
+	  <div class="form-group">
+	    <label for="pais">Pais: </label>
+	    <select class="form-control" id="pais" name="pais">
+	    
+	    <c:forEach items="${selectPaises}" var="p">
+	    	<option value="${p.id}">${p.nombre}</option>
+	    </c:forEach>
+	    
+	    </select>
+	  </div>
+	  <div class="form-group">
+	    <label for="continente">Continente: </label>
+	    <select class="form-control" id="continente" name="continente">
+	      <c:forEach items="${selectContinentes}" var="c">
+	    	<option value="${c.id}">${c.nombre}</option>
+	    </c:forEach>
+	    </select>
+	  </div>
+	 
+	  <button type="submit" class="btn btn-primary mb-2">Registrar</button>
 	</form>
 	
-	<!-- Borra lo que se introdujo para que no se escriba si se refresca o se vuelva a esta pagina-->
-	<c:if test="${not empty nombreIntroducido}">
-		<%session.removeAttribute("nombreIntroducido"); %>
-	</c:if>
 	
-	</div>
 	
 
 

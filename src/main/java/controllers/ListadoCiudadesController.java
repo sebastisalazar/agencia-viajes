@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import modelo.Pais;
 import modelo.Ciudad;
 import modelo.CiudadDAOImp;
+import modelo.PaisDAOImp;
 
 /**
  * Servlet implementation class listadoPaisesController
@@ -29,17 +31,28 @@ public class ListadoCiudadesController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		//crud para operar contra bbdd
 		CiudadDAOImp dao = CiudadDAOImp.getInstance();
+		
+		//lista para guardar todos los paises
 		ArrayList<Ciudad> lista= new ArrayList<Ciudad>();
+		
+		//obtiene la session iniciada
+		HttpSession session=request.getSession();
+		
+		//se obtiene la lista
 		try {
 			lista= dao.getAll();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
-			request.setAttribute("lista",lista);
-			request.getRequestDispatcher("lista-ciudades.jsp").forward(request, response);
+			
+			//se pasa la lista guardada en la lista
+			session.setAttribute("lista",lista);
+			
+			//se redireciona
+			response.sendRedirect("lista-ciudades.jsp");
 		}
 		
 		
