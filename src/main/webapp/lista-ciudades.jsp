@@ -14,8 +14,8 @@
 <h1 class="text-primary text-center mb-3">Ciudades destinos</h1>
 
 
-<table class="table tabla">
-	<thead class="thead-dark">
+<table class="table table-striped table-hover tabla ">
+	<thead class="thead-dark text-center">
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">CIUDAD</th>
@@ -28,14 +28,23 @@
 	</thead>
 	<tbody>
 		<c:forEach items="${lista}" var="c">
-			<tr>
+			<tr class="text-center">
 				<td>${c.id}</td>
 				<td>${c.nombre}</td>
 				<td>${c.pais.nombre}</td>
 				<td><img src="https://picsum.photos/100"></td>
 				<td>${c.continente.nombre}</td>
-				<td><a href="actualizar-ciudad?id=${c.id}"> EDITAR</a></td>
-				<td><a onclick="confirmar('${c.nombre}')" href="eliminar-ciudad?id=${c.id}"> ELIMINAR</a></td>
+				<td>
+					<a href="actualizar-ciudad?id=${c.id}">
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+				</td>
+				
+				<td>
+					<a onclick="confirmar('${c.nombre}')"href="eliminar-ciudad?id=${c.id}"> 
+						<i class="fas fa-trash-alt"></i>
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 

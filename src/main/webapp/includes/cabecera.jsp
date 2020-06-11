@@ -16,6 +16,7 @@
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.5/examples/product/">
 
+
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
@@ -25,6 +26,12 @@
 <link href="/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet"
 	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
 	crossorigin="anonymous">
+
+<!-- fontawesome -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
+	rel="stylesheet"
+>
 
 <!-- Favicons -->
 <link rel="apple-touch-icon"
