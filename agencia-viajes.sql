@@ -36,12 +36,12 @@ CREATE TABLE `ciudad` (
   `pais` int(11) NOT NULL,
   `continente` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `ciudad_UN` (`nombre`),
+  UNIQUE KEY `ciudad_UN` (`nombre`,`pais`),
   KEY `ciudad_FK` (`pais`),
   KEY `ciudad_FK_1` (`continente`),
   CONSTRAINT `ciudad_FK` FOREIGN KEY (`pais`) REFERENCES `pais` (`id`),
   CONSTRAINT `ciudad_FK_1` FOREIGN KEY (`continente`) REFERENCES `continente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,7 +50,7 @@ CREATE TABLE `ciudad` (
 
 LOCK TABLES `ciudad` WRITE;
 /*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
-INSERT INTO `ciudad` VALUES (1,'Berlin',5,5),(2,'Madrid',1,5),(3,'Praga',8,5),(4,'Cracovia',7,5),(5,'Viena',6,5),(7,'Paris',3,5),(8,'Lisboa',2,5),(9,'Milan',4,5);
+INSERT INTO `ciudad` VALUES (1,'Berlin',5,5),(3,'Praga',8,5),(4,'Cracovia',7,5),(5,'Viena',6,5),(7,'Paris',3,5),(8,'Lisboa',2,5),(10,'Bilbao',1,5);
 /*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -95,7 +95,7 @@ CREATE TABLE `pais` (
   UNIQUE KEY `pais_UN` (`nombre`),
   KEY `pais_FK` (`continente`),
   CONSTRAINT `pais_FK` FOREIGN KEY (`continente`) REFERENCES `continente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -117,4 +117,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 18:28:07
+-- Dump completed on 2020-06-12  0:04:20
