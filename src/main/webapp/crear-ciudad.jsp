@@ -19,7 +19,7 @@
 
 	<h1 class="text-primary text-center">Registro ciudad</h1>
 
-	<form action="registro-ciudad" method="POST">
+	<form action="crear-ciudad" method="POST">
 
 
 		<!-- Pinta los mensajes si hay alguno -->

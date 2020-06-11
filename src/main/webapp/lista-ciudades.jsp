@@ -34,7 +34,7 @@
 				<td>${c.pais.nombre}</td>
 				<td><img src="https://picsum.photos/100"></td>
 				<td>${c.continente.nombre}</td>
-				<td><a href="editar-ciudad?id=${c.id}"> EDITAR</a></td>
+				<td><a href="actualizar-ciudad?id=${c.id}"> EDITAR</a></td>
 				<td><a href="eliminar-ciudad?id=${c.id}"> ELIMINAR</a></td>
 			</tr>
 		</c:forEach>
