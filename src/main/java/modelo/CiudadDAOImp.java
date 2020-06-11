@@ -39,7 +39,8 @@ public class CiudadDAOImp implements CiudadDAO {
 									"INNER JOIN continente ON pais.continente = continente.id;";
 	
 	
-	private final String SQL_INSERT="INSERT INTO pais (nombre) VALUES(?);";
+	private final String SQL_INSERT="INSERT INTO agencia_viajes.ciudad (nombre, pais, continente) VALUES(?, ?, ?);";
+	
 	@Override
 	public ArrayList<Ciudad> getAll() throws Exception {
 		
@@ -96,6 +97,8 @@ public class CiudadDAOImp implements CiudadDAO {
 			){
 				//se modifica la insert diciendo que el interrogante lo sustituya con el nombre del objeto
 				pst.setString(1, pojo.getNombre());
+				pst.setInt(2, pojo.getPais().getId());
+				pst.setInt(3, pojo.getContinente().getId());
 				
 				try{
 					//insert
@@ -119,18 +122,15 @@ public class CiudadDAOImp implements CiudadDAO {
 					
 					//si captura una excepcion de typo sql la lanza
 				}catch (Exception DBSQLException) {
-					throw new Exception("\nLo sentimos, el pais "+(pojo.getNombre()).toUpperCase()+"\n"+" ya está registrado.");
+					throw new Exception("\nLo sentimos, "+(pojo.getNombre()).toUpperCase()+"\n"+" ya está registrado en el pais seleccionado.");
 				}
 					
 			} catch (Exception e) {
-				
 				//este lanzariía el mensaje del catch interno (Erro, ya existe...)
 				throw new Exception(e.getMessage());
 			}
 			
 			return pojo;
-		
-		
 		
 	}
 

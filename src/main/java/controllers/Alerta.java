@@ -1,4 +1,4 @@
-package modelo;
+package controllers;
 
 public class Alerta {
 

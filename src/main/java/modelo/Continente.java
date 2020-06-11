@@ -1,7 +1,12 @@
 package modelo;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+
 public class Continente {
 
+	@Max(value = 5, message = "Selecciona un continente de la lista.")
+	@Min( value = 1, message = "Selecciona un continente de la lista.")
 	private int id;
 	private String nombre;
 	
