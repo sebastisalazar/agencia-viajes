@@ -91,9 +91,9 @@
 						d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
 			</a> <a
 				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
-				href="listado-ciudades">Destinos</a> <a
+				href="listado-ciudades">Ciudades</a> <a
 				class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-ciudad">Registrar nuevo destino</a> 
+				href="crear-ciudad">Registrar nueva Ciudad</a> 
 				
 				<span class="form-inline">
             	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="#">Iniciar Sesión</a>

@@ -11,7 +11,7 @@
 
 </jsp:include>
 
-<h1 class="text-primary text-center mb-3">Ciudades destinos</h1>
+<h1 class="text-primary text-center mb-3">Lista ciudades</h1>
 
 
 <table class="table table-striped table-hover tabla ">

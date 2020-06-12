@@ -51,6 +51,9 @@ public class ListadoCiudadesController extends HttpServlet {
 			//se pasa la lista guardada en la lista
 			session.setAttribute("lista",lista);
 			
+			//mata la sesion en 1 hora 
+			session.setMaxInactiveInterval(60*60);
+			
 			//se redireciona
 			response.sendRedirect("lista-ciudades.jsp");
 		}
