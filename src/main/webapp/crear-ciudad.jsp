@@ -5,9 +5,9 @@
 
 <jsp:include page="includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Registro" />
+	<jsp:param name="pagina" value="Crear" />
 
-	<jsp:param name="title" value="Registrar ciudad" />
+	<jsp:param name="title" value="Crear ciudad" />
 
 </jsp:include>
 
