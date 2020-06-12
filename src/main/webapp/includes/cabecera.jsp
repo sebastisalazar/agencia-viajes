@@ -98,11 +98,11 @@
 
 				<span class="form-inline " > <a
 					class="nav-link  bg-dark rounded-left text-white"
-					href="#"><small>${loginEmail}</small></a>
+					href="#"><small class="font-weight-bold">${loginEmail}</small></a>
 					
 					<a
 					class="nav-link  bg-danger  rounded-right text-white"
-					href="logout"><small><i class="fas fa-times"></i></small></a>
+					href="logout"><small><i class="fas fa-times font-weight-bold"></i></small></a>
 				</span>
 				
 
@@ -110,8 +110,8 @@
 			
 			<c:if test="${empty loginEmail}">
 				<span class="form-inline"> <a
-				class="nav-link  btn btn-outline-dark bg-dark text-white"
-				href="login.jsp">Iniciar Sesión</a>
+				class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
+				href="login.jsp"><small class="font-weight-bold">Iniciar Sesión</small></a>
 				</span>
 			
 			</c:if>
