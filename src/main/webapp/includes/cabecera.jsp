@@ -30,8 +30,7 @@
 <!-- fontawesome -->
 <link
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
-	rel="stylesheet"
->
+	rel="stylesheet">
 
 <!-- Favicons -->
 <link rel="apple-touch-icon"
@@ -93,11 +92,30 @@
 				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
 				href="listado-ciudades">Ciudades</a> <a
 				class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-ciudad">Registrar nueva Ciudad</a> 
+				href="crear-ciudad">Registrar nueva Ciudad</a>
+
+			<c:if test="${not empty loginEmail}">
+
+				<span class="form-inline " > <a
+					class="nav-link  bg-dark rounded-left text-white"
+					href="#"><small>${loginEmail}</small></a>
+					
+					<a
+					class="nav-link  bg-danger  rounded-right text-white"
+					href="logout"><small><i class="fas fa-times"></i></small></a>
+				</span>
 				
-				<span class="form-inline">
-            	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="#">Iniciar Sesión</a>
-            	</span>
+
+			</c:if>
+			
+			<c:if test="${empty loginEmail}">
+				<span class="form-inline"> <a
+				class="nav-link  btn btn-outline-dark bg-dark text-white"
+				href="#">Iniciar Sesión</a>
+				</span>
+			
+			</c:if>
+			
 		</div>
 	</nav>
 
