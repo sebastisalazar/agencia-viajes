@@ -15,12 +15,12 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-import modelo.Ciudad;
-import modelo.Pais;
-import modelo.PaisDAOImp;
-import modelo.CiudadDAOImp;
-import modelo.Continente;
-import modelo.ContinenteDAOImp;
+import modelo.DAOImp.CiudadDAOImp;
+import modelo.DAOImp.ContinenteDAOImp;
+import modelo.DAOImp.PaisDAOImp;
+import modelo.pojo.Ciudad;
+import modelo.pojo.Continente;
+import modelo.pojo.Pais;
 
 /**
  * Servlet implementation class RegistroCiudadController

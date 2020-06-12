@@ -1,10 +1,15 @@
-package modelo;
+package modelo.DAOImp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import modelo.ConnectionManager;
+import modelo.DAO.PaisDAO;
+import modelo.pojo.Continente;
+import modelo.pojo.Pais;
 
 public class PaisDAOImp implements PaisDAO {
 	

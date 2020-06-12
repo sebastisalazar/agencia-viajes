@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.Pais;
-import modelo.Ciudad;
-import modelo.CiudadDAOImp;
-import modelo.PaisDAOImp;
+import modelo.DAOImp.CiudadDAOImp;
+import modelo.DAOImp.PaisDAOImp;
+import modelo.pojo.Ciudad;
+import modelo.pojo.Pais;
 
 /**
  * Servlet implementation class listadoPaisesController

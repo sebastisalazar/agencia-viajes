@@ -32,7 +32,7 @@
 				<td>${c.id}</td>
 				<td>${c.nombre}</td>
 				<td>${c.pais.nombre}</td>
-				<td><img src="https://picsum.photos/100"></td>
+				<td><img src="${c.pais.bandera}"></td>
 				<td>${c.continente.nombre}</td>
 				<td>
 					<a href="actualizar-ciudad?id=${c.id}">

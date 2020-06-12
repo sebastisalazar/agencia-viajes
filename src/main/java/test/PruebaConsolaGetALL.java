@@ -1,12 +1,12 @@
 package test;
 import java.util.ArrayList;
 
-import modelo.Pais;
-import modelo.Ciudad;
-import modelo.CiudadDAOImp;
-import modelo.Continente;
-import modelo.ContinenteDAOImp;
-import modelo.PaisDAOImp;
+import modelo.DAOImp.CiudadDAOImp;
+import modelo.DAOImp.ContinenteDAOImp;
+import modelo.DAOImp.PaisDAOImp;
+import modelo.pojo.Ciudad;
+import modelo.pojo.Continente;
+import modelo.pojo.Pais;
 
 public class PruebaConsolaGetALL {
 

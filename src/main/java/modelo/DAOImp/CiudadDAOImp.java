@@ -1,10 +1,16 @@
-package modelo;
+package modelo.DAOImp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import modelo.ConnectionManager;
+import modelo.DAO.CiudadDAO;
+import modelo.pojo.Ciudad;
+import modelo.pojo.Continente;
+import modelo.pojo.Pais;
 
 public class CiudadDAOImp implements CiudadDAO {
 

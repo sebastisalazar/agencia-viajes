@@ -1,9 +1,13 @@
-package modelo;
+package modelo.DAOImp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import modelo.ConnectionManager;
+import modelo.DAO.ContinenteDAO;
+import modelo.pojo.Continente;
 
 public class ContinenteDAOImp implements ContinenteDAO {
 

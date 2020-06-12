@@ -1,4 +1,4 @@
-package modelo;
+package modelo.pojo;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

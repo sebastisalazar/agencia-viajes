@@ -12,8 +12,6 @@
 	  </button>
 	</div>
 	
-	
-	
 	<%session.setAttribute("alerta",null);%>
 	
 </c:if>
