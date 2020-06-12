@@ -111,7 +111,7 @@
 			<c:if test="${empty loginEmail}">
 				<span class="form-inline"> <a
 				class="nav-link  btn btn-outline-dark bg-dark text-white"
-				href="#">Iniciar Sesión</a>
+				href="login.jsp">Iniciar Sesión</a>
 				</span>
 			
 			</c:if>
