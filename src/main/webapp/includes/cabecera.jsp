@@ -93,12 +93,11 @@
 				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
 				href="listado-ciudades">Destinos</a> <a
 				class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-ciudad">Registrar nuevo destino</a> <a
-				class="py-2 d-none d-md-inline-block" href="#">Features</a> <a
-				class="py-2 d-none d-md-inline-block" href="#">Enterprise</a> <a
-				class="py-2 d-none d-md-inline-block" href="#">Support</a> <a
-				class="py-2 d-none d-md-inline-block" href="#">Pricing</a> <a
-				class="py-2 d-none d-md-inline-block" href="#">Cart</a>
+				href="crear-ciudad">Registrar nuevo destino</a> 
+				
+				<span class="form-inline">
+            	  <a class="nav-link  btn btn-outline-success bg-success text-white" href="#">Iniciar Sesión</a>
+            	</span>
 		</div>
 	</nav>
 
