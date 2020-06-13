@@ -16,7 +16,6 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
 import modelo.DAOImp.CiudadDAOImp;
-import modelo.DAOImp.ContinenteDAOImp;
 import modelo.DAOImp.PaisDAOImp;
 import modelo.pojo.Ciudad;
 import modelo.pojo.Continente;
@@ -35,7 +34,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 	public InsertUpdateCiudadController() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -66,6 +65,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		// si se llama a crear-ciudad se redirecciona
 		if (llamaACrear) {
+			
 			// se redirecciona
 			response.sendRedirect("crear-ciudad.jsp");
 
@@ -96,9 +96,11 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 				// si no encuentra el id envia alerta
 				alerta = new Alerta("danger", e.getMessage());
-			} finally {
 				session.setAttribute("alerta", alerta);
-			}
+				response.sendRedirect("crear-ciudad");
+			} 
+			
+			
 
 		}
 
@@ -110,10 +112,9 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		// para saber si entra por crear
 		boolean llamaACrear = ("/crear-ciudad").equalsIgnoreCase(request.getServletPath());
 
-		
 		// se obtiene la session creada
 		HttpSession session = request.getSession();
-		
+
 		// creacion de objeto alerta
 		Alerta alerta = new Alerta();
 
@@ -176,6 +177,13 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 			if (llamaACrear) {
 
+				// se manda los campos escritos para que el usuario no pierda los datos
+				session.setAttribute("nombreIntroducidoC", nombre);
+
+				session.setAttribute("paisSeleccionadoC", pais);
+
+				session.setAttribute("continenteSeleccionadoC", continente);
+				
 				if (requeridos.size() != 0) {
 
 					// se manda los mensajes para requeridos
@@ -185,6 +193,9 @@ public class InsertUpdateCiudadController extends HttpServlet {
 				} else {
 
 					daoCiudad.insert(ci);
+					
+					
+					
 					// si la insert va bien manda el siguiente mensaje
 					alerta = new Alerta("success", "El registro se ha guardado correctamente.");
 
@@ -202,10 +213,16 @@ public class InsertUpdateCiudadController extends HttpServlet {
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
 
+					// por seguridad comprobamos si no es null
+					if (id == null) {
+						response.sendRedirect("listado-ciudades");
+					}
+
 					// antes de ejecutar el update cogemos el id pasado por url y se lo asignamos al
 					// objeto
 					ci.setId(Integer.parseInt(id));
 					// ejecucion update
+
 					daoCiudad.update(ci);
 
 					// si la insert va bien manda el siguiente mensaje
@@ -226,6 +243,9 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		} catch (Exception e) {
 
+			alerta = new Alerta("danger", e.getMessage());
+
+
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
 			// alli
 			if (llamaACrear) {
@@ -235,13 +255,11 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			} else {
 				response.sendRedirect("actualizar-ciudad?id=" + id);
 			}
-
-			alerta = new Alerta("danger", e.getMessage());
-
 			// por ultimo exista error o no
 		} finally {
 			// se manda el mensaje alerta
 			session.setAttribute("alerta", alerta);
+
 
 		} // fin try
 
