@@ -86,14 +86,15 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("loginEmail", email);
 				session.setAttribute("loginPassword",password);
 				
+				session.setAttribute("alerta",alerta);
+				
 				response.sendRedirect("listado-ciudades");
 			} catch (Exception e) {
-				alerta= new Alerta("warning",e.getMessage());
+				requeridos.add(e.getMessage());
+				session.setAttribute("requeridos", requeridos);;
 				session.setAttribute("loginEmailErroneo",email);
 				session.setAttribute("loginPasswordErroneo",password);
 				response.sendRedirect("login.jsp");
-			}finally {
-				session.setAttribute("alerta",alerta);
 			}
 		}
 		

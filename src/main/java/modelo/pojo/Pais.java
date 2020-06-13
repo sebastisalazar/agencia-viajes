@@ -8,7 +8,6 @@ public class Pais {
 
 	private String nombre;
 	
-	@Min( value = 1, message = "Selecciona un continente de la lista.")
 	private int id;
 	private String bandera;
 	private Continente continente;

@@ -59,10 +59,12 @@
 			<label for="continente">Continente: </label> <select
 				class="form-control" id="continente" name="continenteciudad">
 				<option value="0" selected>Elige un continente ...</option>
-				<c:forEach items="${selectContinentes}" var="c">
-					<option value="${c.id}"
-						${(c.id eq continenteSeleccionado)? 'selected':'' }>${c.nombre}</option>
-				</c:forEach>
+				<option value="1">Africa</option>
+				<option value="2">América</option>
+				<option value="3">Antártida</option>
+				<option value="4">Asia</option>
+				<option value="5">Europa</option>
+				<option value="6">Oceania</option>
 			</select>
 		</div>
 

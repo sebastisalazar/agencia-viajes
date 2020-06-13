@@ -18,7 +18,6 @@
 	<jsp:include page="includes/alerta.jsp"></jsp:include>
 
 	<h1 class="text-primary text-center">Actualizar ciudad</h1>
-
 	<form action="actualizar-ciudad?id=${ciudadEditar.id}" method="POST">
 
 
@@ -37,7 +36,7 @@
 		<div class="form-group">
 			<label for="nombreciudad">Nombre ciudad:</label> <input type="text"
 				class="form-control" id="nombreciudad" name="nombreciudad"
-				placeholder="Valencia" value="${ciudadEditar.nombre}">
+				placeholder="${ciudadEditar.nombre}" value="${nombreIntroducido}">
 
 		</div>
 
@@ -59,10 +58,12 @@
 			<label for="continente">Continente: </label> <select
 				class="form-control" id="continente" name="continenteciudad">
 				<option value="0" selected>Elige un continente ...</option>
-				<c:forEach items="${selectContinentes}" var="c">
-					<option value="${c.id}"
-						${(c.id eq ciudadEditar.continente.id)? 'selected':'' }>${c.nombre}</option>
-				</c:forEach>
+				<option value="1" ${('1' eq ciudadEditar.continente.id)? 'selected':'' }>Africa</option>
+				<option value="2" ${('2' eq ciudadEditar.continente.id)? 'selected':'' }>América</option>
+				<option value="3" ${('3' eq ciudadEditar.continente.id)? 'selected':'' }>Antártida</option>
+				<option value="4" ${('4' eq ciudadEditar.continente.id)? 'selected':'' }>Asia</option>
+				<option value="5" ${('5' eq ciudadEditar.continente.id)? 'selected':'' }>Europa</option>
+				<option value="6" ${('6' eq ciudadEditar.continente.id)? 'selected':'' }>Oceania</option>
 			</select>
 		</div>
 
