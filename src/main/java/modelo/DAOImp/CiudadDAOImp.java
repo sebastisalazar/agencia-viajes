@@ -195,14 +195,14 @@ public class CiudadDAOImp implements CiudadDAO {
 			pst.setInt(3, pojo.getContinente().getId());
 			pst.setInt(4, pojo.getId());
 			
-			int insertado=pst.executeUpdate();
+		
+				int insertado=pst.executeUpdate();
+				if (insertado==2) {
+					throw new Exception("Lo sentimos pero la ciudad "+pojo.getNombre()+" con id "+pojo.getId()+"no esta registrado");
+					
+				}
 			
-			if (insertado==2) {
-				throw new Exception("Lo sentimos pero la ciudad "+pojo.getNombre()+" con id "+pojo.getId()+"no esta registrado");
-				
-			}
-			
-		}catch (Exception duplicatedQException) {
+		}catch (Exception e) {
 			throw new Exception("Lo sentimos pero ya existe la ciudad "+pojo.getNombre().toUpperCase()+" para el pais seleccionado");
 		
 		}
