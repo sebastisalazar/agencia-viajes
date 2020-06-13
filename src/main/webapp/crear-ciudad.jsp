@@ -37,7 +37,7 @@
 		<div class="form-group">
 			<label for="nombreciudad">Nombre ciudad:</label> <input type="text"
 				class="form-control" id="nombreciudad" name="nombreciudad"
-				placeholder="Valencia" value="${nombreIntroducido}">
+				placeholder="Introduce el nombre ..." value="${nombreIntroducidoC}">
 
 		</div>
 
@@ -46,9 +46,20 @@
 				id="pais" name="paisciudad">
 				<option value="0" selected>Elige un pais ...</option>
 
+
 				<c:forEach items="${selectPaises}" var="p">
-					<option value="${p.id}"
-						${(p.id eq paisSeleccionado)? 'selected':'' }>${p.nombre}</option>
+					<c:if test="${not empty paisSeleccionadoC}">
+						<option value="${p.id}"
+							${(p.id eq paisSeleccionadoC)? 'selected':'' }>${p.nombre}</option>
+
+					</c:if>
+
+					<c:if test="${empty paisSeleccionadoC}">
+						<option value="${p.id}">${p.nombre}</option>
+
+					</c:if>
+
+
 				</c:forEach>
 
 			</select>
@@ -56,15 +67,30 @@
 
 
 		<div class="form-group">
-			<label for="continente">Continente: </label> <select
-				class="form-control" id="continente" name="continenteciudad">
+			<label for="continente">Continente: </label>
+			 <select class="form-control" id="continente" name="continenteciudad">
 				<option value="0" selected>Elige un continente ...</option>
-				<option value="1">Africa</option>
-				<option value="2">América</option>
-				<option value="3">Antártida</option>
-				<option value="4">Asia</option>
-				<option value="5">Europa</option>
-				<option value="6">Oceania</option>
+
+
+				<c:if test="${not empty continenteSeleccionadoC}">
+
+					<option value="1" ${('1' eq continenteSeleccionadoC)?'selected':'' }>Africa</option>
+					<option value="2" ${('2' eq continenteSeleccionadoC)?'selected':'' }>América</option>
+					<option value="3" ${('3' eq continenteSeleccionadoC)?'selected':'' }>Antártida</option>
+					<option value="4" ${('4' eq continenteSeleccionadoC)?'selected':'' }>Asia</option>
+					<option value="5" ${('5' eq continenteSeleccionadoC)?'selected':'' }>Europa</option>
+					<option value="6" ${('6' eq continenteSeleccionadoC)?'selected':'' }>Oceania</option>
+				</c:if> 
+				
+				<c:if test="${empty continenteSeleccionadoC}">
+
+					<option value="1">Africa</option>
+					<option value="2">América</option>
+					<option value="3">Antártida</option>
+					<option value="4">Asia</option>
+					<option value="5">Europa</option>
+					<option value="6">Oceania</option>
+				</c:if> 
 			</select>
 		</div>
 

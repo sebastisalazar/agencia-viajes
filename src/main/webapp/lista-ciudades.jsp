@@ -3,6 +3,12 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+<!-- Si la sesion caduca y se recarga borrará el atributo lista, por lo tanto volvemos a llamar al controlador para que nos lo vuelva a pasar -->
+<c:if test="${empty lista}">
+	<c:redirect url="listado-ciudades"></c:redirect>
+</c:if>
+
 <jsp:include page="includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />
@@ -34,17 +40,13 @@
 				<td>${c.pais.nombre}</td>
 				<td><img src="${c.pais.bandera}"></td>
 				<td>${c.continente.nombre}</td>
-				<td>
-					<a href="actualizar-ciudad?id=${c.id}">
-						<i class="fas fa-pencil-alt"></i>
-					</a>
-				</td>
-				
-				<td>
-					<a onclick="confirmar('${c.nombre}')"href="eliminar-ciudad?id=${c.id}"> 
-						<i class="fas fa-trash-alt"></i>
-					</a>
-				</td>
+				<td><a href="actualizar-ciudad?id=${c.id}"> <i
+						class="fas fa-pencil-alt"></i>
+				</a></td>
+
+				<td><a onclick="confirmar('${c.nombre}')"
+					href="eliminar-ciudad?id=${c.id}"> <i class="fas fa-trash-alt"></i>
+				</a></td>
 			</tr>
 		</c:forEach>
 
