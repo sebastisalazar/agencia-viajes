@@ -13,14 +13,14 @@
 
 
 
-<div class="container">
+<div class="d-flex flex-row justify-content-center border-0  ">
 
+	
 	<jsp:include page="includes/alerta.jsp"></jsp:include>
+	
+	<form action="crear-ciudad" class="px-5 py-3 border pb-5" method="POST">
 
-	<h1 class="text-primary text-center">Registro ciudad</h1>
-
-	<form action="crear-ciudad" method="POST">
-
+	<h1 class="text-primary text-center mb-5 mt-5">Registro ciudad</h1>
 
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">

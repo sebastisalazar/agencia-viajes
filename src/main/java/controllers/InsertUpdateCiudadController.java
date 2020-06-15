@@ -47,7 +47,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// objeto para alertas
-		Alerta alerta = new Alerta();
+		Alerta alerta;
 
 		// para poder enviar la lista de paises y continents
 		try {
@@ -116,7 +116,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// creacion de objeto alerta
-		Alerta alerta = new Alerta();
+		Alerta alerta=null;
 
 		// Guardamos los datos recogidos del formulario
 		String nombre = request.getParameter("nombreciudad");
@@ -194,8 +194,6 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 					daoCiudad.insert(ci);
 					
-					
-					
 					// si la insert va bien manda el siguiente mensaje
 					alerta = new Alerta("success", "El registro se ha guardado correctamente.");
 
@@ -243,7 +241,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		} catch (Exception e) {
 
-			alerta = new Alerta("danger", e.getMessage());
+			requeridos.add(e.getMessage());
 
 
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
@@ -258,9 +256,13 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			// por ultimo exista error o no
 		} finally {
 			// se manda el mensaje alerta
-			session.setAttribute("alerta", alerta);
-
-
+			if (alerta!=null) {
+				session.setAttribute("alerta", alerta);
+			}
+			
+			if (requeridos.size()!=0) {
+				session.setAttribute("requeridos", requeridos);
+			}
 		} // fin try
 
 	}// fin DOPOST

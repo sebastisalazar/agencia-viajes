@@ -38,15 +38,19 @@
 				<td>${c.id}</td>
 				<td>${c.nombre}</td>
 				<td>${c.pais.nombre}</td>
-				<td><img src="${c.pais.bandera}"></td>
+				<td><img src="${c.pais.bandera}" class="img-thumbnail img-fluid" width="60" height="40" ></td>
 				<td>${c.continente.nombre}</td>
-				<td><a href="actualizar-ciudad?id=${c.id}"> <i
-						class="fas fa-pencil-alt"></i>
-				</a></td>
+				<td>
+					<a href="actualizar-ciudad?id=${c.id}"> 
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+				</td>
 
-				<td><a onclick="confirmar('${c.nombre}')"
-					href="eliminar-ciudad?id=${c.id}"> <i class="fas fa-trash-alt"></i>
-				</a></td>
+				<td>
+					<a onclick="confirmar('${c.nombre}')" href="eliminar-ciudad?id=${c.id}"> 
+						<i class="fas fa-trash-alt"></i>
+					</a>
+				</td>
 			</tr>
 		</c:forEach>
 

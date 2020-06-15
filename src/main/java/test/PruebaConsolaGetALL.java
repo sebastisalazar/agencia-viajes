@@ -21,6 +21,12 @@ public class PruebaConsolaGetALL {
 			System.out.println(ciudad);
 		}
 		
+		
+		Ciudad ciudad=daoCiudad.getById(1);
+		System.out.println("\n\nCIUDAD.GETBYID");
+		System.out.println(ciudad);
+		
+		
 		System.out.println("\n\nPAISES.GETALL");
 		PaisDAOImp daoPais=PaisDAOImp.getInstance();
 		ArrayList<Pais> paises=daoPais.getAll();

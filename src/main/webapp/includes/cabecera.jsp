@@ -127,10 +127,5 @@
 
 			<!-- Si el mensaje se muestra lo pinta y lo pone a null para pintarlo solo una vez -->
 			<c:if test="${not empty alerta}">
-				<div class="alert alert-${alerta.tipo} text-center" role="alert">
-					${alerta.texto}</div>
-
-				<%
-					session.setAttribute("alerta", null);
-				%>
+				<jsp:include page="alerta.jsp"></jsp:include>
 			</c:if>

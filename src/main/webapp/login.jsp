@@ -17,7 +17,6 @@
 <div class="d-flex flex-row justify-content-center border-0  ">
 	
 	
-	
 	<form class="px-5 py-3 border pb-5" action="login" method="post">
 		<h1 class="text-primary text-center mb-3 mt-5">Iniciar sesión</h1>
 		

@@ -32,7 +32,7 @@ public class CiudadDAOImp implements CiudadDAO {
 	private final String SQL_INSERT = "INSERT INTO agencia_viajes.ciudad (nombre, pais, continente) VALUES(?, ?, ?);";
 	private final String SQL_UPDATE="UPDATE agencia_viajes.ciudad SET nombre=?, pais=?, continente=? WHERE id=?;";
 	private final String SQL_DELETE="DELETE FROM agencia_viajes.ciudad WHERE id=?;";
-	private final String SQL_GETBYID="SELECT id, nombre, pais, continente FROM agencia_viajes.ciudad WHERE id=?;";
+	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre, ciudad.pais as ciudad_pais, ciudad.continente ciudad_continente, pais.bandera pais_bandera FROM agencia_viajes.ciudad INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id WHERE ciudad.id=?;";
 	private final String SQL_GETALL = "SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
 			"ciudad.pais as ciudad_pais," + 
 			"ciudad.continente as ciudad_continente," + 
@@ -257,10 +257,11 @@ public class CiudadDAOImp implements CiudadDAO {
 		Continente co = new Continente();
 
 		// asercion de objetos segun el dato
-		co.setId(rs.getInt("continente"));
-		ci.setId(rs.getInt("id"));
-		ci.setNombre(rs.getString("nombre"));
-		p.setId(rs.getInt("pais"));
+		co.setId(rs.getInt("ciudad_continente"));
+		ci.setId(rs.getInt("ciudad_id"));
+		ci.setNombre(rs.getString("ciudad_nombre"));
+		p.setId(rs.getInt("ciudad_pais"));
+		p.setBandera(rs.getString("pais_bandera"));
 		p.setContinente(co);
 
 		ci.setPais(p);
