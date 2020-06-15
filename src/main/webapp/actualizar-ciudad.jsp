@@ -140,9 +140,6 @@
 				<a href="listado-ciudades" class="btn btn-danger bg-danger mb-2 mt-5 p-3">Cancelar</a>
 			</div>
 			
-			
-			
-			
 	</form>
 </div>
 

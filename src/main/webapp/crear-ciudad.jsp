@@ -94,7 +94,11 @@
 			</select>
 		</div>
 
-		<button type="submit" class="btn btn-primary mb-2">Registrar</button>
+		<div class="text-center" >
+			<button type="submit" class="btn btn-primary mb-2 mt-5 mr-5 p-3">Registrar</button>
+			<a href="listado-ciudades" class="btn btn-danger bg-danger mb-2 mt-5 p-3">Cancelar</a>
+		</div>
+		
 	</form>
 
 
