@@ -1,4 +1,5 @@
 package test;
+import java.io.File;
 import java.util.ArrayList;
 
 import modelo.DAOImp.CiudadDAOImp;
@@ -42,6 +43,8 @@ public class PruebaConsolaGetALL {
 			System.out.println(continente);
 		}
 
+		String path= new File("").getAbsolutePath()+"/uploads/";
+		System.out.println(path);
 	}
 
 }

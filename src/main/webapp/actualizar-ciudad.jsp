@@ -153,7 +153,7 @@
 		<div class="container">
 			<div class="text-center ">
 			
-				<img alt="Bandera" width="200px" height="200px" src="${ciudadEditar.pais.bandera}" class="rounded">
+				<img alt="Bandera" width="200px" height="200px" src="/home/javaee/apache-tomcat-8.5.51/webapps/${ciudadEditar.pais.bandera}" class="rounded">
 
 				<form method="post" action="UploadServlet" enctype="multipart/form-data" >
 					<input type="file" name="file" class="d-inline mt-3">

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Path;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
@@ -49,7 +50,8 @@ public class UploadServlet extends HttpServlet {
 	
 	
 	   private boolean isMultipart;
-	   private String filePath="/home/javaee/apache-tomcat-8.5.51/webapps/uploads/";
+	   private String filePath= new File("").getAbsolutePath()+"/uploads/";
+	   
 	   private int maxFileSize = 1024 * 1024;
 	   private int maxMemSize = 50 * 1024;
 	   private File file ;
@@ -65,7 +67,7 @@ public class UploadServlet extends HttpServlet {
 		
 		// Check that we have a file upload request
 	      isMultipart = ServletFileUpload.isMultipartContent(request);
-	      response.setContentType("text/html");
+	   
 	      java.io.PrintWriter out = response.getWriter( );
 		
 		
