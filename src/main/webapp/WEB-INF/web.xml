@@ -12,9 +12,12 @@
 	 	Y conseguimso pasar por un controlador para conseguir los datos a mostrar en index.jsp
 	 	
 	 -->
-	 
+	
+	
 	<welcome-file-list>		
 		<welcome-file>listado-ciudades</welcome-file>		
 	</welcome-file-list>
+
   
 </web-app>
+

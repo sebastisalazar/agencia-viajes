@@ -2,9 +2,13 @@ package controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +20,10 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import modelo.DAOImp.CiudadDAOImp;
 import modelo.DAOImp.PaisDAOImp;
@@ -31,6 +39,8 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 	private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private static Validator validator = factory.getValidator();
+	
+	
 
 	private static final long serialVersionUID = 1L;
 
@@ -268,5 +278,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		} // fin try
 
 	}// fin DOPOST
+	
+	
 	
 }// fin clase
