@@ -50,7 +50,10 @@ public class UploadServlet extends HttpServlet {
 	
 	
 	   private boolean isMultipart;
-	   private String filePath= new File("").getAbsolutePath()+"/uploads/";
+	   
+	   //TODO cambiar esta ruta, NO ES LA CORRECTA
+	   private String filePath= new File("").getPath()+"/uploads/";
+	  
 	   
 	   private int maxFileSize = 1024 * 1024;
 	   private int maxMemSize = 50 * 1024;

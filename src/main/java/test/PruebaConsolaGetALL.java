@@ -1,5 +1,6 @@
 package test;
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import modelo.DAOImp.CiudadDAOImp;
@@ -42,9 +43,10 @@ public class PruebaConsolaGetALL {
 		for (Continente continente : continentes) {
 			System.out.println(continente);
 		}
-
-		String path= new File("").getAbsolutePath()+"/uploads/";
-		System.out.println(path);
+		
+		//TODO averiguar a qué carpeta va
+		String filePath= new File("").getPath()+"/uploads/";
+		System.out.println(filePath);
 	}
 
 }

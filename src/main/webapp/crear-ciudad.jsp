@@ -3,6 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${empty selectPaises}">
+	<c:redirect url="crear-ciudad"/>
+</c:if>
+
 <jsp:include page="includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Crear" />

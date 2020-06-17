@@ -61,7 +61,7 @@ public class Ciudad {
 
 	@Override
 	public String toString() {
-		return "Ciudad [nombre=" + nombre + ", id=" + id + ", pais=" + pais.getNombre() + ", continente=" + continente.getNombre() + "]";
+		return "Ciudad [nombre=" + nombre + ", id=" + id + ", pais=" + pais.getNombre()+" bandera="+pais.getBandera() + ", continente=" + continente.getNombre() + "]";
 	}
 	
 	

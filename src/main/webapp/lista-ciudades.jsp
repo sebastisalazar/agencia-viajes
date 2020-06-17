@@ -38,7 +38,7 @@
 				<td>${c.id}</td>
 				<td>${c.nombre}</td>
 				<td>${c.pais.nombre}</td>
-				<td><img src="/home/javaee/apache-tomcat-8.5.51/webapps/uploads/${c.pais.bandera}" class="img-thumbnail img-fluid" width="60" height="40" ></td>
+				<td><img src="${c.pais.bandera}" class="img-thumbnail img-fluid" width="60" height="40" ></td>
 				<td>${c.continente.nombre}</td>
 				<td>
 					<a href="actualizar-ciudad?id=${c.id}"> 

@@ -3,6 +3,11 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${not  empty loginEmail }">
+	<c:redirect url="listado-ciudades"/>
+</c:if>
+
+
 <jsp:include page="includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />

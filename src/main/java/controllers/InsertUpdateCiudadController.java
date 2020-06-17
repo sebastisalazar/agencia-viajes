@@ -39,8 +39,6 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 	private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private static Validator validator = factory.getValidator();
-	
-	
 
 	private static final long serialVersionUID = 1L;
 
@@ -77,7 +75,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		// si se llama a crear-ciudad se redirecciona
 		if (llamaACrear) {
-			
+
 			// se redirecciona
 			response.sendRedirect("crear-ciudad.jsp");
 
@@ -110,9 +108,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 				alerta = new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
 				response.sendRedirect("crear-ciudad");
-			} 
-			
-			
+			}
 
 		}
 
@@ -128,7 +124,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		// creacion de objeto alerta
-		Alerta alerta=null;
+		Alerta alerta = null;
 
 		// Guardamos los datos recogidos del formulario
 		String nombre = request.getParameter("nombreciudad");
@@ -164,15 +160,6 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		ci.setPais(p);
 		ci.setContinente(co);
 
-		// validaciones combo box
-		if (("0".equalsIgnoreCase(pais))) {
-			requeridos.add("<p><b>Pais</b>: Selecciona un pais de la lista</p>");
-		}
-
-		if (("0".equalsIgnoreCase(continente))) {
-			requeridos.add("<p><b>Continente</b>: Selecciona un continente de la lista</p>");
-		}
-
 		// Recogemos las violaciones si es que las hay
 		Set<ConstraintViolation<Ciudad>> violationsCiudad = validator.validate(ci);
 
@@ -184,6 +171,14 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			}
 		}
 
+		// validaciones combo box
+		if (("0".equalsIgnoreCase(pais))) {
+			requeridos.add("<p><b>Pais</b>: Selecciona un pais de la lista</p>");
+		}
+
+		if (("0".equalsIgnoreCase(continente))) {
+			requeridos.add("<p><b>Continente</b>: Selecciona un continente de la lista</p>");
+		}
 // INSERT***************************************************************************************************	
 		try {
 
@@ -195,23 +190,33 @@ public class InsertUpdateCiudadController extends HttpServlet {
 				session.setAttribute("paisSeleccionadoC", pais);
 
 				session.setAttribute("continenteSeleccionadoC", continente);
-				
+
 				if (requeridos.size() != 0) {
 
 					// se manda los mensajes para requeridos
 					session.setAttribute("requeridos", requeridos);
 
+					response.sendRedirect("crear-ciudad.jsp");
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
 
 					daoCiudad.insert(ci);
 					
+
+					session.removeAttribute("nombreIntroducidoC");
+
+					session.removeAttribute("paisSeleccionadoC");
+
+					session.removeAttribute("continenteSeleccionadoC");
+
 					// si la insert va bien manda el siguiente mensaje
 					alerta = new Alerta("success", "El registro se ha guardado correctamente.");
+					
+					response.sendRedirect("listado-ciudades");
 
 				}
 
-				response.sendRedirect("crear-ciudad.jsp");
+				
 // UPDATE ***************************************************************************************************				
 			} else {
 
@@ -250,11 +255,13 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			session.removeAttribute("paisSeleccionado");
 
 			session.removeAttribute("continenteSeleccionado");
+			
+
+
 
 		} catch (Exception e) {
 
 			requeridos.add(e.getMessage());
-
 
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
 			// alli
@@ -268,17 +275,15 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			// por ultimo exista error o no
 		} finally {
 			// se manda el mensaje alerta
-			if (alerta!=null) {
+			if (alerta != null) {
 				session.setAttribute("alerta", alerta);
 			}
-			
-			if (requeridos.size()!=0) {
+
+			if (requeridos.size() != 0) {
 				session.setAttribute("requeridos", requeridos);
 			}
 		} // fin try
 
 	}// fin DOPOST
-	
-	
-	
+
 }// fin clase
