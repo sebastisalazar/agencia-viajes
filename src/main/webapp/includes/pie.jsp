@@ -82,5 +82,6 @@
 
 <!-- nuestro javascript -->
 <script src="js/custom.js"></script>
+<script src="js/country.js"></script>
 </body>
 </html>

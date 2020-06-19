@@ -32,7 +32,7 @@ public class PaisDAOImp implements PaisDAO {
 
 	
 
-	private final String SQL_GETALL="SELECT id, nombre, bandera, continente FROM agencia_viajes.pais;";
+	private final String SQL_GETALL="SELECT id, nombre, bandera, continente, nombre_corto FROM agencia_viajes.pais;";
 	private final String UPDATE_BANDERA="UPDATE agencia_viajes.pais SET bandera=? WHERE id=?;";
 	
 	@Override
@@ -58,6 +58,7 @@ public class PaisDAOImp implements PaisDAO {
 				p.setNombre(rs.getString("nombre"));
 				p.setBandera(rs.getString("bandera"));
 				p.setContinente( new Continente(rs.getInt("continente")));
+				p.setNombrecorto(rs.getString("nombre_corto"));
 				
 				//se añade a la lista
 				paises.add(p);
@@ -121,6 +122,7 @@ public class PaisDAOImp implements PaisDAO {
 		
 		
 	}
+	
 	
 	
 }

@@ -7,6 +7,7 @@ public class Pais {
 	
 
 	private String nombre;
+	private String nombrecorto;
 	
 	private int id;
 	private String bandera;
@@ -53,12 +54,23 @@ public class Pais {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+		
 	}
 	
 
+	public String getNombrecorto() {
+		return nombrecorto;
+	}
+
+
+	public void setNombrecorto(String nombrecorto) {
+		this.nombrecorto = nombrecorto;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Pais [nombre=" + nombre + ", id=" + id + ", bandera=" + bandera + ", continente=" + continente.getId() + "]";
+		return "Pais [nombre=" + nombre +", nombre corto="+nombrecorto+ ", id=" + id + ", bandera=" + bandera + ", continente=" + continente.getId() + "]";
 	}
 	
 }

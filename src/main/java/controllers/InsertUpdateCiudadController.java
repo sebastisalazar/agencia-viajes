@@ -128,7 +128,12 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		// Guardamos los datos recogidos del formulario
 		String nombre = request.getParameter("nombreciudad");
-		String pais = request.getParameter("paisciudad");
+		
+		//el input que del que recoge contiene value="1,es"
+		String pais = request.getParameter("paisciudad"); //primero cogemos todo el dato
+		String paiscorto=pais.substring(pais.indexOf(",")); //de ese dato recogido solo nos quedamos con lo que hay detras de la coma
+		pais=pais.substring(0,pais.indexOf(","));//nos quedamos solo con el número
+		
 		String continente = request.getParameter("continenteciudad");
 
 		// recoge el id por url cuando sea para actualizar

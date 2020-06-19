@@ -1,0 +1,15 @@
+.country {
+    margin: 10px;
+    padding: 4px 6px;
+    border: 1px solid #999;
+    border-radius: 5px;
+    display: inline-block;
+    font-family: tahoma;
+    font-size: 12px
+}
+.country i {
+    background: url(https://dl.dropboxusercontent.com/s/izcyieh1iatr4n5/flags.png) no-repeat;
+    display: inline-block;
+    width: 16px;
+    height: 11px;
+}

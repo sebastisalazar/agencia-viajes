@@ -37,7 +37,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			"ciudad.pais as ciudad_pais," + 
 			"ciudad.continente as ciudad_continente," + 
 			"pais.nombre as pais_nombre," + 
-			"pais.bandera as pais_bandera," + 
+			"pais.nombre_corto as pais_bandera," + 
 			"continente.nombre as continente_nombre " + 
 			"FROM agencia_viajes.ciudad " + 
 			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 

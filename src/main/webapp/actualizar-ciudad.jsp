@@ -68,31 +68,50 @@
 
 						</div>
 
-
-
-
 						<div class="form-group col">
-							<label for="pais">Pais: </label> 
-							<select class="form-control" id="pais" name="paisciudad">
-
+							<div class="row row-cols-2">
 							
-								<c:forEach items="${selectPaises}" var="p">
-
-
-									<c:if test="${empty paisSeleccionado}">
-										<option value="${p.id}"
-											${(p.id eq ciudadEditar.pais.id)? 'selected':'' }>${p.nombre}</option>
-									</c:if>
-
-									<c:if test="${not empty paisSeleccionado }">
-										<option value="${p.id}"
-											${(p.id eq paisSeleccionado)? 'selected':'' }>${p.nombre}</option>
-									</c:if>
-
-
-								</c:forEach>
-
-							</select>
+								<div class="col-6">
+									<label for="pais">Pais: </label> 
+								</div>
+								<div class="col-6">
+									<label for="pais" class="pl-2 d-block">Bandera </label> 
+								</div>
+								<div class="col-6">
+						
+										<select class="form-control" id="pais" name="paisciudad">
+			
+											<c:forEach items="${selectPaises}" var="p">
+			
+			
+												<c:if test="${empty paisSeleccionado}">
+													<option value="${p.id},${p.nombrecorto}"
+														${(p.id eq ciudadEditar.pais.id)? 'selected':'' }>${p.nombre}</option>
+													
+												</c:if>
+			
+												<c:if test="${not empty paisSeleccionado }">
+													<option value="${p.id}"
+														${(p.id eq paisSeleccionado)? 'selected':'' }>${p.nombre}</option>
+												</c:if>
+												
+			
+											</c:forEach>
+											
+										</select>
+								
+								</div>
+								
+								<div class="col" style="vertical-align: baseline">
+									<div class="country d-block">
+										<i ></i> 
+										<b ></b>
+									</div>
+								</div>
+							
+							</div>
+							
+							
 						</div>
 
 
