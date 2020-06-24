@@ -32,12 +32,27 @@ public class CiudadDAOImp implements CiudadDAO {
 	private final String SQL_INSERT = "INSERT INTO agencia_viajes.ciudad (nombre, pais, continente) VALUES(?, ?, ?);";
 	private final String SQL_UPDATE="UPDATE agencia_viajes.ciudad SET nombre=?, pais=?, continente=? WHERE id=?;";
 	private final String SQL_DELETE="DELETE FROM agencia_viajes.ciudad WHERE id=?;";
+	private final String SQL_GETLAST="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
+											"ciudad.pais as ciudad_pais," + 
+											"ciudad.continente as ciudad_continente," + 
+											"pais.nombre as pais_nombre," + 
+											"pais.nombre_corto as pais_nombrecorto," + 
+											"pais.bandera as pais_bandera," +
+											"continente.nombre as continente_nombre " + 
+											"FROM agencia_viajes.ciudad " + 
+											"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
+											"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id"+
+											" ORDER BY ciudad.id DESC LIMIT ? ;";
+	
+	
+	
 	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre, ciudad.pais as ciudad_pais, ciudad.continente ciudad_continente, pais.bandera pais_bandera FROM agencia_viajes.ciudad INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id WHERE ciudad.id=?;";
 	private final String SQL_GETALL = "SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
 			"ciudad.pais as ciudad_pais," + 
 			"ciudad.continente as ciudad_continente," + 
 			"pais.nombre as pais_nombre," + 
-			"pais.nombre_corto as pais_bandera," + 
+			"pais.nombre_corto as pais_nombrecorto," + 
+			"pais.bandera as pais_bandera," +
 			"continente.nombre as continente_nombre " + 
 			"FROM agencia_viajes.ciudad " + 
 			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
@@ -239,6 +254,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		ci.setNombre(rs.getString("ciudad_nombre"));
 		p.setId(rs.getInt("ciudad_pais"));
 		p.setNombre(rs.getString("pais_nombre"));
+		p.setNombrecorto(rs.getString("pais_nombrecorto"));
 		p.setBandera(rs.getString("pais_bandera"));
 		p.setContinente(co);
 
@@ -261,6 +277,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		ci.setId(rs.getInt("ciudad_id"));
 		ci.setNombre(rs.getString("ciudad_nombre"));
 		p.setId(rs.getInt("ciudad_pais"));
+		
 		p.setBandera(rs.getString("pais_bandera"));
 		p.setContinente(co);
 
@@ -269,6 +286,41 @@ public class CiudadDAOImp implements CiudadDAO {
 
 		return ci;
 
+	}
+
+	@Override
+	public ArrayList<Ciudad> getLast(int numRegistro) throws Exception {
+		// lista para guardar todos los paises
+				ArrayList<Ciudad> listaCiudades = new ArrayList<Ciudad>();
+
+				// conecta con la base de datos
+				try (Connection con = ConnectionManager.getConnection();
+						PreparedStatement pst = con.prepareStatement(SQL_GETLAST);
+						
+
+				) {
+					pst.setInt(1, numRegistro);
+					
+					try(ResultSet rs = pst.executeQuery();){
+						
+						// lee linea por linea
+						while (rs.next()) {
+
+							// Se encia a la funcion mapper para que asigne los datos segun el objeto y se
+							// agrega a la lista
+							listaCiudades.add(mapperALL(rs));
+
+						}
+					}
+					
+
+				} catch (Exception e) {
+
+					e.printStackTrace();
+
+				}
+
+				return listaCiudades;
 	}
 	
 	

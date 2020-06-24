@@ -1,34 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> 
-<!DOCTYPE html>
-<html>
-<head>
+	pageEncoding="UTF-8"%>
 
-	<!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<jsp:include page="includes/cabecera.jsp">
 
-   
-<title>Listado Ciudades</title>
-</head>
-<body>
+	<jsp:param name="pagina" value="Inicio" />
 
-	<div class="container mt-5">
-		<h1 class="text-warning text-center">Ciudades</h1>
-		<a href="listado-ciudades" class="d-block text-center ">listado ciudades</a>
+	<jsp:param name="title" value="Inicio" />
+
+</jsp:include>
+
+<div class="container">
+
+
+	<div class="col-12 text-center input-group md-form form-sm form-1 pl-0">
+		<div class="input-group-prepend">
+			<span class="input-group-text cyan lighten-2" id="basic-text1"><i
+				class="fas fa-search text-white" aria-hidden="true"></i></span>
+		</div>
+		<input class="form-control my-0 py-1" type="text" placeholder="Search"
+			aria-label="Search">
+	</div> 
+	
+	<div class="container row row-cols-3 my-4">
+
+		<div class="col-12">
+			<h1 class="text-primary text-center">Ciudades más visitadas</h1>
+		</div>
+		<c:forEach items="${ciudadesMasVisitadas}" var="c">
+			<div class="card" style="width: 18rem;">
+				<img src="${c.pais.bandera}" class="card-img-top" alt="bandera">
+				<div class="card-body">
+					<h5 class="card-title">${c.nombre}</h5>
+					<a href="#" class="btn btn-primary">Ver vuelos</a>
+				</div>
+			</div>
+		</c:forEach>
+
 	</div>
-	
-	
-	<!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-</body>
-</html>
+</div>
+
+
+<jsp:include page="includes/pie.jsp" />

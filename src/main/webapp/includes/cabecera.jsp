@@ -74,8 +74,10 @@
 
 
 
+
 <!-- Custom styles for this template -->
 <link href="css/product.css" rel="stylesheet">
+
 
 
 </head>
@@ -92,11 +94,15 @@
       <circle cx="12" cy="12" r="10" />
       <path
 						d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
-			</a> <a
-				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
-				href="listado-ciudades">Ciudades</a> <a
-				class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+			</a> 
+			
+			<a class="py-2 d-none d-md-inline-block ${( 'Inicio' eq param.pagina ) ? 'active' : ''}"
+				href="inicio">Inicio</a>
+			<a class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
+				href="listado-ciudades">Ciudades</a>
+		    <a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
 				href="crear-ciudad">Registrar nueva Ciudad</a>
+			
 
 			<c:if test="${not empty loginEmail}">
 

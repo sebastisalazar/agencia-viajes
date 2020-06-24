@@ -27,12 +27,10 @@
 (function($) {
 	
 	
-
   $(function() {
 	
-	  
     var $target = $('.country');
- 
+    
 //ACTUALIZAR CIUDAD
     var actual=document.getElementById('pais').value;//pilla el valor seleccionado. ejemplo value="1,es" donde 1 es el id el pais y es es para que pille la bandera
     console.log(actual);
@@ -40,11 +38,11 @@
     //solo queremos el nombre corto asi que lo cortamos diciendole que empiece desde la coma hasta el final
     var actual=actual.substring(actual.indexOf(',')+1);
     console.log(actual);
+   
   
     // on load:
     $target.find('i').setFlagPosition(actual);
     $target.find('b').text($("#pais").find(':selected').text());
-    
     
 	  
 	
@@ -59,10 +57,26 @@
         //solo queremos el nombre corto asi que lo cortamos diciendole que empiece desde la coma hasta el final
         var pos= pos.substring(pos.indexOf(',')+1);
         console.log(pos);
-      $target.find('i').setFlagPosition(pos);
-      $target.find('b').text($(this).find(':selected').text());
+        
+        $target.find('i').setFlagPosition(pos);
+        $target.find('b').text($(this).find(':selected').text());
     });
+    
+    
+    
   });
   
 
 })(jQuery);
+
+	
+	
+	  function cargarBandera() {
+		
+	    var $target = $('.country');
+	    $target.find('i').setFlagPosition('de');
+	    
+
+	  };
+	  
+

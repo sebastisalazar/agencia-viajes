@@ -44,9 +44,16 @@ public class PruebaConsolaGetALL {
 			System.out.println(continente);
 		}
 		
+		System.out.println("\n\nCIUDAD.GETLAST");
+		ciudades=daoCiudad.getLast(2);
+		for (Ciudad ciudad1 : ciudades) {
+			System.out.println(ciudad1);
+		}
+		
+		
 		//TODO averiguar a qué carpeta va
-		String filePath= new File("").getPath()+"/uploads/";
-		System.out.println(filePath);
+		//String filePath= new File("").getPath()+"/uploads/";
+		//System.out.println(filePath);
 	}
 
 }
