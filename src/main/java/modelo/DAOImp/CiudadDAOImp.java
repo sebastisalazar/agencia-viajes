@@ -34,7 +34,8 @@ public class CiudadDAOImp implements CiudadDAO {
 	private final String SQL_DELETE="DELETE FROM agencia_viajes.ciudad WHERE id=?;";
 	private final String SQL_GETLAST="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
 											"ciudad.pais as ciudad_pais," + 
-											"ciudad.continente as ciudad_continente," + 
+											"ciudad.continente as ciudad_continente," +
+											"ciudad.portada as ciudad_portada,"+
 											"pais.nombre as pais_nombre," + 
 											"pais.nombre_corto as pais_nombrecorto," + 
 											"pais.bandera as pais_bandera," +
@@ -46,10 +47,11 @@ public class CiudadDAOImp implements CiudadDAO {
 	
 	
 	
-	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre, ciudad.pais as ciudad_pais, ciudad.continente ciudad_continente, pais.bandera pais_bandera FROM agencia_viajes.ciudad INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id WHERE ciudad.id=?;";
+	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre, ciudad.pais as ciudad_pais, ciudad.continente ciudad_continente, ciudad.portada as ciudad_portada, pais.bandera pais_bandera FROM agencia_viajes.ciudad INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id WHERE ciudad.id=?;";
 	private final String SQL_GETALL = "SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
 			"ciudad.pais as ciudad_pais," + 
 			"ciudad.continente as ciudad_continente," + 
+			"ciudad.portada as ciudad_portada,"+
 			"pais.nombre as pais_nombre," + 
 			"pais.nombre_corto as pais_nombrecorto," + 
 			"pais.bandera as pais_bandera," +
@@ -252,6 +254,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		co.setId(rs.getInt("ciudad_continente"));
 		ci.setId(rs.getInt("ciudad_id"));
 		ci.setNombre(rs.getString("ciudad_nombre"));
+		ci.setPortada(rs.getString("ciudad_portada"));
 		p.setId(rs.getInt("ciudad_pais"));
 		p.setNombre(rs.getString("pais_nombre"));
 		p.setNombrecorto(rs.getString("pais_nombrecorto"));
@@ -276,6 +279,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		co.setId(rs.getInt("ciudad_continente"));
 		ci.setId(rs.getInt("ciudad_id"));
 		ci.setNombre(rs.getString("ciudad_nombre"));
+		ci.setPortada(rs.getString("ciudad_portada"));
 		p.setId(rs.getInt("ciudad_pais"));
 		
 		p.setBandera(rs.getString("pais_bandera"));

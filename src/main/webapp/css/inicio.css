@@ -1,0 +1,28 @@
+.ciudades-card{
+  max-width:100%;
+  min-height: 100%;
+  min-width: 200px;
+  width: 100%;
+  height: 14em;
+}
+
+.titulo-card{
+  color:#ffff;
+  background: rgba(0, 0, 0, 0.5);
+  height:100%;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600px;
+  font-size: 2em;
+  font-family: sans-serif;
+}
+
+.card-img-overlay{
+  padding:0px;
+}
+
+.titulo-card:hover{
+	background: rgba(0, 0, 0, 0.2);
+}

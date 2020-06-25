@@ -4,7 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:if test="${empty selectPaises}">
-	<c:redirect url="crear-ciudad"/>
+	<c:redirect url="crear-ciudad" />
 </c:if>
 
 <jsp:include page="includes/cabecera.jsp">
@@ -19,12 +19,12 @@
 
 <div class="d-flex flex-row justify-content-center border-0  ">
 
-	
+
 	<jsp:include page="includes/alerta.jsp"></jsp:include>
-	
+
 	<form action="crear-ciudad" class="px-5 py-3 border pb-5" method="POST">
 
-	<h1 class="text-primary text-center mb-5 mt-5">Registro ciudad</h1>
+		<h1 class="text-primary text-center mb-5 mt-5">Registro ciudad</h1>
 
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
@@ -46,7 +46,8 @@
 		</div>
 
 		<div class="form-group">
-			<label for="pais">Pais: </label> <select class="form-control"
+			<label for="pais">Pais: </label> 
+			<select class="form-control"
 				id="pais" name="paisciudad">
 				<option value="0" selected>Elige un pais ...</option>
 
@@ -69,23 +70,35 @@
 			</select>
 		</div>
 
+	
+			<div class="country d-block">
+				<i></i> <b></b>
+			</div>
+		
+
 
 		<div class="form-group">
-			<label for="continente">Continente: </label>
-			 <select class="form-control" id="continente" name="continenteciudad">
+			<label for="continente">Continente: </label> <select
+				class="form-control" id="continente" name="continenteciudad">
 				<option value="0" selected>Elige un continente ...</option>
 
 
 				<c:if test="${not empty continenteSeleccionadoC}">
 
-					<option value="1" ${('1' eq continenteSeleccionadoC)?'selected':'' }>Africa</option>
-					<option value="2" ${('2' eq continenteSeleccionadoC)?'selected':'' }>América</option>
-					<option value="3" ${('3' eq continenteSeleccionadoC)?'selected':'' }>Antártida</option>
-					<option value="4" ${('4' eq continenteSeleccionadoC)?'selected':'' }>Asia</option>
-					<option value="5" ${('5' eq continenteSeleccionadoC)?'selected':'' }>Europa</option>
-					<option value="6" ${('6' eq continenteSeleccionadoC)?'selected':'' }>Oceania</option>
-				</c:if> 
-				
+					<option value="1"
+						${('1' eq continenteSeleccionadoC)?'selected':'' }>Africa</option>
+					<option value="2"
+						${('2' eq continenteSeleccionadoC)?'selected':'' }>América</option>
+					<option value="3"
+						${('3' eq continenteSeleccionadoC)?'selected':'' }>Antártida</option>
+					<option value="4"
+						${('4' eq continenteSeleccionadoC)?'selected':'' }>Asia</option>
+					<option value="5"
+						${('5' eq continenteSeleccionadoC)?'selected':'' }>Europa</option>
+					<option value="6"
+						${('6' eq continenteSeleccionadoC)?'selected':'' }>Oceania</option>
+				</c:if>
+
 				<c:if test="${empty continenteSeleccionadoC}">
 
 					<option value="1">Africa</option>
@@ -94,15 +107,16 @@
 					<option value="4">Asia</option>
 					<option value="5">Europa</option>
 					<option value="6">Oceania</option>
-				</c:if> 
+				</c:if>
 			</select>
 		</div>
 
-		<div class="text-center" >
+		<div class="text-center">
 			<button type="submit" class="btn btn-primary mb-2 mt-5 mr-5 p-3">Registrar</button>
-			<a href="listado-ciudades" class="btn btn-danger bg-danger mb-2 mt-5 p-3">Cancelar</a>
+			<a href="listado-ciudades"
+				class="btn btn-danger bg-danger mb-2 mt-5 p-3">Cancelar</a>
 		</div>
-		
+
 	</form>
 
 

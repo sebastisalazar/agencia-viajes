@@ -13,6 +13,8 @@ public class Ciudad {
 	@Size( min = 3, max = 100, message = "La longtitud de ser entre 3 y 100 caracteres")
 	private String nombre;
 	
+	private String portada;
+	
 	private int id;
 	
 	private Pais pais;
@@ -23,6 +25,7 @@ public class Ciudad {
 		super();
 		this.nombre ="";
 		this.id =0;
+		this.portada="";
 		this.pais = new Pais();
 		this.continente = new Continente();
 	}
@@ -59,9 +62,17 @@ public class Ciudad {
 		this.continente = continente;
 	}
 
+	public String getPortada() {
+		return portada;
+	}
+
+	public void setPortada(String portada) {
+		this.portada = portada;
+	}
+
 	@Override
 	public String toString() {
-		return "Ciudad [nombre=" + nombre + ", id=" + id + ", pais=" + pais.getNombre()+" bandera="+pais.getBandera() + ", continente=" + continente.getNombre() + "]";
+		return "Ciudad [nombre=" + nombre + ", id=" + id +", portada="+portada +", pais=" + pais.getNombre()+" bandera="+pais.getBandera() + ", continente=" + continente.getNombre() + "]";
 	}
 	
 	
