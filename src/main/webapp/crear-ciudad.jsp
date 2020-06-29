@@ -22,9 +22,13 @@
 
 	<jsp:include page="includes/alerta.jsp"></jsp:include>
 
-	<form action="crear-ciudad" class="px-5 py-3 border pb-5" method="POST">
+	<form action="crear-ciudad"
+		class="px-5 py-3 border pb-5 formulario-crear" method="POST">
+
 
 		<h1 class="text-primary text-center mb-5 mt-5">Registro ciudad</h1>
+
+
 
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
@@ -38,6 +42,7 @@
 		</c:if>
 
 
+
 		<div class="form-group">
 			<label for="nombreciudad">Nombre ciudad:</label> <input type="text"
 				class="form-control" id="nombreciudad" name="nombreciudad"
@@ -45,37 +50,51 @@
 
 		</div>
 
-		<div class="form-group">
-			<label for="pais">Pais: </label> 
-			<select class="form-control"
-				id="pais" name="paisciudad">
-				<option value="0" selected>Elige un pais ...</option>
 
 
-				<c:forEach items="${selectPaises}" var="p">
-					<c:if test="${not empty paisSeleccionadoC}">
-						<option value="${p.id}"
-							${(p.id eq paisSeleccionadoC)? 'selected':'' }>${p.nombre}</option>
+		<div class="row row-cols-2">
+			<div class="col">
+				<div class="form-group">
+					<label for="pais">Pais: </label> <select class="form-control"
+						id="pais" name="paisciudad">
+						<c:forEach items="${selectPaises}" var="p">
 
-					</c:if>
+							<c:if test="${not empty paisSeleccionadoC}">
+								<option value="${p.id},${p.nombrecorto}"
+									${(p.id eq paisSeleccionadoC)? 'selected':'' }>${p.nombre}</option>
 
-					<c:if test="${empty paisSeleccionadoC}">
-						<option value="${p.id}">${p.nombre}</option>
+							</c:if>
 
-					</c:if>
+							<c:if test="${empty paisSeleccionadoC}">
 
+								<c:choose>
 
-				</c:forEach>
-
-			</select>
-		</div>
-
+									<c:when test="${'1' eq p.id}">
+							            <option value="${p.id},${p.nombrecorto}" selected>${p.nombre}</option>
 	
-			<div class="country d-block">
-				<i></i> <b></b>
-			</div>
-		
+							         </c:when>
+							
+									<c:otherwise>
+							            <option value="${p.id},${p.nombrecorto}" >${p.nombre}</option>
+							         </c:otherwise>
+							         
+								</c:choose>
 
+							</c:if>
+						</c:forEach>
+
+					</select>
+				</div>
+			</div>
+
+			<div class="col">
+				<label for="pais">Bandera: </label>
+				<div class="country d-block text-center"
+					style="margin: 0px; padding: 8px 6px">
+					<i></i> <b></b>
+				</div>
+			</div>
+		</div>
 
 		<div class="form-group">
 			<label for="continente">Continente: </label> <select
@@ -105,10 +124,12 @@
 					<option value="2">América</option>
 					<option value="3">Antártida</option>
 					<option value="4">Asia</option>
-					<option value="5">Europa</option>
+					<option value="5" selected>Europa</option>
 					<option value="6">Oceania</option>
 				</c:if>
+
 			</select>
+
 		</div>
 
 		<div class="text-center">
@@ -119,5 +140,7 @@
 
 	</form>
 
+</div>
 
-	<jsp:include page="includes/pie.jsp" />
+
+<jsp:include page="includes/pie.jsp" />

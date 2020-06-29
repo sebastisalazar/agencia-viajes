@@ -41,8 +41,6 @@
 			<form action="actualizar-ciudad?id=${ciudadEditar.id}"
 				method="POST">
 
-
-
 				<!-- Pinta los mensajes si hay alguno -->
 				<c:if test="${not empty requeridos}">
 
@@ -99,7 +97,7 @@
 						</div>
 
 						<div class="col" style="vertical-align: baseline">
-							<div class="country d-block">
+							<div class="country d-block text-center" style="margin: 0px; padding: 8px 6px">
 								<i></i> <b></b>
 							</div>
 						</div>
