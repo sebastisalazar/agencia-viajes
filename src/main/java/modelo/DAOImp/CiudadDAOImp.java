@@ -47,18 +47,45 @@ public class CiudadDAOImp implements CiudadDAO {
 	
 	
 	
-	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre, ciudad.pais as ciudad_pais, ciudad.continente ciudad_continente, ciudad.portada as ciudad_portada, pais.bandera pais_bandera FROM agencia_viajes.ciudad INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id WHERE ciudad.id=?;";
+	private final String SQL_GETBYID="SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
+			"ciudad.pais as ciudad_pais," + 
+			"ciudad.continente as ciudad_continente," + 
+			"ciudad.portada as ciudad_portada,"+
+			"pais.nombre as pais_nombre," +
+			"pais.nombre_corto as pais_nombrecorto," + 
+			"pais.bandera as pais_bandera," +
+			"continente.nombre as continente_nombre " + 
+			"FROM agencia_viajes.ciudad " + 
+			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
+			"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id "+
+			"WHERE ciudad.id=?;";
 	private final String SQL_GETALL = "SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
 			"ciudad.pais as ciudad_pais," + 
 			"ciudad.continente as ciudad_continente," + 
 			"ciudad.portada as ciudad_portada,"+
-			"pais.nombre as pais_nombre," + 
+			"pais.nombre as pais_nombre," +
 			"pais.nombre_corto as pais_nombrecorto," + 
 			"pais.bandera as pais_bandera," +
 			"continente.nombre as continente_nombre " + 
 			"FROM agencia_viajes.ciudad " + 
 			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
 			"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id;";
+	
+	private final String SQL_SELECTBYPAIS= "SELECT ciudad.id as ciudad_id,ciudad.nombre as ciudad_nombre," + 
+			"ciudad.pais as ciudad_pais," + 
+			"ciudad.continente as ciudad_continente," + 
+			"ciudad.portada as ciudad_portada,"+
+			"pais.nombre as pais_nombre," + 
+			"pais.id as pais_id," +
+			"pais.nombre_corto as pais_nombrecorto," + 
+			"pais.bandera as pais_bandera," +
+			"continente.nombre as continente_nombre " + 
+			"FROM agencia_viajes.ciudad " + 
+			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
+			"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id"+
+			"WHERE ciudad.pais=?;";
+			
+			
 
 	
 
@@ -108,7 +135,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			try(ResultSet rs= pst.executeQuery()){
 				
 				if (rs.next()) {
-					ci=mapperCiudad(rs);
+					ci=mapperALL(rs);
 				}else {
 					throw new Exception("Usuario no encontrado id =" + id);
 				}
@@ -250,15 +277,20 @@ public class CiudadDAOImp implements CiudadDAO {
 		 
 		// asercion de objetos segun el dato
 
-		co.setNombre(rs.getString("continente_nombre"));
-		co.setId(rs.getInt("ciudad_continente"));
+		
+		
+		
 		ci.setId(rs.getInt("ciudad_id"));
 		ci.setNombre(rs.getString("ciudad_nombre"));
-		ci.setPortada(rs.getString("ciudad_portada"));
 		p.setId(rs.getInt("ciudad_pais"));
+		co.setId(rs.getInt("ciudad_continente"));
+		ci.setPortada(rs.getString("ciudad_portada"));
 		p.setNombre(rs.getString("pais_nombre"));
 		p.setNombrecorto(rs.getString("pais_nombrecorto"));
 		p.setBandera(rs.getString("pais_bandera"));
+		co.setNombre(rs.getString("continente_nombre"));
+		
+		
 		p.setContinente(co);
 
 		ci.setPais(p);
@@ -268,29 +300,6 @@ public class CiudadDAOImp implements CiudadDAO {
 
 	}
 	
-	private Ciudad mapperCiudad(ResultSet rs) throws SQLException {
-
-		// creacion de objtetos para recoger los atributos de la tabla
-		Ciudad ci = new Ciudad();
-		Pais p = new Pais();
-		Continente co = new Continente();
-
-		// asercion de objetos segun el dato
-		co.setId(rs.getInt("ciudad_continente"));
-		ci.setId(rs.getInt("ciudad_id"));
-		ci.setNombre(rs.getString("ciudad_nombre"));
-		ci.setPortada(rs.getString("ciudad_portada"));
-		p.setId(rs.getInt("ciudad_pais"));
-		
-		p.setBandera(rs.getString("pais_bandera"));
-		p.setContinente(co);
-
-		ci.setPais(p);
-		ci.setContinente(co);
-
-		return ci;
-
-	}
 
 	@Override
 	public ArrayList<Ciudad> getLast(int numRegistro) throws Exception {
@@ -325,6 +334,35 @@ public class CiudadDAOImp implements CiudadDAO {
 				}
 
 				return listaCiudades;
+	}
+
+	@Override
+	public ArrayList<Ciudad> getAllByPais(int id) throws Exception {
+		
+		ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();
+		PaisDAOImp paisdao = PaisDAOImp.getInstance();
+		
+		try(
+			Connection con= ConnectionManager.getConnection();
+			PreparedStatement pst= con.prepareStatement(SQL_SELECTBYPAIS);	
+		) {
+			
+			pst.setInt(1, id);
+			
+			try(ResultSet rs= pst.executeQuery()){
+				
+				while (rs.next()) {
+					Ciudad ci= mapperALL(rs);
+					ciudades.add(ci);
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		return ciudades;
 	}
 	
 	

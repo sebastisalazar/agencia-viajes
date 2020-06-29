@@ -11,6 +11,13 @@
 <meta name="author"
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
+
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+<!--  ${pageContext.request.contextPath} == http://localhost:8080/agencia-viajes master -->
+<base href="${pageContext.request.contextPath}/" />
+
+
+
 <title>${param.title}</title>
 
 <link rel="canonical"
@@ -94,38 +101,56 @@
       <circle cx="12" cy="12" r="10" />
       <path
 						d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
-			</a> 
+			</a> <a
+				class="py-2 d-none d-md-inline-block ${( 'Inicio' eq param.pagina ) ? 'active' : ''}"
+				href="inicio">Inicio</a> <a
+				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
+				href="listado-ciudades">Ciudades</a> 
+				
+				
+				<li class="nav-item dropdown">
 			
-			<a class="py-2 d-none d-md-inline-block ${( 'Inicio' eq param.pagina ) ? 'active' : ''}"
-				href="inicio">Inicio</a>
-			<a class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
-				href="listado-ciudades">Ciudades</a>
-		    <a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+						role="button" aria-haspopup="true" aria-expanded="false">Continentes</a>
+					<div class="dropdown-menu">
+					
+						<c:forEach items="${continentes}" var="c">
+							
+							<a class="dropdown-item" href="paises-continente?id=${c.id}&nombre=${c.nombre}">${c.nombre}</a>
+						
+						</c:forEach>
+							
+							
+					</div>
+				</li>
+				
+				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
 				href="crear-ciudad">Registrar nueva Ciudad</a>
+
 			
+
 
 			<c:if test="${not empty loginEmail}">
 
-				<span class="form-inline " > <a
-					class="nav-link  bg-dark rounded-left text-white"
-					href="#"><small class="font-weight-bold">${loginEmail}</small></a>
-					
-					<a
-					class="nav-link  bg-danger  rounded-right text-white"
-					href="logout"><small><i class="fas fa-times font-weight-bold"></i></small></a>
+				<span class="form-inline "> <a
+					class="nav-link  bg-dark rounded-left text-white" href="#"><small
+						class="font-weight-bold">${loginEmail}</small></a> <a
+					class="nav-link  bg-danger  rounded-right text-white" href="logout"><small><i
+							class="fas fa-times font-weight-bold"></i></small></a>
 				</span>
-				
+
 
 			</c:if>
-			
+
 			<c:if test="${empty loginEmail}">
 				<span class="form-inline"> <a
-				class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
-				href="login.jsp"><small class="font-weight-bold">Iniciar Sesión</small></a>
+					class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
+					href="login.jsp"><small class="font-weight-bold">Iniciar
+							Sesión</small></a>
 				</span>
-			
+
 			</c:if>
-			
+
 		</div>
 	</nav>
 

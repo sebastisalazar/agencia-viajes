@@ -70,7 +70,7 @@ public class Pais {
 
 	@Override
 	public String toString() {
-		return "Pais [nombre=" + nombre +", nombre corto="+nombrecorto+ ", id=" + id + ", bandera=" + bandera + ", continente=" + continente.getId() + "]";
+		return "Pais [nombre=" + nombre +", nombre corto="+nombrecorto+ ", id=" + id + ", bandera=" + bandera + ", continente_id=" + continente.getId() + ", continente_nombre="+continente.getNombre()+ "]";
 	}
 	
 }

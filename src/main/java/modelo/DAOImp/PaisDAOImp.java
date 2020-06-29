@@ -32,8 +32,32 @@ public class PaisDAOImp implements PaisDAO {
 
 	
 
-	private final String SQL_GETALL="SELECT id, nombre, bandera, continente, nombre_corto FROM agencia_viajes.pais;";
+	private final String SQL_GETALL="SELECT " +
+			"pais.id as pais_id," + 
+			"pais.nombre  as pais_nombre," + 
+			"pais.bandera as pais_bandera," + 
+			"pais.continente as pais_continente," + 
+			"continente.nombre as continente_nombre," + 
+			"continente.id as continente_id," + 
+			"pais.nombre_corto as pais_nombrecorto " + 
+			"FROM agencia_viajes.pais "+
+			"INNER JOIN agencia_viajes.continente "+
+			"ON agencia_viajes.pais.continente = agencia_viajes.continente.id;";
+	
+	
 	private final String UPDATE_BANDERA="UPDATE agencia_viajes.pais SET bandera=? WHERE id=?;";
+	private final String SQL_GETBYCONTINENTE="SELECT " +
+			"pais.id as pais_id," + 
+			"pais.nombre  as pais_nombre," + 
+			"pais.bandera as pais_bandera," + 
+			"pais.continente as pais_continente," + 
+			"continente.nombre as continente_nombre," + 
+			"continente.id as continente_id," + 
+			"pais.nombre_corto as pais_nombrecorto " + 
+			"FROM agencia_viajes.pais "+
+			"INNER JOIN agencia_viajes.continente "+
+			"ON agencia_viajes.pais.continente = agencia_viajes.continente.id "+
+			"WHERE continente.id=?";
 	
 	@Override
 	public ArrayList<Pais> getAll() throws Exception {
@@ -51,14 +75,7 @@ public class PaisDAOImp implements PaisDAO {
 			while (rs.next()) {
 				
 				//por cada linea leida crea un  objeto vacio
-				Pais p= new Pais();
-				
-				//asignacion de datos por campo al objeto
-				p.setId(rs.getInt("id"));
-				p.setNombre(rs.getString("nombre"));
-				p.setBandera(rs.getString("bandera"));
-				p.setContinente( new Continente(rs.getInt("continente")));
-				p.setNombrecorto(rs.getString("nombre_corto"));
+				Pais p= mapper(rs);
 				
 				//se añade a la lista
 				paises.add(p);
@@ -102,6 +119,24 @@ public class PaisDAOImp implements PaisDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public Pais mapper(ResultSet rs) throws SQLException {
+		
+		Pais p= new Pais();
+		Continente co= new Continente();
+		
+		//asignacion de datos por campo al objeto
+		p.setId(rs.getInt("pais_id"));
+		p.setNombre(rs.getString("pais_nombre"));
+		p.setBandera(rs.getString("pais_bandera"));
+		co.setId(rs.getInt("pais_continente"));
+		co.setNombre(rs.getString("continente_nombre"));
+		p.setContinente(co);
+		p.setNombrecorto(rs.getString("pais_nombrecorto"));
+		
+		
+		return p;
+	}
 
 	@Override
 	public Ciudad setBandera(Ciudad ci) throws SQLException, Exception {
@@ -119,6 +154,36 @@ public class PaisDAOImp implements PaisDAO {
 		}
 		return ci;
 		
+		
+		
+	}
+
+	@Override
+	public ArrayList<Pais> getAllByContinente(int id) throws Exception {
+		
+		ArrayList<Pais> paises= new ArrayList<Pais>();
+		
+		
+		try(
+			Connection con= ConnectionManager.getConnection();
+			PreparedStatement pst=con.prepareStatement(SQL_GETBYCONTINENTE);
+		
+		){
+			pst.setInt(1, id);
+			try(ResultSet rs= pst.executeQuery()){
+				
+				while (rs.next()) {
+					Pais p= mapper(rs);
+					paises.add(p);
+				}
+			}
+			
+		}catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		
+		return paises;
 		
 		
 	}
