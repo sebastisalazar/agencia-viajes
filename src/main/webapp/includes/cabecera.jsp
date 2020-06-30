@@ -125,7 +125,7 @@
 				</li>
 				
 				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-ciudad">Registrar nueva Ciudad</a>
+				href="crear-ciudad">Nueva Ciudad</a>
 
 			
 

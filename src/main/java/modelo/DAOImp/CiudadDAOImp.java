@@ -82,7 +82,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			"continente.nombre as continente_nombre " + 
 			"FROM agencia_viajes.ciudad " + 
 			"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
-			"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id"+
+			"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id "+
 			"WHERE ciudad.pais=?;";
 			
 			
@@ -256,7 +256,7 @@ public class CiudadDAOImp implements CiudadDAO {
 
 	@Override
 	public ArrayList<Ciudad> getAllByNombre(String palabraBuscada) throws Exception {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
@@ -277,9 +277,6 @@ public class CiudadDAOImp implements CiudadDAO {
 		 
 		// asercion de objetos segun el dato
 
-		
-		
-		
 		ci.setId(rs.getInt("ciudad_id"));
 		ci.setNombre(rs.getString("ciudad_nombre"));
 		p.setId(rs.getInt("ciudad_pais"));
@@ -340,7 +337,6 @@ public class CiudadDAOImp implements CiudadDAO {
 	public ArrayList<Ciudad> getAllByPais(int id) throws Exception {
 		
 		ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>();
-		PaisDAOImp paisdao = PaisDAOImp.getInstance();
 		
 		try(
 			Connection con= ConnectionManager.getConnection();

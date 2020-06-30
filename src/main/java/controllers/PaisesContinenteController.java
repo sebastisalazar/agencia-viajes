@@ -1,7 +1,7 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +29,8 @@ public class PaisesContinenteController extends HttpServlet {
 		
 		
 		int id=Integer.parseInt(request.getParameter("id"));
-		String nombre= request.getParameter("nombre");
+		
+		String nombre=request.getParameter("nombre");
 		
 		PaisDAOImp daoPais= PaisDAOImp.getInstance();
 		
@@ -37,24 +38,25 @@ public class PaisesContinenteController extends HttpServlet {
 		
 		Alerta alerta= new Alerta();
 		
-		try {
-			ArrayList<Pais> paisesContinente= daoPais.getAllByContinente(id);
-			//ArrayList<Ciudad> ciudadesPais=daoCiudad.getAllByContinente(id);
-			session.setAttribute("busqueda",nombre);
-			session.setAttribute("paisesContinente",paisesContinente);
 			
-			if(paisesContinente.size()==0) {
-				alerta= new Alerta("warning", "No existen registros para este pais");
+			try {
+				HashMap<String,Pais> paisesContinente= daoPais.getAllByContinente(id);
+				//ArrayList<Ciudad> ciudadesPais=daoCiudad.getAllByContinente(id);
+				session.setAttribute("busqueda",nombre);
+				session.setAttribute("paisesContinente",paisesContinente);
+				
+				if(paisesContinente.size()==0) {
+					alerta= new Alerta("warning", "Lo sentimos, no existen registros para este continente");
+					session.setAttribute("alerta", alerta);
+				}
+				
+			} catch (Exception e) {
+				
+				alerta= new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
+			}finally {
+				response.sendRedirect("paises-continente.jsp?id="+id+"&nombre="+nombre);
 			}
-		} catch (Exception e) {
-			
-			alerta= new Alerta("danger", e.getMessage());
-			session.setAttribute("alerta", alerta);
-		}finally {
-			response.sendRedirect("paises-continente.jsp?id="+id+"&nombre="+nombre);
-		}
-		
 		
 		
 	}

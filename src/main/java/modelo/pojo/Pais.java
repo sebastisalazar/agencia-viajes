@@ -1,14 +1,15 @@
 package modelo.pojo;
 
-import javax.validation.constraints.Min;
+
 
 public class Pais {
 
-	
-
 	private String nombre;
 	private String nombrecorto;
+	private int numciudades;
 	
+	
+
 	private int id;
 	private String bandera;
 	private Continente continente;
@@ -18,9 +19,19 @@ public class Pais {
 		this.nombre ="";
 		this.id =0;
 		this.bandera="";
+		this.numciudades=0;
 		this.continente= new Continente();
 	}
 
+
+	public int getNumciudades() {
+		return numciudades;
+	}
+
+
+	public void setNumciudades(int numciudades) {
+		this.numciudades += numciudades;
+	}
 
 	public String getNombre() {
 		return nombre;
@@ -70,7 +81,7 @@ public class Pais {
 
 	@Override
 	public String toString() {
-		return "Pais [nombre=" + nombre +", nombre corto="+nombrecorto+ ", id=" + id + ", bandera=" + bandera + ", continente_id=" + continente.getId() + ", continente_nombre="+continente.getNombre()+ "]";
+		return "Pais [nombre=" + nombre +", nombre corto="+nombrecorto+ ", id=" + id + ", bandera=" + bandera +", numciudades="+numciudades+ ", continente_id=" + continente.getId() + ", continente_nombre="+continente.getNombre()+ "]";
 	}
 	
 }

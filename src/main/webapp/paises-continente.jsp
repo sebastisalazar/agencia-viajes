@@ -3,14 +3,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${not  empty loginEmail }">
-	<c:redirect url="listado-ciudades"/>
-</c:if>
-
-<c:if test="${ empty paisesContinente }">
-	<c:redirect url="paises-continente"/>
-</c:if>
-
 
 <jsp:include page="includes/cabecera.jsp">
 
@@ -31,22 +23,39 @@
 			<th scope="col">PAIS</th>
 			<th scope="col">BANDERA</th>
 			<th scope="col">CONTINENTE</th>
+			<th scope="col">CIUDADES</th>
 		</tr>
 	</thead>
 	<tbody>
 		<c:forEach items="${paisesContinente}" var="p">
 			<tr class="text-center">
-				<td>${p.id}</td>
-				<td>${p.nombre}</td>
+				<td>${p.key}</td>
+				<td>${p.value.nombre}</td>
 				<td>
+					
 					<div class="country" >
 						<i onload="cargarBandera()">
-							${p.nombrecorto}
+							${p.value.nombrecorto}
 						</i>
 					</div>
-				
 				</td>
 				<td>${busqueda}</td>
+				<td>
+					
+					<c:choose>
+         
+				         <c:when test = "${p.value.numciudades >0}">
+				            <a href="ciudades-pais?id=${p.key}&nombre=${p.value.nombre}">Ver ciudades (${p.value.numciudades})</a>
+				         </c:when>
+				         
+				         
+				         <c:otherwise>
+				            No existen ciudades registradas.
+				         </c:otherwise>
+				      </c:choose>
+					
+					
+				</td>
 
 				
 			</tr>

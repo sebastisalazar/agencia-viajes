@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import modelo.ConnectionManager;
 import modelo.DAO.PaisDAO;
@@ -46,18 +47,16 @@ public class PaisDAOImp implements PaisDAO {
 	
 	
 	private final String UPDATE_BANDERA="UPDATE agencia_viajes.pais SET bandera=? WHERE id=?;";
-	private final String SQL_GETBYCONTINENTE="SELECT " +
-			"pais.id as pais_id," + 
-			"pais.nombre  as pais_nombre," + 
-			"pais.bandera as pais_bandera," + 
-			"pais.continente as pais_continente," + 
-			"continente.nombre as continente_nombre," + 
-			"continente.id as continente_id," + 
-			"pais.nombre_corto as pais_nombrecorto " + 
-			"FROM agencia_viajes.pais "+
-			"INNER JOIN agencia_viajes.continente "+
-			"ON agencia_viajes.pais.continente = agencia_viajes.continente.id "+
-			"WHERE continente.id=?";
+	private final String SQL_GETPAISESBYCONTINENTE="SELECT " + 
+													"pais.id as pais_id," + 
+													"pais.continente as continente_id," + 
+													"pais.nombre_corto as pais_nombrecorto,"+
+													"pais.bandera as pais_bandera,"+
+													"ciudad.nombre as ciudad_nombre," + 
+													"pais.nombre as pais_nombre " + 
+													"FROM ciudad " + 
+													"RIGHT JOIN pais ON pais.id = ciudad.pais " + 
+													"Where pais.continente=?";
 	
 	@Override
 	public ArrayList<Pais> getAll() throws Exception {
@@ -159,22 +158,48 @@ public class PaisDAOImp implements PaisDAO {
 	}
 
 	@Override
-	public ArrayList<Pais> getAllByContinente(int id) throws Exception {
+	public HashMap<String,Pais> getAllByContinente(int id) throws Exception {
 		
-		ArrayList<Pais> paises= new ArrayList<Pais>();
-		
+		HashMap<String,Pais> paises= new HashMap<String,Pais>();
 		
 		try(
 			Connection con= ConnectionManager.getConnection();
-			PreparedStatement pst=con.prepareStatement(SQL_GETBYCONTINENTE);
+			PreparedStatement pst=con.prepareStatement(SQL_GETPAISESBYCONTINENTE);
 		
 		){
 			pst.setInt(1, id);
 			try(ResultSet rs= pst.executeQuery()){
 				
 				while (rs.next()) {
-					Pais p= mapper(rs);
-					paises.add(p);
+					
+					Pais p= new Pais();
+		
+					p.setId(rs.getInt("pais_id"));
+					p.getContinente().setId(rs.getInt("continente_id"));
+					p.setNombre(rs.getString("pais_nombre"));
+					p.setBandera(rs.getString("pais_bandera"));
+					p.setNombrecorto(rs.getString("pais_nombrecorto"));
+					
+					String ciudad=rs.getString("ciudad_nombre");
+					
+					//si el pais ya existe en el hashmap quiere decir que es porque tiene mas de una ciudad
+					if (paises.containsKey(String.valueOf(p.getId()))) {
+						
+						p=paises.get(String.valueOf(p.getId()));
+						p.setNumciudades(1);
+						
+					//si no se evalua 
+					}else {
+						
+						//si no existe en el hasmap se intrudce como nuevo pero se mira si la columna ciudad_nombre no es null
+						if (ciudad!=null) {
+							p.setNumciudades(1);//si no es null se suma uno
+						}
+						
+						//si no se introduce solo el pais
+						paises.put(String.valueOf(p.getId()),p);
+					}
+					
 				}
 			}
 			
