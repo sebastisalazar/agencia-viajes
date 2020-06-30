@@ -3,6 +3,10 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${empty ciudadesPais}">
+	<c:redirect url="ciudades-pais?id=${param.id}&nombre=${param.nombre}" />
+</c:if>
+
 <jsp:include page="includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />
@@ -12,7 +16,7 @@
 </jsp:include>
 
 
-<h1 class="text-primary text-center mb-3"> Ciudades en ${busqueda}</h1>
+<h1 class="text-primary text-center mb-3"> Ciudades en ${busquedaCiudades}</h1>
 
 
 <table class="table table-striped table-hover tabla ">
@@ -21,7 +25,7 @@
 			<th scope="col">ID</th>
 			<th scope="col">CIUDAD</th>
 			<th scope="col">PAIS</th>
-			<th scope="col">BANDERA</th>
+			<th scope="col">ISO 3166 CODIGO PAIS</th>
 			<th scope="col">CONTINENTE</th>
 			<th scope="col">EDITAR</th>
 			<th scope="col">ELIMINAR</th>
@@ -35,11 +39,11 @@
 				<td>${c.pais.nombre}</td>
 				<td>
 					
-									<div class="country" >
-										<i onload="cargarBandera()">
-											${c.pais.nombrecorto}
-										</i>
-									</div>
+					<div class="country" >
+						<i onload="cargarBandera()">
+							${c.pais.nombrecorto}
+						</i>
+					</div>
 					
 				</td>
 				<td>${c.continente.nombre}</td>
@@ -60,12 +64,5 @@
 	</tbody>
 
 </table>
-
-
-
-
-
-
-
 
 <jsp:include page="includes/pie.jsp" />

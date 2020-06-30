@@ -42,10 +42,11 @@ public class PaisesContinenteController extends HttpServlet {
 			try {
 				HashMap<String,Pais> paisesContinente= daoPais.getAllByContinente(id);
 				//ArrayList<Ciudad> ciudadesPais=daoCiudad.getAllByContinente(id);
-				session.setAttribute("busqueda",nombre);
+				session.setAttribute("busquedaPaises",nombre);
 				session.setAttribute("paisesContinente",paisesContinente);
 				
 				if(paisesContinente.size()==0) {
+					paisesContinente=null;
 					alerta= new Alerta("warning", "Lo sentimos, no existen registros para este continente");
 					session.setAttribute("alerta", alerta);
 				}

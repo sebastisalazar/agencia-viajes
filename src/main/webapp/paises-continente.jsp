@@ -3,17 +3,20 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<c:if test="${empty paisesContinente}">
+	<c:redirect url="paises-continente?id=${param.id}&nombre=${param.nombre}" />
+</c:if>
 
 <jsp:include page="includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Continente" />
+	<jsp:param name="pagina" value="Paises" />
 
-	<jsp:param name="title" value="Continente" />
+	<jsp:param name="title" value="Paises" />
 
 </jsp:include>
 
 
-<h1 class="text-primary text-center mb-3"> Paises en ${busqueda}</h1>
+<h1 class="text-primary text-center mb-3"> Paises en ${busquedaPaises}</h1>
 
 
 <table class="table table-striped table-hover tabla ">
@@ -21,9 +24,11 @@
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">PAIS</th>
-			<th scope="col">BANDERA</th>
+			<th scope="col">ISO 3166</th>
 			<th scope="col">CONTINENTE</th>
-			<th scope="col">CIUDADES</th>
+			<th scope="col">CIUDADES REGISTRADAS</th>
+			<th scope="col">EDITAR</th>
+			<th scope="col">ELIMINAR</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -39,7 +44,7 @@
 						</i>
 					</div>
 				</td>
-				<td>${busqueda}</td>
+				<td>${busquedaPaises}</td>
 				<td>
 					
 					<c:choose>
@@ -54,7 +59,18 @@
 				         </c:otherwise>
 				      </c:choose>
 					
-					
+				</td>
+				
+				<td>
+					<a href="actualizar-pais?id=${p.key}"> 
+						<i class="fas fa-pencil-alt"></i>
+					</a>
+				</td>
+
+				<td>
+					<a onclick="confirmar('${p.value.nombre}')" href="eliminar-pais?id=${p.key}"> 
+						<i class="fas fa-trash-alt"></i>
+					</a>
 				</td>
 
 				
@@ -62,14 +78,7 @@
 		</c:forEach>
 
 	</tbody>
-
 </table>
-
-
-
-
-
-
-
+	
 
 <jsp:include page="includes/pie.jsp" />

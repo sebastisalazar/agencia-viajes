@@ -35,13 +35,13 @@ public class CiudadesPaisController extends HttpServlet {
 		try {
 			ArrayList<Ciudad> ciudades=dao.getAllByPais(id);
 			session.setAttribute("ciudadesPais", ciudades);
-			session.setAttribute("busqueda", nombre);
+			session.setAttribute("busquedaCiudades", nombre);
 		} catch (Exception e) {
 			alerta= new Alerta("danger", e.getMessage());
 			session.setAttribute("alerta", alerta);
 		}
 		
-		response.sendRedirect("ciudades-pais.jsp");
+		response.sendRedirect("ciudades-pais.jsp?id="+id+"&nombre="+nombre);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

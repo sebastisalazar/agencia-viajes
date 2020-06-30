@@ -1,15 +1,20 @@
 package modelo.pojo;
 
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 public class Pais {
 
+	//VALIDACIONES
+	@NotBlank ( message = "Escribe el nombre del pais")
+	@Size( min = 3, max = 100, message = "La longtitud de ser entre 3 y 100 caracteres")
 	private String nombre;
+	
+	@NotBlank ( message = "Escribe el codigo del pais")
+	@Size( min = 2, max = 2, message = "La longtitud debe ser de 2 caracteres")
 	private String nombrecorto;
 	private int numciudades;
-	
-	
-
 	private int id;
 	private String bandera;
 	private Continente continente;

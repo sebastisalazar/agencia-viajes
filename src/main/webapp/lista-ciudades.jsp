@@ -26,7 +26,7 @@
 			<th scope="col">ID</th>
 			<th scope="col">CIUDAD</th>
 			<th scope="col">PAIS</th>
-			<th scope="col">BANDERA</th>
+			<th scope="col">ISO 3166 CODIGO PAIS</th>
 			<th scope="col">CONTINENTE</th>
 			<th scope="col">EDITAR</th>
 			<th scope="col">ELIMINAR</th>

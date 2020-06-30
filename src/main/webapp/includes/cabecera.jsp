@@ -107,25 +107,28 @@
 				class="py-2 d-none d-md-inline-block ${( 'Destinos' eq param.pagina ) ? 'active' : ''}"
 				href="listado-ciudades">Ciudades</a> 
 				
+					<div class="nav-item dropdown">
 				
-				<li class="nav-item dropdown">
-			
-					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-						role="button" aria-haspopup="true" aria-expanded="false">Continentes</a>
-					<div class="dropdown-menu">
-					
-						<c:forEach items="${continentes}" var="c">
-							
-							<a class="dropdown-item" href="paises-continente?id=${c.id}&nombre=${c.nombre}">${c.nombre}</a>
+						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
+							role="button" aria-haspopup="true" aria-expanded="false">Continentes</a>
+						<div class="dropdown-menu">
 						
-						</c:forEach>
+							<c:forEach items="${continentes}" var="c">
+								
+								<a class="dropdown-item" href="paises-continente?id=${c.id}&nombre=${c.nombre}">${c.nombre}</a>
 							
-							
+							</c:forEach>
+								
+								
+						</div>
 					</div>
-				</li>
+				
 				
 				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
 				href="crear-ciudad">Nueva Ciudad</a>
+				
+				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+				href="crear-pais.jsp">Nuevo Pais</a>
 
 			
 

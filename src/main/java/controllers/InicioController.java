@@ -30,7 +30,7 @@ public class InicioController extends HttpServlet {
 		
 		
 		try {
-			ciudades= dao.getLast(6);
+			ciudades= dao.getLast(9);
 			session.setAttribute("ciudadesMasVisitadas",ciudades);
 		} catch (Exception e) {
 			Alerta alerta= new Alerta("danger","Opps.. something went wrong");
