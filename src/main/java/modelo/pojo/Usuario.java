@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 
+import modelo.pojo.Rol;
+
 public class Usuario {
 
 	private int id;
@@ -14,15 +16,20 @@ public class Usuario {
 	
 	private String imagen;
 	
+	private Rol rol;
+	
+	
 	public Usuario() {
 		super();
 		this.id =0;
 		this.email = "";
 		this.password = "";
 		this.imagen = "";
+		this.rol = new Rol();
 	}
 	
 	
+
 
 	public Usuario(String email, String password) {
 		this();
@@ -30,7 +37,18 @@ public class Usuario {
 		this.password = password;
 	}
 
+	
 
+
+	public Rol getRol() {
+		return rol;
+	}
+
+
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
 
 	public int getId() {
 		return id;

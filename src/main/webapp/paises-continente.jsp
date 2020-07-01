@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <c:if test="${empty paisesContinente}">
 	<c:redirect url="paises-continente?id=${param.id}&nombre=${param.nombre}" />
 </c:if>
@@ -31,53 +32,60 @@
 			<th scope="col">ELIMINAR</th>
 		</tr>
 	</thead>
-	<tbody>
-		<c:forEach items="${paisesContinente}" var="p">
-			<tr class="text-center">
-				<td>${p.key}</td>
-				<td>${p.value.nombre}</td>
-				<td>
-					
-					<div class="country" >
-						<i onload="cargarBandera()">
-							${p.value.nombrecorto}
-						</i>
-					</div>
-				</td>
-				<td>${busquedaPaises}</td>
-				<td>
-					
-					<c:choose>
-         
-				         <c:when test = "${p.value.numciudades >0}">
-				            <a href="ciudades-pais?id=${p.key}&nombre=${p.value.nombre}">Ver ciudades (${p.value.numciudades})</a>
-				         </c:when>
-				         
-				         
-				         <c:otherwise>
-				            No existen ciudades registradas.
-				         </c:otherwise>
-				      </c:choose>
-					
-				</td>
-				
-				<td>
-					<a href="actualizar-pais?id=${p.key}"> 
-						<i class="fas fa-pencil-alt"></i>
-					</a>
-				</td>
-
-				<td>
-					<a onclick="confirmar('${p.value.nombre}')" href="eliminar-pais?id=${p.key}"> 
-						<i class="fas fa-trash-alt"></i>
-					</a>
-				</td>
-
-				
-			</tr>
-		</c:forEach>
-
-	</tbody>
+	
+	<c:if test="${paisesContinente.containsKey('vacio')==false}">
+		<tbody>
+				<c:forEach items="${paisesContinente}" var="p">
+					<tr class="text-center">
+						<td>${p.key}</td>
+						<td>${p.value.nombre}</td>
+						<td>
+							
+							<div class="country" >
+								<i onload="cargarBandera()">
+									${p.value.nombrecorto}
+								</i>
+							</div>
+						</td>
+						<td>${busquedaPaises}</td>
+						<td>
+							
+							<c:choose>
+		         
+						         <c:when test = "${p.value.numciudades >0}">
+						            <a href="ciudades-pais?id=${p.key}&nombre=${p.value.nombre}">Ver ciudades (${p.value.numciudades})</a>
+						         </c:when>
+						         
+						         
+						         <c:otherwise>
+						            No existen ciudades registradas.
+						         </c:otherwise>
+						      </c:choose>
+							
+						</td>
+						
+						<td>
+							<a href="actualizar-pais?id=${p.key}"> 
+								<i class="fas fa-pencil-alt"></i>
+							</a>
+						</td>
+		
+						<td>
+							<a onclick="confirmar('${p.value.nombre}')" href="eliminar-pais?id=${p.key}"> 
+								<i class="fas fa-trash-alt"></i>
+							</a>
+						</td>
+		
+						
+					</tr>
+				</c:forEach>
+		
+			</tbody>
+	
+	</c:if>
+	
+	
+	
 </table>
 	
 

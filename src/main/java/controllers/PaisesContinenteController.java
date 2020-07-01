@@ -45,8 +45,9 @@ public class PaisesContinenteController extends HttpServlet {
 				session.setAttribute("busquedaPaises",nombre);
 				session.setAttribute("paisesContinente",paisesContinente);
 				
+			
 				if(paisesContinente.size()==0) {
-					paisesContinente=null;
+					paisesContinente.put("vacio", new Pais() );
 					alerta= new Alerta("warning", "Lo sentimos, no existen registros para este continente");
 					session.setAttribute("alerta", alerta);
 				}

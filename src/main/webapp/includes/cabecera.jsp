@@ -16,8 +16,6 @@
 <!--  ${pageContext.request.contextPath} == http://localhost:8080/agencia-viajes master -->
 <base href="${pageContext.request.contextPath}/" />
 
-
-
 <title>${param.title}</title>
 
 <link rel="canonical"
@@ -79,13 +77,8 @@
 }
 </style>
 
-
-
-
 <!-- Custom styles for this template -->
 <link href="css/product.css" rel="stylesheet">
-
-
 
 </head>
 <body onload="init()">
@@ -110,7 +103,7 @@
 					<div class="nav-item dropdown">
 				
 						<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-							role="button" aria-haspopup="true" aria-expanded="false">Continentes</a>
+							role="button" aria-haspopup="true" aria-expanded="false">Paises</a>
 						<div class="dropdown-menu">
 						
 							<c:forEach items="${continentes}" var="c">
