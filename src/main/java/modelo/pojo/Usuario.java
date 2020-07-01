@@ -1,8 +1,10 @@
 package modelo.pojo;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import modelo.pojo.Rol;
 
@@ -10,8 +12,12 @@ public class Usuario {
 
 	private int id;
 	
+	@NotBlank ( message = "Escribe un email")
+	@Email (message="Introduce un email válido")
 	private String email;
 	
+	@NotBlank ( message = "Escribe la contraseña")
+	@Size( min = 3, max = 100, message = "La longtitud de ser entre 5 y 15 caracteres")
 	private String password;
 	
 	private String imagen;

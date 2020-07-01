@@ -3,10 +3,22 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<c:if test="${not empty loginUsuario}">
+         <c:if test = "${loginUsuario.rol.id == 1}">
+            <c:redirect url="inicio"></c:redirect>
+      	</c:if>
+	
+</c:if>
+
+<!-- Si se intenta acceder sin haberse logeado redigira a login -->
+<c:if test="${empty loginUsuario}">
+      <c:redirect url="login.jsp"></c:redirect>
+</c:if>
 
 <jsp:include page="includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Crear" />
+	<jsp:param name="pagina" value="Registro Pais" />
 
 	<jsp:param name="title" value="Crear ciudad" />
 

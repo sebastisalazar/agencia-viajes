@@ -3,8 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${not  empty loginEmail }">
-	<c:redirect url="listado-ciudades"/>
+<c:if test="${not empty loginUsuario }">
+	<c:redirect url="inicio"/>
 </c:if>
 
 
@@ -48,8 +48,17 @@
 		<div class="form-group form-check">
 			<input type="checkbox" class="form-check-input" id="recordar" name="recordar">
 			<label class="form-check-label" for="recordar" >Recordar sesión</label>
+			
+			<div class="d-flex justify-content-around my-4">
+				<small class="font-weight-bold"><a href="crear-usuario">Registrate</a></small>
+				<small class="font-weight-bold"><a href="#">Recuperar contraseña</a></small>
+			</div>
+			 
 		</div>
-		<button type="submit" class="btn btn-primary">Entrar</button>
+		
+		<div class="d-flex justify-content-center">
+			   <button type="submit" class="btn btn-primary px-5">Entrar</button>
+		</div>
 	</form>
 
 </div>

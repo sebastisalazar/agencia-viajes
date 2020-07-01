@@ -3,10 +3,22 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<c:if test="${not empty loginUsuario}">
+         <c:if test = "${loginUsuario.rol.id == 1}">
+            <c:redirect url="inicio"></c:redirect>
+      	</c:if>
+	
+</c:if>
+
+<!-- Si se intenta acceder sin logearse redigirá -->
+<c:if test="${empty loginUsuario}">
+	<c:redirect url="login.jsp"></c:redirect>
+</c:if>
 
 <!-- Si se intenta entrar sin un id por parametro redigirá -->
 <c:if test="${empty param.id}">
-	<c:redirect url="listado-ciudades"></c:redirect>
+	<c:redirect url="inicio"></c:redirect>
 </c:if>
 
 <!-- Si pasamos mucho tiempo interacturar en esta pagina, la session borrara el atributo ciudad editar, por lo tanto vuelve a recuperar los datos cuando eso pase -->
@@ -17,9 +29,9 @@
 
 <jsp:include page="includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Actualizar" />
+	<jsp:param name="pagina" value="Actualizar pais" />
 
-	<jsp:param name="title" value="Actualizar ciudad" />
+	<jsp:param name="title" value="Actualizar pais" />
 
 </jsp:include>
 
@@ -167,8 +179,6 @@
 
 			</form>
 
-
-
 		</div>
 
 		<!--Contiene todo el form para SOLO actualizar el la foto-->
@@ -177,7 +187,7 @@
 				<label class="d-block text-center">Portada</label>
 				<div class="card bg-dark text-white">
 					<img class="card-img ciudades-card" src="${paisEditar.bandera}"
-						alt="ciudad">
+						alt="portadaPais">
 					<div class="card-img-overlay">
 						<p class="titulo-card">
 							<strong>${paisEditar.nombre}</strong>

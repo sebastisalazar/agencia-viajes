@@ -118,11 +118,14 @@
 				
 				<c:if test="${not empty loginUsuario}">
 					<c:if test="${loginUsuario.rol.id == 2}">
-				
-						<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+						
+						<a class="py-2 d-none d-md-inline-block ${( 'Usuarios' eq param.pagina ) ? 'active' : ''}"
+						href="listado-usuarios">Usuarios</a>
+						
+						<a class="py-2 d-none d-md-inline-block ${( 'Registro Ciudad' eq param.pagina ) ? 'active' : ''}"
 						href="crear-ciudad">Nueva Ciudad</a>
 						
-						<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+						<a class="py-2 d-none d-md-inline-block ${( 'Registro Pais' eq param.pagina ) ? 'active' : ''}"
 						href="crear-pais.jsp">Nuevo Pais</a>
 
 					</c:if>
@@ -142,6 +145,9 @@
 			</c:if>
 
 			<c:if test="${empty loginUsuario}">
+			
+				<a class="py-2 d-none d-md-inline-block ${( 'Registro Usuario' eq param.pagina ) ? 'active' : ''}"
+						href="crear-usuario.jsp">Nuevo Usuario</a>
 				<span class="form-inline"> <a
 					class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
 					href="login.jsp"><small class="font-weight-bold">Iniciar

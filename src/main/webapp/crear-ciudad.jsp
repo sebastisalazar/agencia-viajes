@@ -3,13 +3,27 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<c:if test="${not empty loginUsuario}">
+         <c:if test = "${loginUsuario.rol.id == 1}">
+            <c:redirect url="inicio"></c:redirect>
+      	</c:if>
+	
+</c:if>
+
+<!-- Si se intenta acceder sin haberse logeado redigira a login -->
+<c:if test="${empty loginUsuario}">
+      <c:redirect url="login.jsp"></c:redirect>
+</c:if>
+
+<!-- Si el array select esta vacio llama de nuevo al crear-ciudad para recuperarlo -->
 <c:if test="${empty selectPaises}">
 	<c:redirect url="crear-ciudad" />
 </c:if>
 
 <jsp:include page="includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Crear" />
+	<jsp:param name="pagina" value="Registro Ciudad" />
 
 	<jsp:param name="title" value="Crear ciudad" />
 
