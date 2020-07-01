@@ -48,7 +48,7 @@ public class PaisesContinenteController extends HttpServlet {
 			
 				if(paisesContinente.size()==0) {
 					paisesContinente.put("vacio", new Pais() );
-					alerta= new Alerta("warning", "Lo sentimos, no existen registros para este continente");
+					alerta= new Alerta("warning", "Lo sentimos, aún no existen paises registrados en este continente.");
 					session.setAttribute("alerta", alerta);
 				}
 				

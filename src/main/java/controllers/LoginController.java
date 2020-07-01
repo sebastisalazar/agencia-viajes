@@ -77,14 +77,13 @@ public class LoginController extends HttpServlet {
 			
 			
 			try {
-				daoUsuario.getExiste(email, password);
+				u=daoUsuario.getExiste(email, password);
 				alerta= new Alerta("success", "Has Iniciado sesión correctamente.");
 				
 				session.removeAttribute("loginEmailErroneo");
 				session.removeAttribute("loginPasswordErroneo");
 				
-				session.setAttribute("loginEmail", email);
-				session.setAttribute("loginPassword",password);
+				session.setAttribute("loginUsuario",u);
 				
 				session.setAttribute("alerta",alerta);
 				

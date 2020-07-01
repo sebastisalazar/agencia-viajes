@@ -36,8 +36,7 @@ public class LogoutController extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		//se mata /invalida la sesion
-		session.removeAttribute("loginEmail");
-		session.removeAttribute("loginPassword");
+		session.removeAttribute("loginUsuario");
 		
 		
 		//se pasa el mensaje de DESLOGEO mediante una alerta

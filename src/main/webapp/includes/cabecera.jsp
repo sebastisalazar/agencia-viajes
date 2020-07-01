@@ -116,21 +116,24 @@
 						</div>
 					</div>
 				
+				<c:if test="${not empty loginUsuario}">
+					<c:if test="${loginUsuario.rol.id == 2}">
 				
-				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-ciudad">Nueva Ciudad</a>
-				
-				<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
-				href="crear-pais.jsp">Nuevo Pais</a>
+						<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+						href="crear-ciudad">Nueva Ciudad</a>
+						
+						<a class="py-2 d-none d-md-inline-block ${( 'Registro' eq param.pagina ) ? 'active' : ''}"
+						href="crear-pais.jsp">Nuevo Pais</a>
 
-			
+					</c:if>
+				</c:if>
 
 
-			<c:if test="${not empty loginEmail}">
+			<c:if test="${not empty loginUsuario}">
 
 				<span class="form-inline "> <a
 					class="nav-link  bg-dark rounded-left text-white" href="#"><small
-						class="font-weight-bold">${loginEmail}</small></a> <a
+						class="font-weight-bold">${loginUsuario.email}</small></a> <a
 					class="nav-link  bg-danger  rounded-right text-white" href="logout"><small><i
 							class="fas fa-times font-weight-bold"></i></small></a>
 				</span>
@@ -138,7 +141,7 @@
 
 			</c:if>
 
-			<c:if test="${empty loginEmail}">
+			<c:if test="${empty loginUsuario}">
 				<span class="form-inline"> <a
 					class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
 					href="login.jsp"><small class="font-weight-bold">Iniciar

@@ -25,11 +25,16 @@
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">PAIS</th>
-			<th scope="col">ISO 3166</th>
+			<th scope="col">CODIGO PAIS</th>
 			<th scope="col">CONTINENTE</th>
-			<th scope="col">CIUDADES REGISTRADAS</th>
-			<th scope="col">EDITAR</th>
-			<th scope="col">ELIMINAR</th>
+			<th scope="col">CIUDADES</th>
+			
+			<c:if test="${not empty loginUsuario}">
+				<c:if test="${loginUsuario.rol.id == 2}">
+					<th scope="col">EDITAR</th>
+					<th scope="col">ELIMINAR</th>
+				</c:if>
+			</c:if>
 		</tr>
 	</thead>
 	
@@ -64,17 +69,21 @@
 							
 						</td>
 						
-						<td>
-							<a href="actualizar-pais?id=${p.key}"> 
-								<i class="fas fa-pencil-alt"></i>
-							</a>
-						</td>
-		
-						<td>
-							<a onclick="confirmar('${p.value.nombre}')" href="eliminar-pais?id=${p.key}"> 
-								<i class="fas fa-trash-alt"></i>
-							</a>
-						</td>
+						<c:if test="${not empty loginUsuario}">
+							<c:if test="${loginUsuario.rol.id == 2}">
+								<td>
+									<a href="actualizar-pais?id=${p.key}"> 
+										<i class="fas fa-pencil-alt"></i>
+									</a>
+								</td>
+				
+								<td>
+									<a onclick="confirmar('${p.value.nombre}')" href="eliminar-pais?id=${p.key}"> 
+										<i class="fas fa-trash-alt"></i>
+									</a>
+								</td>
+							</c:if>
+						</c:if>
 		
 						
 					</tr>

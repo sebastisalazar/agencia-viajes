@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import modelo.ConnectionManager;
 import modelo.DAO.UsuarioDAO;
+import modelo.pojo.Rol;
 import modelo.pojo.Usuario;
 
 public class UsuarioDAOImp implements UsuarioDAO {
@@ -26,7 +27,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 		return INSTANCE;
 	}
 
-	private final String SQL_EXISTE = "SELECT id, nombre, password, imagen FROM agencia_viajes.usuarios WHERE nombre=? AND password=?;";
+	private final String SQL_EXISTE = "SELECT id, nombre, password, imagen,id_rol FROM agencia_viajes.usuarios WHERE nombre=? AND password=?;";
 
 	@Override
 	public ArrayList<Usuario> getAll() throws Exception {
@@ -82,6 +83,9 @@ public class UsuarioDAOImp implements UsuarioDAO {
 					u = new Usuario();
 					u.setEmail(rs.getString("nombre"));
 					u.setPassword(rs.getString("password"));
+					
+					Rol rol= new Rol(Integer.parseInt(rs.getString("id_rol")));
+					u.setRol(rol);
 
 				}
 
