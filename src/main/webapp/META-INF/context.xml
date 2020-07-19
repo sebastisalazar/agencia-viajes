@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <Context path="/ejemplo05">
+      <Resource
+          type="javax.sql.DataSource"
+          auth="Container"
+          name="jdbc/agencia_viajes"
+          driverClassName="com.mysql.jdbc.Driver"
+          url="jdbc:mysql://localhost:3306/agencia_viajes"
+          username="root-agencia"
+          password="sebastian"
+          maxActive="100"
+          maxIdle="30"
+          maxWait="10000"          
+      />
+ </Context>

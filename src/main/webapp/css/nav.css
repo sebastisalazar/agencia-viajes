@@ -5,3 +5,13 @@
 .dropdown-item:hover{
 	background-color:rgba(0, 0, 0, .90);
 }
+
+
+.sticky-top{
+	z-index:1040;
+}
+
+#layoutSidenav_nav, .sb-sidenav-dark, .sb-sidenav-footer{
+	background-color:rgba(0, 0, 0, 1);
+}
+

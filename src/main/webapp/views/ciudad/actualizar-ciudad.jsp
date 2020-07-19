@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá 
 <c:if test="${not empty loginUsuario}">
          <c:if test = "${loginUsuario.rol.id == 1}">
             <c:redirect url="listado-ciudades"></c:redirect>
@@ -11,10 +11,17 @@
 	
 </c:if>
 
-<!-- Si se intenta acceder sin logearse redigirá -->
+<!-- Si se intenta acceder sin logearse redigirá 
 <c:if test="${empty loginUsuario}">
 	<c:redirect url="login.jsp"></c:redirect>
 </c:if>
+
+
+-->
+
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+    <!--  ${pageContext.request.contextPath} == http://localhost:8080/supermerkado-master-->
+<base href="${pageContext.request.contextPath}/" />
 
 <!-- Si se intenta entrar sin un id por parametro redigirá -->
 <c:if test="${empty param.id}">
@@ -27,7 +34,7 @@
 </c:if>
 
 
-<jsp:include page="includes/cabecera.jsp">
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Actualizar ciudad" />
 
@@ -39,7 +46,7 @@
 
 
 
-<jsp:include page="includes/alerta.jsp"></jsp:include>
+<jsp:include page="/includes/alerta.jsp"></jsp:include>
 <div class="container">
 	<div class="row row-cols-2 border p-4">
 
@@ -56,7 +63,7 @@
 				<!-- Pinta los mensajes si hay alguno -->
 				<c:if test="${not empty requeridos}">
 
-					<jsp:include page="includes/requeridos.jsp"></jsp:include>
+					<jsp:include page="/includes/requeridos.jsp"></jsp:include>
 
 					<!-- Una vez pintado borra los mensajes -->
 					<%
@@ -206,4 +213,4 @@
 	</div>
 </div>
 
-<jsp:include page="includes/pie.jsp" />
+<jsp:include page="/includes/pie.jsp" />

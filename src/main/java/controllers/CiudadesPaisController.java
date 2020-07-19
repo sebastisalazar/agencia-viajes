@@ -41,7 +41,7 @@ public class CiudadesPaisController extends HttpServlet {
 			session.setAttribute("alerta", alerta);
 		}
 		
-		response.sendRedirect("ciudades-pais.jsp?id="+id+"&nombre="+nombre);
+		response.sendRedirect("views/ciudad/ciudades-pais.jsp?id="+id+"&nombre="+nombre);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

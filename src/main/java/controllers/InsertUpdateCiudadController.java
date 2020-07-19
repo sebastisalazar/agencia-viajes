@@ -77,7 +77,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		if (llamaACrear) {
 
 			// se redirecciona
-			response.sendRedirect("crear-ciudad.jsp");
+			response.sendRedirect("views/ciudad/crear-ciudad.jsp");
 
 			// si no es que llama a update
 		} else {
@@ -100,7 +100,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 				session.setAttribute("ciudadEditar", ci);
 
 				// se redirecciona al formulario para mostrar lo que se va a editar
-				response.sendRedirect("actualizar-ciudad.jsp?id=" + id);
+				response.sendRedirect("views/ciudad/actualizar-ciudad.jsp?id=" + id);
 
 			} catch (Exception e) {
 

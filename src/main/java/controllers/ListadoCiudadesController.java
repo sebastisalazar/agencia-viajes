@@ -68,7 +68,7 @@ public class ListadoCiudadesController extends HttpServlet {
 			session.setMaxInactiveInterval(60 * 60);
 
 			// se redireciona
-			response.sendRedirect("lista-ciudades.jsp");
+			response.sendRedirect("views/ciudad/lista-ciudades.jsp");
 		}
 
 	}

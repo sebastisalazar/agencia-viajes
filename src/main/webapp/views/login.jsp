@@ -3,12 +3,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:if test="${not empty loginUsuario }">
-	<c:redirect url="inicio"/>
+ 
+
+<base href="${pageContext.request.contextPath}/" />
+
+<c:if test="${not empty loginUsuario}">
+	<c:redirect url="/inicio"/>
 </c:if>
 
-
-<jsp:include page="includes/cabecera.jsp">
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />
 
@@ -28,7 +31,7 @@
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
 
-			<jsp:include page="includes/requeridos.jsp"></jsp:include>
+			<jsp:include page="/includes/requeridos.jsp"></jsp:include>
 
 			<!-- Una vez pintado borra los mensajes -->
 			<%
@@ -65,5 +68,5 @@
 
 
 
-<jsp:include page="includes/pie.jsp" />
+<jsp:include page="/includes/pie.jsp" />
 

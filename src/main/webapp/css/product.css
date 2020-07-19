@@ -6,6 +6,7 @@
 @import 'nav.css';
 
 
+
 /**
 	ESTILO POR DEFECTO DEL TEMA PARA EL NAVEGADOR
 */
@@ -19,7 +20,7 @@
  */
 
 .site-header {
-  background-color: rgba(0, 0, 0, .85);
+  background-color: rgba(0, 0, 0, 1);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   backdrop-filter: saturate(180%) blur(20px);
 }
@@ -84,3 +85,5 @@
 }
 
 .overflow-hidden { overflow: hidden; }
+
+

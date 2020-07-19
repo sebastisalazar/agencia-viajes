@@ -19,6 +19,7 @@ import javax.validation.constraints.NotBlank;
 
 import modelo.DAOImp.UsuarioDAOImp;
 import modelo.pojo.Continente;
+import modelo.pojo.Rol;
 import modelo.pojo.Usuario;
 
 /**
@@ -82,12 +83,15 @@ public class LoginController extends HttpServlet {
 				
 				session.removeAttribute("loginEmailErroneo");
 				session.removeAttribute("loginPasswordErroneo");
-				
 				session.setAttribute("loginUsuario",u);
-				
 				session.setAttribute("alerta",alerta);
 				
-				response.sendRedirect("listado-ciudades");
+				if (u.getRol().getId()==Rol.ADMINISTRADOR) {
+					response.sendRedirect("views/backoffice/index.jsp");
+				}else {
+					response.sendRedirect("views/frontoffice/index.jsp");
+				}
+				
 			} catch (Exception e) {
 				requeridos.add(e.getMessage());
 				session.setAttribute("requeridos", requeridos);;

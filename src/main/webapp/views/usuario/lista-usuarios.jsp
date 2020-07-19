@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá 
 <c:if test="${not empty loginUsuario}">
          <c:if test = "${loginUsuario.rol.id == 1}">
             <c:redirect url="inicio"></c:redirect>
@@ -11,17 +11,22 @@
 	
 </c:if>
 
-<!-- Si se intenta acceder sin logearse redigirá -->
+<!-- Si se intenta acceder sin logearse redigirá 
 <c:if test="${empty loginUsuario}">
 	<c:redirect url="login.jsp"></c:redirect>
-</c:if>
+</c:if>-->
+
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+    <!--  ${pageContext.request.contextPath} == http://localhost:8080/supermerkado-master -->
+<base href="${pageContext.request.contextPath}/" />
 
 <!-- Si la sesion caduca y se recarga borrará el atributo lista, por lo tanto volvemos a llamar al controlador para que nos lo vuelva a pasar -->
 <c:if test="${empty listaUsuarios}">
 	<c:redirect url="listado-usuarios"></c:redirect>
 </c:if>
 
-<jsp:include page="includes/cabecera.jsp">
+
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />
 
@@ -74,5 +79,5 @@
 </table>
 
 
-<jsp:include page="includes/pie.jsp" />
+<jsp:include page="/includes/pie.jsp" />
 

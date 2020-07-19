@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+<!--  ${pageContext.request.contextPath} == http://localhost:8080/agencia-viajes master -->
+<base href="${pageContext.request.contextPath}/" />
+
 <!doctype html>
-<html lang="en">
+<html lang="es">
 <head>
 <meta charset="utf-8">
 <meta name="viewport"
@@ -12,9 +17,16 @@
 	content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
 <meta name="generator" content="Jekyll v4.0.1">
 
-<!-- Todas las rutas relativas comienzan por el href indicado -->
-<!--  ${pageContext.request.contextPath} == http://localhost:8080/agencia-viajes master -->
-<base href="${pageContext.request.contextPath}/" />
+<!-- PAnel admin -->
+
+ <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <link href="css/styles.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" crossorigin="anonymous"></script>
 
 <title>${param.title}</title>
 
@@ -81,7 +93,7 @@
 <link href="css/product.css" rel="stylesheet">
 
 </head>
-<body onload="init()">
+<body onload="init()" class="sb-nav-fixed">
 	<nav class="site-header sticky-top py-1">
 		<div
 			class="container d-flex flex-column flex-md-row justify-content-between">
@@ -126,7 +138,7 @@
 						href="crear-ciudad">Nueva Ciudad</a>
 						
 						<a class="py-2 d-none d-md-inline-block ${( 'Registro Pais' eq param.pagina ) ? 'active' : ''}"
-						href="crear-pais.jsp">Nuevo Pais</a>
+						href="crear-pais">Nuevo Pais</a>
 
 					</c:if>
 				</c:if>
@@ -134,11 +146,26 @@
 
 			<c:if test="${not empty loginUsuario}">
 
-				<span class="form-inline "> <a
-					class="nav-link  bg-dark rounded-left text-white" href="#"><small
-						class="font-weight-bold">${loginUsuario.email}</small></a> <a
-					class="nav-link  bg-danger  rounded-right text-white" href="logout"><small><i
-							class="fas fa-times font-weight-bold"></i></small></a>
+				<span class="form-inline "> 
+				
+					<c:choose>
+         
+				         <c:when test = "${loginUsuario.rol.id==2}">
+				            <a class="nav-link  bg-dark rounded-left text-white" href="views/backoffice/index.jsp">
+								<small class="font-weight-bold">${loginUsuario.email}</small>
+							</a>
+				         </c:when>
+				         
+				         <c:when test = "${loginUsuario.rol.id==1}">
+				            <a class="nav-link  bg-dark rounded-left text-white" href="views/frontoffice/index.jsp">
+								<small class="font-weight-bold">${loginUsuario.email}</small>
+							</a>
+				         </c:when>
+				    </c:choose>
+						
+					 <a class="nav-link  bg-danger  rounded-right text-white" href="logout">
+					 	<small class="d-block p-1"><i class="fas fa-times font-weight-bold"></i></small>
+					 </a>
 				</span>
 
 
@@ -147,11 +174,16 @@
 			<c:if test="${empty loginUsuario}">
 			
 				<a class="py-2 d-none d-md-inline-block ${( 'Registro Usuario' eq param.pagina ) ? 'active' : ''}"
-						href="crear-usuario.jsp">Nuevo Usuario</a>
-				<span class="form-inline"> <a
+						href="views/usuario/crear-usuario.jsp">Nuevo Usuario</a>
+				<span class="form-inline"> 
+				<a
 					class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"
-					href="login.jsp"><small class="font-weight-bold">Iniciar
-							Sesión</small></a>
+					href="views/login.jsp">
+					
+					<small class="font-weight-bold d-block">
+						Iniciar Sesión
+					</small>
+				</a>
 				</span>
 
 			</c:if>

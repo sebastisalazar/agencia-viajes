@@ -3,12 +3,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+    <!--  ${pageContext.request.contextPath} == http://localhost:8080/supermerkado-master -->
+<base href="${pageContext.request.contextPath}/" />
 
 <c:if test="${empty paisesContinente}">
 	<c:redirect url="paises-continente?id=${param.id}&nombre=${param.nombre}" />
 </c:if>
 
-<jsp:include page="includes/cabecera.jsp">
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Paises" />
 
@@ -98,4 +101,4 @@
 </table>
 	
 
-<jsp:include page="includes/pie.jsp" />
+<jsp:include page="/includes/pie.jsp" />

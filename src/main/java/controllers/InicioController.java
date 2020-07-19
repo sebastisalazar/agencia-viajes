@@ -29,6 +29,11 @@ public class InicioController extends HttpServlet {
 		HttpSession session= request.getSession();
 		
 		
+		HttpServletRequest req= (HttpServletRequest) request;
+		
+		//necesitamos la url de como comienza nuestra App, apra construir una ryta ABSOLUTA y que no sea relativa
+		String urlInicioApp = req.getContextPath();
+		
 		try {
 			ciudades= dao.getLast(9);
 			session.setAttribute("ciudadesMasVisitadas",ciudades);
@@ -37,7 +42,7 @@ public class InicioController extends HttpServlet {
 			session.setAttribute("alerta",alerta);
 		}finally {
 			
-			response.sendRedirect("index.jsp");
+			response.sendRedirect(urlInicioApp+"/index.jsp");
 		}
 	}
 

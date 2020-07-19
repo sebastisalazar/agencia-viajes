@@ -70,7 +70,7 @@ public class ListadoUsuariosController extends HttpServlet {
 			session.setMaxInactiveInterval(60 * 60);
 
 			// se redireciona
-			response.sendRedirect("lista-usuarios.jsp");
+			response.sendRedirect("views/usuario/lista-usuarios.jsp");
 		}
 
 	}

@@ -62,7 +62,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		if (llamaACrear) {
 
 			// se redirecciona
-			response.sendRedirect("crear-usuario.jsp");
+			response.sendRedirect("views/usuario/crear-usuario.jsp");
 
 			// si no es que llama a update
 		} else {
@@ -85,7 +85,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 				session.setAttribute("usuarioEditar",u);
 
 				// se redirecciona al formulario para mostrar lo que se va a editar
-				response.sendRedirect("actualizar-usuario.jsp?id=" + id);
+				response.sendRedirect("views/usuario/actualizar-usuario.jsp?id=" + id);
 
 			} catch (Exception e) {
 

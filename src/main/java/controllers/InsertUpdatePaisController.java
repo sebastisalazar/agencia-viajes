@@ -64,7 +64,7 @@ public class InsertUpdatePaisController extends HttpServlet {
 		if (llamaACrear) {
 
 			// se redirecciona
-			response.sendRedirect("crear-pais.jsp");
+			response.sendRedirect("views/pais/crear-pais.jsp");
 
 			// si no es que llama a update
 		} else {
@@ -87,7 +87,7 @@ public class InsertUpdatePaisController extends HttpServlet {
 				session.setAttribute("paisEditar", p);
 
 				// se redirecciona al formulario para mostrar lo que se va a editar
-				response.sendRedirect("actualizar-pais.jsp?id="+id);
+				response.sendRedirect("views/pais/actualizar-pais.jsp?id="+id);
 
 			} catch (Exception e) {
 

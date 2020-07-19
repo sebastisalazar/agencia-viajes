@@ -43,7 +43,7 @@ public class LogoutController extends HttpServlet {
 		session.setAttribute("alerta", new Alerta("success", "Has cerrado sesión correctamente."));
 		
 		//Se redirecciona a login
-		response.sendRedirect("login.jsp");
+		response.sendRedirect("views/login.jsp");
 	}
 
 	/**

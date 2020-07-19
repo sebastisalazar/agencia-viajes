@@ -3,15 +3,19 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá -->
+<!-- Si se intenta entrar siendo un usuario normal, es decir NO ADMIN, redigirá 
 <c:if test="${not empty loginUsuario}">
          <c:if test = "${loginUsuario.rol.id == 1}">
             <c:redirect url="inicio"></c:redirect>
       	</c:if>
 	
-</c:if>
+</c:if> -->
 
-<jsp:include page="includes/cabecera.jsp">
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+    <!--  ${pageContext.request.contextPath} == http://localhost:8080/supermerkado-master -->
+<base href="${pageContext.request.contextPath}/" />
+
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Registro Usuario" />
 
@@ -28,7 +32,7 @@
 		<!-- Pinta los mensajes si hay alguno -->
 		<c:if test="${not empty requeridos}">
 
-			<jsp:include page="includes/requeridos.jsp"></jsp:include>
+			<jsp:include page="/includes/requeridos.jsp"></jsp:include>
 
 			<!-- Una vez pintado borra los mensajes -->
 			<%
@@ -58,5 +62,5 @@
 
 
 
-<jsp:include page="includes/pie.jsp" />
+<jsp:include page="/includes/pie.jsp" />
 

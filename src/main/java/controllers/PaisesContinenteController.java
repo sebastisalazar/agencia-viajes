@@ -57,7 +57,7 @@ public class PaisesContinenteController extends HttpServlet {
 				alerta= new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
 			}finally {
-				response.sendRedirect("paises-continente.jsp?id="+id+"&nombre="+nombre);
+				response.sendRedirect("views/pais/paises-continente.jsp?id="+id+"&nombre="+nombre);
 			}
 		
 		

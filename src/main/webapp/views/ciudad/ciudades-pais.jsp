@@ -3,13 +3,15 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-<!-- Si la sesion caduca y se recarga borrará el atributo lista, por lo tanto volvemos a llamar al controlador para que nos lo vuelva a pasar -->
-<c:if test="${empty lista}">
-	<c:redirect url="listado-ciudades"></c:redirect>
+<c:if test="${empty ciudadesPais}">
+	<c:redirect url="ciudades-pais?id=${param.id}&nombre=${param.nombre}" />
 </c:if>
 
-<jsp:include page="includes/cabecera.jsp">
+<!-- Todas las rutas relativas comienzan por el href indicado -->
+    <!--  ${pageContext.request.contextPath} == http://localhost:8080/supermerkado-master -->
+<base href="${pageContext.request.contextPath}/" />
+
+<jsp:include page="/includes/cabecera.jsp">
 
 	<jsp:param name="pagina" value="Ciudades" />
 
@@ -17,7 +19,8 @@
 
 </jsp:include>
 
-<h1 class="text-primary text-center mb-3">Lista ciudades</h1>
+
+<h1 class="text-primary text-center mb-3"> Ciudades en ${busquedaCiudades}</h1>
 
 
 <table class="table table-striped table-hover tabla ">
@@ -25,8 +28,8 @@
 		<tr>
 			<th scope="col">ID</th>
 			<th scope="col">CIUDAD</th>
-			<th scope="col">PAIS</th>
 			<th scope="col">CODIGO PAIS</th>
+			<th scope="col">PAIS</th>
 			<th scope="col">CONTINENTE</th>
 			
 			<c:if test="${not empty loginUsuario}">
@@ -35,23 +38,24 @@
 					<th scope="col">ELIMINAR</th>
 				</c:if>
 			</c:if>
+			
 		</tr>
 	</thead>
 	<tbody>
-		<c:forEach items="${lista}" var="c">
+		<c:forEach items="${ciudadesPais}" var="c">
 			<tr class="text-center">
 				<td>${c.id}</td>
 				<td>${c.nombre}</td>
-				<td>${c.pais.nombre}</td>
 				<td>
 					
-									<div class="country" >
-										<i onload="cargarBandera()">
-											${c.pais.nombrecorto}
-										</i>
-									</div>
+					<div class="country" >
+						<i onload="cargarBandera()">
+							${c.pais.nombrecorto}
+						</i>
+					</div>
 					
 				</td>
+				<td>${c.pais.nombre}</td>
 				<td>${c.continente.nombre}</td>
 				
 				<c:if test="${not empty loginUsuario}">
@@ -76,6 +80,4 @@
 
 </table>
 
-
-<jsp:include page="includes/pie.jsp" />
-
+<jsp:include page="/includes/pie.jsp" />
