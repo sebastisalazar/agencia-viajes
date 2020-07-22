@@ -8,11 +8,6 @@ import javax.servlet.annotation.WebListener;
 import controllers.Alerta;
 import modelo.DAOImp.ContinenteDAOImp;
 
-
-
-
-
-
 @WebListener
 public class InicioAppListenner implements ServletContextListener {
 

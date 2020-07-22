@@ -272,8 +272,6 @@ public class CiudadDAOImp implements CiudadDAO {
 		Ciudad ci = new Ciudad();
 		Pais p = new Pais();
 		Continente co = new Continente();
-
-		 
 		 
 		// asercion de objetos segun el dato
 

@@ -13,9 +13,9 @@
 
 <jsp:include page="/includes/cabecera.jsp">
 
-	<jsp:param name="pagina" value="Ciudades" />
+	<jsp:param name="pagina" value="Iniciar sesion" />
 
-	<jsp:param name="title" value="Ciudades" />
+	<jsp:param name="title" value="Iniciar sesion" />
 
 </jsp:include>
 

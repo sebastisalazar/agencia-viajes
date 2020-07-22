@@ -227,6 +227,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 				while (rs.next()) {
 					u = new Usuario();
+					u.setId(rs.getInt("id"));
 					u.setEmail(rs.getString("nombre"));
 					u.setPassword(rs.getString("password"));
 					

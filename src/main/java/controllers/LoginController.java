@@ -89,7 +89,7 @@ public class LoginController extends HttpServlet {
 				if (u.getRol().getId()==Rol.ADMINISTRADOR) {
 					response.sendRedirect("views/backoffice/index.jsp");
 				}else {
-					response.sendRedirect("views/frontoffice/index.jsp");
+					request.getRequestDispatcher("views/frontoffice/inicio").forward(request, response);;
 				}
 				
 			} catch (Exception e) {
@@ -97,7 +97,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("requeridos", requeridos);;
 				session.setAttribute("loginEmailErroneo",email);
 				session.setAttribute("loginPasswordErroneo",password);
-				response.sendRedirect("login.jsp");
+				response.sendRedirect("views/login.jsp");
 			}
 		}
 		
