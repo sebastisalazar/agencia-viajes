@@ -17,7 +17,7 @@ import modelo.pojo.Usuario;
 /**
  * Servlet implementation class UsuarioBookingsController
  */
-@WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos"})
+@WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos","/views/frontoffice/vuelos-cancelados"})
 public class UsuarioBookingsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -67,7 +67,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				
 			} catch (Exception e) {
 				
-				alerta= new Alerta("danger", "Lo sentimos, "+e.getMessage());
+				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				
 			}finally{
@@ -90,6 +90,23 @@ public class UsuarioBookingsController extends HttpServlet {
 			}finally{
 				
 				response.sendRedirect("vuelos-cogidos.jsp");
+			}
+			
+		}else if (("/views/frontoffice/vuelos-cancelados").equalsIgnoreCase(url)) {
+			
+			try {
+				
+				listabooking=daoBooking.getAllCancelledFlights(usu);
+				session.setAttribute("listaCancelados", listabooking);
+				
+			} catch (Exception e) {
+				
+				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
+				session.setAttribute("alerta", alerta);
+				
+			}finally{
+				
+				response.sendRedirect("vuelos-cancelados.jsp");
 			}
 		}
 		

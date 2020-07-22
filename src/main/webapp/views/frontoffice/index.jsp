@@ -32,7 +32,7 @@
                                     <div class="card-body">Proximos Vuelos</div>
                                     
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="views/frontoffice/proximos-vuelos">Ver detalles</a>
+                                        <a class="small text-white stretched-link" href="views/frontoffice/proximos-vuelos">Consultar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -41,7 +41,7 @@
                                 <div class="card bg-success text-white mb-4">
                                     <div class="card-body">Vuelos cogidos</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="views/frontoffice/vuelos-cogidos">View Details</a>
+                                        <a class="small text-white stretched-link" href="views/frontoffice/vuelos-cogidos">Consultar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                 <div class="card bg-danger text-white mb-4">
                                     <div class="card-body">Vuelos cancelados</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <a class="small text-white stretched-link" href="views/frontoffice/vuelos-cancelados">Consultar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                                     </div>
                                 </div>

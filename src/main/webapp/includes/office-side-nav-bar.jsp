@@ -18,7 +18,7 @@
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="views/frontoffice/proximos-vuelos">Proximos</a>
                                     <a class="nav-link" href="views/frontoffice/vuelos-cogidos">Tomados</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Cancelados</a>
+                                    <a class="nav-link" href="views/frontoffice/vuelos-cancelados">Cancelados</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">

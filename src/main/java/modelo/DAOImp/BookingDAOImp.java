@@ -49,13 +49,14 @@ public class BookingDAOImp implements BookingDAO {
 			+ "id_usuario,"
 			+ "usuarios.nombre as email_usuario,id_aerolinea,"
 			+ "aerolinea.nombre  as nombre_aerolinea,fecha_booking,"
-			+ "fecha_partida,fecha_vuelta "
+			+ "fecha_partida,fecha_vuelta, cancelado "
 			+ "FROM booking, aerolinea, ciudad,usuarios " + 
 			" WHERE booking.id_aerolinea =aerolinea.id " + 
 			" AND booking.id_ciudad = ciudad.id " + 
 			" AND booking.id_usuario =usuarios.id " + 
 			" AND id_usuario =? " + 
-			" AND MONTH(fecha_partida) >=MONTH (NOW());";
+			" AND MONTH(fecha_partida) >=MONTH (NOW())"
+			+ "AND cancelado=0;";
 	private final String SQL_GETALL_BYFLIGHTSTAKEN="SELECT booking.id as id_booking,"
 			+ "id_ciudad,"
 			+ "ciudad.nombre as nombre_ciudad,"
@@ -67,7 +68,7 @@ public class BookingDAOImp implements BookingDAO {
 			" WHERE booking.id_aerolinea =aerolinea.id " + 
 			" AND booking.id_ciudad = ciudad.id " + 
 			" AND booking.id_usuario =usuarios.id " + 
-			" AND id_usuario =? " + 
+			" AND id_usuario = ? " + 
 			" AND MONTH(fecha_partida) <=MONTH (NOW());";
 	
 	private final String SQL_GETALL="SELECT booking.id as id_booking," + 
@@ -81,6 +82,21 @@ public class BookingDAOImp implements BookingDAO {
 			"booking.id_ciudad = ciudad.id AND " + 
 			"booking.id_usuario =usuarios.id AND "+ 
 			"id_usuario = ?;";
+	
+	private final String SQL_GETALL_BYCANCELLEDFLIGHTS="SELECT booking.id as id_booking,"
+			+ "id_ciudad,"
+			+ "ciudad.nombre as nombre_ciudad,"
+			+ "id_usuario,"
+			+ "usuarios.nombre as email_usuario,id_aerolinea,"
+			+ "aerolinea.nombre  as nombre_aerolinea,fecha_booking,"
+			+ "fecha_partida,fecha_vuelta, cancelado "
+			+ "FROM booking, aerolinea, ciudad,usuarios " + 
+			" WHERE booking.id_aerolinea =aerolinea.id " + 
+			" AND booking.id_ciudad = ciudad.id " + 
+			" AND booking.id_usuario =usuarios.id " + 
+			" AND id_usuario =? " + 
+			" AND MONTH(fecha_partida) >=MONTH (NOW())"
+			+ "AND cancelado=1;";
 	
 	
 	
@@ -288,7 +304,38 @@ public class BookingDAOImp implements BookingDAO {
 				}
 				
 				if (listaBookings.size()==0) {
-					throw new Exception("no se han encontrado registros previos.");
+					throw new Exception("no se han encontrado registros previos");
+				}
+				
+			}
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		return listaBookings;
+	}
+
+	@Override
+	public ArrayList<Booking> getAllCancelledFlights(Usuario usu) throws Exception {
+		
+		ArrayList<Booking> listaBookings= new ArrayList<Booking>();
+		
+		try (
+			Connection con= ConnectionManager.getConnection();
+			PreparedStatement pst=con.prepareStatement(SQL_GETALL_BYCANCELLEDFLIGHTS);
+			
+		){
+			pst.setInt(1,usu.getId());
+			
+			try(ResultSet rs= pst.executeQuery()){
+				
+				while (rs.next()) {
+					listaBookings.add(mapper(rs));
+				}
+				
+				if (listaBookings.size()==0) {
+					throw new Exception("no se han encontrado vuelos cancelados.");
 				}
 				
 			}
