@@ -43,6 +43,33 @@ public class BookingDAOImp implements BookingDAO {
 			"MONTH(fecha_booking)=? AND " + 
 			"id_usuario = ?;";
 	
+	private final String SQL_GETALL_BYFLIGHTSTOTAKE="SELECT booking.id as id_booking,"
+			+ "id_ciudad,"
+			+ "ciudad.nombre as nombre_ciudad,"
+			+ "id_usuario,"
+			+ "usuarios.nombre as email_usuario,id_aerolinea,"
+			+ "aerolinea.nombre  as nombre_aerolinea,fecha_booking,"
+			+ "fecha_partida,fecha_vuelta "
+			+ "FROM booking, aerolinea, ciudad,usuarios " + 
+			" WHERE booking.id_aerolinea =aerolinea.id " + 
+			" AND booking.id_ciudad = ciudad.id " + 
+			" AND booking.id_usuario =usuarios.id " + 
+			" AND id_usuario =? " + 
+			" AND MONTH(fecha_partida) >=MONTH (NOW());";
+	private final String SQL_GETALL_BYFLIGHTSTAKEN="SELECT booking.id as id_booking,"
+			+ "id_ciudad,"
+			+ "ciudad.nombre as nombre_ciudad,"
+			+ "id_usuario,"
+			+ "usuarios.nombre as email_usuario,id_aerolinea,"
+			+ "aerolinea.nombre  as nombre_aerolinea,fecha_booking,"
+			+ "fecha_partida,fecha_vuelta "
+			+ "FROM booking, aerolinea, ciudad,usuarios " + 
+			" WHERE booking.id_aerolinea =aerolinea.id " + 
+			" AND booking.id_ciudad = ciudad.id " + 
+			" AND booking.id_usuario =usuarios.id " + 
+			" AND id_usuario =? " + 
+			" AND MONTH(fecha_partida) <=MONTH (NOW());";
+	
 	private final String SQL_GETALL="SELECT booking.id as id_booking," + 
 			"id_ciudad,ciudad.nombre as nombre_ciudad," + 
 			"id_usuario, usuarios.nombre as email_usuario," + 
@@ -218,7 +245,7 @@ public class BookingDAOImp implements BookingDAO {
 		
 		try (
 			Connection con= ConnectionManager.getConnection();
-			PreparedStatement pst=con.prepareStatement(SQL_GETALL);
+			PreparedStatement pst=con.prepareStatement(SQL_GETALL_BYFLIGHTSTOTAKE);
 			
 		){
 			pst.setInt(1,usu.getId());
@@ -230,9 +257,39 @@ public class BookingDAOImp implements BookingDAO {
 				}
 				
 				if (listaBookings.size()==0) {
-					throw new Exception("No se han encontrado bookings para este mes");
+					throw new Exception("no se han encontrado vuelos pendientes");
 				}
 				
+			}
+			
+		} catch (Exception e) {
+			throw new Exception(e.getMessage());
+		}
+		
+		return listaBookings;
+	}
+
+	@Override
+	public ArrayList<Booking> getAllFlightsTaken(Usuario usu) throws Exception {
+		
+		ArrayList<Booking> listaBookings= new ArrayList<Booking>();
+		
+		try (
+			Connection con= ConnectionManager.getConnection();
+			PreparedStatement pst=con.prepareStatement(SQL_GETALL_BYFLIGHTSTAKEN);
+			
+		){
+			pst.setInt(1,usu.getId());
+			
+			try(ResultSet rs= pst.executeQuery()){
+				
+				while (rs.next()) {
+					listaBookings.add(mapper(rs));
+				}
+				
+				if (listaBookings.size()==0) {
+					throw new Exception("no se han encontrado registros previos.");
+				}
 				
 			}
 			

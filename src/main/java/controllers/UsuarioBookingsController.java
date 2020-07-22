@@ -17,7 +17,7 @@ import modelo.pojo.Usuario;
 /**
  * Servlet implementation class UsuarioBookingsController
  */
-@WebServlet("/views/frontoffice/inicio")
+@WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos"})
 public class UsuarioBookingsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -38,20 +38,61 @@ public class UsuarioBookingsController extends HttpServlet {
 		
 		Alerta alerta= new Alerta();
 		
-		try {
+		String url=request.getServletPath();
+		
+	
+		if (("/views/frontoffice/inicio").equalsIgnoreCase(url)) {
 			
-			listabooking=daoBooking.getAllByUser(usu);
-			session.setAttribute("listabooking", listabooking);
+			try {
+				
+				listabooking=daoBooking.getAllByUser(usu);
+				session.setAttribute("listabooking", listabooking);
+				
+			} catch (Exception e) {
+				
+				alerta= new Alerta("danger", "Lo sentimos, "+e.getMessage());
+				session.setAttribute("alerta", alerta);
+				
+			}finally{
+				
+				response.sendRedirect("views/frontoffice/index.jsp");
+			}
 			
-		} catch (Exception e) {
+		}else if (("/views/frontoffice/proximos-vuelos").equalsIgnoreCase(url)) {
 			
-			alerta= new Alerta("danger", "Lo sentimos, "+e.getMessage());
-			session.setAttribute("alerta", alerta);
+			try {
+				
+				listabooking=daoBooking.getAllFlightsToTake(usu);
+				session.setAttribute("listaProximos", listabooking);
+				
+			} catch (Exception e) {
+				
+				alerta= new Alerta("danger", "Lo sentimos, "+e.getMessage());
+				session.setAttribute("alerta", alerta);
+				
+			}finally{
+				
+				response.sendRedirect("proximos-vuelos.jsp");
+			}
 			
-		}finally{
+		}else if (("/views/frontoffice/vuelos-cogidos").equalsIgnoreCase(url)) {
 			
-			response.sendRedirect("views/frontoffice/index.jsp");
+			try {
+				
+				listabooking=daoBooking.getAllFlightsTaken(usu);
+				session.setAttribute("listaCogidos", listabooking);
+				
+			} catch (Exception e) {
+				
+				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage()+" a la fecha actual");
+				session.setAttribute("alerta", alerta);
+				
+			}finally{
+				
+				response.sendRedirect("vuelos-cogidos.jsp");
+			}
 		}
+		
 			
 		
 		

@@ -10,6 +10,7 @@ public interface BookingDAO extends CrudAble<Booking> {
 	
 	ArrayList<Booking> getAllByBookingMonth( String mes, Usuario usu) throws Exception;
 	ArrayList<Booking> getAllFlightsToTake(Usuario usu) throws Exception;
+	ArrayList<Booking> getAllFlightsTaken(Usuario usu) throws Exception;
 	ArrayList<Booking> getAllByBookingYear( String year, Usuario usu ) throws Exception;
 	ArrayList<Booking> getAllByUser( Usuario usu ) throws Exception;
 	ArrayList<Booking> getAllByCiudad( String ciudad ) throws Exception;
