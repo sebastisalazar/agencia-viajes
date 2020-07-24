@@ -17,7 +17,7 @@ import modelo.pojo.Usuario;
 /**
  * Servlet implementation class UsuarioBookingsController
  */
-@WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos","/views/frontoffice/vuelos-cancelados"})
+@WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos","/views/frontoffice/vuelos-cancelados","/views/frontoffice/mis-datos"})
 public class UsuarioBookingsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -45,8 +45,28 @@ public class UsuarioBookingsController extends HttpServlet {
 			
 			try {
 				
+				
+				int proximos=daoBooking.getAllFlightsToTake(usu).size();
+				int tomados=daoBooking.getAllFlightsTaken(usu).size();
+				int cancelados=daoBooking.getAllCancelledFlights(usu).size();
+				
+				
+				session.setAttribute("proximos",proximos);
+				session.setAttribute("tomados", tomados);
+				session.setAttribute("cancelados", cancelados);
+				
+				
 				listabooking=daoBooking.getAllByUser(usu);
+				
+				if (listabooking.size()==0) {
+					alerta= new Alerta("warning", "No tienes vuelos previos registrados ");
+					session.setAttribute("alerta", alerta);
+				}
+				
 				session.setAttribute("listabooking", listabooking);
+				
+				
+				
 				
 			} catch (Exception e) {
 				
@@ -63,6 +83,12 @@ public class UsuarioBookingsController extends HttpServlet {
 			try {
 				
 				listabooking=daoBooking.getAllFlightsToTake(usu);
+				
+				if (listabooking.size()==0) {
+					alerta= new Alerta("warning", "No tienes vuelos proximos registrados ");
+					session.setAttribute("alerta", alerta);
+				}
+				
 				session.setAttribute("listaProximos", listabooking);
 				
 			} catch (Exception e) {
@@ -80,11 +106,17 @@ public class UsuarioBookingsController extends HttpServlet {
 			try {
 				
 				listabooking=daoBooking.getAllFlightsTaken(usu);
+				
+				if (listabooking.size()==0) {
+					alerta= new Alerta("warning", "No tienes vuelos previos registrados ");
+					session.setAttribute("alerta", alerta);
+				}
+				
 				session.setAttribute("listaCogidos", listabooking);
 				
 			} catch (Exception e) {
 				
-				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage()+" a la fecha actual");
+				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				
 			}finally{
@@ -97,6 +129,12 @@ public class UsuarioBookingsController extends HttpServlet {
 			try {
 				
 				listabooking=daoBooking.getAllCancelledFlights(usu);
+				
+				if (listabooking.size()==0) {
+					alerta= new Alerta("warning", "No tienes vuelos previos cancelados ");
+					session.setAttribute("alerta", alerta);
+				}
+				
 				session.setAttribute("listaCancelados", listabooking);
 				
 			} catch (Exception e) {
@@ -108,6 +146,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				
 				response.sendRedirect("vuelos-cancelados.jsp");
 			}
+			
 		}
 		
 			

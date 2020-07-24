@@ -179,16 +179,11 @@ public class BookingDAOImp implements BookingDAO {
 				while (rs.next()) {
 					listaBookings.add(mapper(rs));
 				}
-				
-				if (listaBookings.size()==0) {
-					throw new Exception("No se han encontrado bookings para este mes");
-				}
-				
-				
+	
 			}
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("Error, "+e.getMessage());
 		}
 		
 		return listaBookings;
@@ -272,14 +267,11 @@ public class BookingDAOImp implements BookingDAO {
 					listaBookings.add(mapper(rs));
 				}
 				
-				if (listaBookings.size()==0) {
-					throw new Exception("no se han encontrado vuelos pendientes");
-				}
 				
 			}
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("Error, "+e.getMessage());
 		}
 		
 		return listaBookings;
@@ -303,14 +295,11 @@ public class BookingDAOImp implements BookingDAO {
 					listaBookings.add(mapper(rs));
 				}
 				
-				if (listaBookings.size()==0) {
-					throw new Exception("no se han encontrado registros previos");
-				}
 				
 			}
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("Error, "+e.getMessage());
 		}
 		
 		return listaBookings;
@@ -334,14 +323,11 @@ public class BookingDAOImp implements BookingDAO {
 					listaBookings.add(mapper(rs));
 				}
 				
-				if (listaBookings.size()==0) {
-					throw new Exception("no se han encontrado vuelos cancelados.");
-				}
 				
 			}
 			
 		} catch (Exception e) {
-			throw new Exception(e.getMessage());
+			throw new Exception("Error, "+e.getMessage());
 		}
 		
 		return listaBookings;

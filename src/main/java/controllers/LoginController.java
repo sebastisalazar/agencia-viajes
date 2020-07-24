@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("requeridos", requeridos);
 			session.setAttribute("loginEmailErroneo", email);
 			session.setAttribute("loginPasswordErroneo",password);
-			response.sendRedirect("login.jsp");
+			response.sendRedirect("views/login.jsp");
 			
 		}else {
 			
