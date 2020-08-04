@@ -88,7 +88,9 @@ public class LoginController extends HttpServlet {
 				if (u.getRol().getId()==Rol.ADMINISTRADOR) {
 					response.sendRedirect("views/backoffice/index.jsp");
 				}else {
-					request.getRequestDispatcher("views/frontoffice/inicio").forward(request, response);;
+					
+					request.getRequestDispatcher("views/frontoffice/inicio").forward(request, response);
+					
 				}
 				
 			} catch (Exception e) {

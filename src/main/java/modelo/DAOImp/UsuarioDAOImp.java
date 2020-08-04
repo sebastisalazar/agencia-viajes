@@ -41,7 +41,14 @@ public class UsuarioDAOImp implements UsuarioDAO {
 	
 	private final String SQL_GETBYID="SELECT id, nombre, password, imagen, id_rol FROM agencia_viajes.usuarios WHERE id=?;";
 	
-	private final String SQL_EXISTE = "SELECT id, nombre, password, imagen,id_rol FROM agencia_viajes.usuarios WHERE nombre=? AND password=?;";
+	private final String SQL_EXISTE = "SELECT u.id, u.nombre as email, u.password, u.imagen, u.id_rol," + 
+			"d.nombre,d.ape1,d.ape2,d.DNI_NIE, d.nacionalidad, d.residencia," + 
+			"t.numero,t.caducidad,t.num_seguridad, t.titular " + 
+			"FROM usuarios u, datos_personales d, tarjetas_credito t " + 
+			"WHERE u.id_datos = d.id " + 
+			"AND d.id_tarjeta =t.id " + 
+			"AND u.nombre LIKE ? " + 
+			"AND u.password LIKE ? ";
 	
 	private final String SQL_INSERT="INSERT INTO agencia_viajes.usuarios (nombre, password) "+
 									"VALUES(?,?);"; 
@@ -226,14 +233,26 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
+					
 					u = new Usuario();
 					u.setId(rs.getInt("id"));
-					u.setEmail(rs.getString("nombre"));
+					u.setEmail(rs.getString("email"));
 					u.setPassword(rs.getString("password"));
+					u.setImagen(rs.getString("imagen"));
 					
 					Rol rol= new Rol(Integer.parseInt(rs.getString("id_rol")));
 					u.setRol(rol);
-
+					
+					u.setNombre(rs.getString("nombre"));
+					u.setApe1(rs.getString("ape1"));
+					u.setApe2(rs.getString("ape2"));
+					u.setDNI_NIE(rs.getString("DNI_NIE"));
+					u.setNacionalidad(rs.getString("nacionalidad"));
+					u.setResidencia(rs.getString("residencia"));
+					u.setNumTarjeta(rs.getInt("numero"));
+					u.setCaducidadTarjeta(rs.getDate("caducidad").toString());
+					u.setNumseguridadTarjeta(rs.getInt("num_seguridad"));
+					u.setTitular(rs.getString("titular"));
 				}
 
 				// si no encuentra registro lo busca por email

@@ -27,7 +27,7 @@
                             </a>
                             
                             <div class="sb-sidenav-menu-heading">Mi cuenta</div>
-                            <a class="nav-link" href="views/frontoffice/mis-datos.jsp">
+                            <a class="nav-link" href="views/frontoffice/datos-usuario.jsp">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
                                 Mis datos
                             </a>
