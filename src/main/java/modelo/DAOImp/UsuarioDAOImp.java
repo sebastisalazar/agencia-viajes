@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 import modelo.ConnectionManager;
 import modelo.DAO.UsuarioDAO;
-import modelo.pojo.Ciudad;
-import modelo.pojo.Pais;
+
 import modelo.pojo.Rol;
 import modelo.pojo.Usuario;
 
