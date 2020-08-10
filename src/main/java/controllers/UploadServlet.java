@@ -12,11 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Path;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import org.apache.commons.io.output.*;
 
 import modelo.DAOImp.PaisDAOImp;
 import modelo.pojo.Ciudad;
@@ -69,74 +64,74 @@ public class UploadServlet extends HttpServlet {
 		Ciudad ci= (Ciudad) session.getAttribute("ciudadEditar");
 		
 		// Check that we have a file upload request
-	      isMultipart = ServletFileUpload.isMultipartContent(request);
+//	      isMultipart = ServletFileUpload.isMultipartContent(request);
 	   
 	      java.io.PrintWriter out = response.getWriter( );
 		
 		
-		if( !isMultipart ) {
-	         alerta= new Alerta("danger","error al subir el archivo.");
-	         session.setAttribute("alerta", alerta);
-	         response.sendRedirect("actualizar-ciudad?id="+ci.getId());
-	    }
-	  
-	      DiskFileItemFactory factory = new DiskFileItemFactory();
-	   
-	      // maximum size that will be stored in memory
-	      factory.setSizeThreshold(maxMemSize);
-	   
-	   
-
-	      // Create a new file upload handler
-	      ServletFileUpload upload = new ServletFileUpload(factory);
-	   
-	      // maximum file size to be uploaded.
-	      upload.setSizeMax( maxFileSize );
-
-	      try { 
-	         // Parse the request to get file items.
-	         List fileItems = upload.parseRequest(request);
-		
-	         // Process the uploaded file items
-	         Iterator i = fileItems.iterator();
-	   
-		         while ( i.hasNext () ) {
-		            FileItem fi = (FileItem)i.next();
-		            if ( !fi.isFormField () ) {
-		               // Get the uploaded file parameters
-		               String fieldName = fi.getFieldName();
-		               String fileName = fi.getName();
-		               String contentType = fi.getContentType();
-		               boolean isInMemory = fi.isInMemory();
-		               long sizeInBytes = fi.getSize();
-		            
-		               // Write the file
-		               if( fileName.lastIndexOf("\\") >= 0 ) {
-		                  file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
-		               } else {
-		                  file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-		               }
-		               fi.write( file ) ;
-		               
-		               ci.getPais().setBandera(fileName);
-		               
-		               PaisDAOImp dao= PaisDAOImp.getInstance();
-		               dao.setBandera(ci);
-		               
-		               alerta= new Alerta("success", "Se ha subido correctamente: "+fileName);
-		               session.setAttribute("alerta", alerta);
-		               
-		            }
-		            
-	
-		         }
-	         } catch(Exception ex) {
-	        	 alerta= new Alerta("danger","error"+ex.getMessage());
-		         session.setAttribute("alerta", alerta);
-	         }finally {
-	        	 
-		         response.sendRedirect("actualizar-ciudad?id="+ci.getId());
-			}
+//		if( !isMultipart ) {
+//	         alerta= new Alerta("danger","error al subir el archivo.");
+//	         session.setAttribute("alerta", alerta);
+//	         response.sendRedirect("actualizar-ciudad?id="+ci.getId());
+//	    }
+//	  
+//	      DiskFileItemFactory factory = new DiskFileItemFactory();
+//	   
+//	      // maximum size that will be stored in memory
+//	      factory.setSizeThreshold(maxMemSize);
+//	   
+//	   
+//
+//	      // Create a new file upload handler
+//	      ServletFileUpload upload = new ServletFileUpload(factory);
+//	   
+//	      // maximum file size to be uploaded.
+//	      upload.setSizeMax( maxFileSize );
+//
+//	      try { 
+//	         // Parse the request to get file items.
+//	         List fileItems = upload.parseRequest(request);
+//		
+//	         // Process the uploaded file items
+//	         Iterator i = fileItems.iterator();
+//	   
+//		         while ( i.hasNext () ) {
+//		            FileItem fi = (FileItem)i.next();
+//		            if ( !fi.isFormField () ) {
+//		               // Get the uploaded file parameters
+//		               String fieldName = fi.getFieldName();
+//		               String fileName = fi.getName();
+//		               String contentType = fi.getContentType();
+//		               boolean isInMemory = fi.isInMemory();
+//		               long sizeInBytes = fi.getSize();
+//		            
+//		               // Write the file
+//		               if( fileName.lastIndexOf("\\") >= 0 ) {
+//		                  file = new File( filePath + fileName.substring( fileName.lastIndexOf("\\"))) ;
+//		               } else {
+//		                  file = new File( filePath + fileName.substring(fileName.lastIndexOf("\\")+1)) ;
+//		               }
+//		               fi.write( file ) ;
+//		               
+//		               ci.getPais().setBandera(fileName);
+//		               
+//		               PaisDAOImp dao= PaisDAOImp.getInstance();
+//		               dao.setBandera(ci);
+//		               
+//		               alerta= new Alerta("success", "Se ha subido correctamente: "+fileName);
+//		               session.setAttribute("alerta", alerta);
+//		               
+//		            }
+//		            
+//	
+//		         }
+//	         } catch(Exception ex) {
+//	        	 alerta= new Alerta("danger","error"+ex.getMessage());
+//		         session.setAttribute("alerta", alerta);
+//	         }finally {
+//	        	 
+//		         response.sendRedirect("actualizar-ciudad?id="+ci.getId());
+//			}
 	      }
 
 }

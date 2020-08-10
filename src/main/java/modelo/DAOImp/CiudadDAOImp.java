@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import listener.InicioAppListenner;
 import modelo.ConnectionManager;
 import modelo.DAO.CiudadDAO;
 import modelo.pojo.Ciudad;
@@ -15,6 +18,7 @@ import modelo.pojo.Pais;
 public class CiudadDAOImp implements CiudadDAO {
 
 	private static CiudadDAOImp INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(InicioAppListenner.class);
 
 	private CiudadDAOImp() {
 		super();
@@ -101,6 +105,7 @@ public class CiudadDAOImp implements CiudadDAO {
 				ResultSet rs = pst.executeQuery();
 
 		) {
+			LOG.debug(pst);
 			// lee linea por linea
 			while (rs.next()) {
 
@@ -109,9 +114,11 @@ public class CiudadDAOImp implements CiudadDAO {
 				listaCiudades.add(mapperALL(rs));
 
 			}
+			
+			
 
 		} catch (Exception e) {
-
+			LOG.error(e);
 			e.printStackTrace();
 
 		}
@@ -131,7 +138,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		) {
 			
 			pst.setInt(1,id);
-			
+			LOG.debug(pst);
 			try(ResultSet rs= pst.executeQuery()){
 				
 				if (rs.next()) {
@@ -142,7 +149,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			}
 
 		} catch (Exception e) {
-
+			LOG.error(e);
 			e.printStackTrace();
 
 		}
@@ -161,12 +168,14 @@ public class CiudadDAOImp implements CiudadDAO {
 		){
 			ci=getById(id);
 			pst.setInt(1, id);
+			LOG.debug(pst);
 			int borrado=pst.executeUpdate();
 			
 			if (borrado==2) {
 				throw new Exception("Lo sentimos, la ciudad "+ci.getNombre()+" con id "+ci.getId()+" no está registrada");
 			}
 		}catch (Exception e) {
+			LOG.error(e);
 			throw new Exception(e.getMessage());
 		}
 		
@@ -193,6 +202,7 @@ public class CiudadDAOImp implements CiudadDAO {
 
 			try {
 				// insert
+				LOG.debug(pst);
 				int filaInsertada = pst.executeUpdate();
 
 				// si ha insertado correctamente leemos el id asignado
@@ -213,11 +223,13 @@ public class CiudadDAOImp implements CiudadDAO {
 
 				// si captura una excepcion de typo sql la lanza
 			} catch (Exception DBSQLException) {
+				LOG.error(DBSQLException);
 				throw new Exception("\nLo sentimos, " + (pojo.getNombre()).toUpperCase() + "\n"
 						+ " ya está registrado en el pais seleccionado.");
 			}
 
 		} catch (Exception e) {
+			LOG.error(e);
 			// este lanzariía el mensaje del catch interno (Erro, ya existe...)
 			throw new Exception(e.getMessage());
 		}
@@ -240,6 +252,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			pst.setInt(4, pojo.getId());
 			
 		
+			LOG.debug(pst);
 				int insertado=pst.executeUpdate();
 				if (insertado==2) {
 					throw new Exception("Lo sentimos pero la ciudad "+pojo.getNombre()+" con id "+pojo.getId()+"no esta registrado");
@@ -247,6 +260,7 @@ public class CiudadDAOImp implements CiudadDAO {
 				}
 			
 		}catch (Exception e) {
+			LOG.error(e);
 			throw new Exception("Lo sentimos pero ya existe la ciudad "+pojo.getNombre().toUpperCase()+" para el pais seleccionado");
 		
 		}
@@ -308,7 +322,7 @@ public class CiudadDAOImp implements CiudadDAO {
 
 				) {
 					pst.setInt(1, numRegistro);
-					
+					LOG.debug(pst);
 					try(ResultSet rs = pst.executeQuery();){
 						
 						// lee linea por linea
@@ -323,7 +337,7 @@ public class CiudadDAOImp implements CiudadDAO {
 					
 
 				} catch (Exception e) {
-
+					LOG.error(e);
 					e.printStackTrace();
 
 				}
@@ -342,7 +356,7 @@ public class CiudadDAOImp implements CiudadDAO {
 		) {
 			
 			pst.setInt(1, id);
-			
+			LOG.debug(pst);
 			try(ResultSet rs= pst.executeQuery()){
 				
 				while (rs.next()) {
@@ -353,6 +367,7 @@ public class CiudadDAOImp implements CiudadDAO {
 			}
 			
 		} catch (Exception e) {
+			LOG.error(e);
 			throw new Exception(e.getMessage());
 		}
 		

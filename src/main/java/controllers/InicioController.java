@@ -41,7 +41,6 @@ public class InicioController extends HttpServlet {
 			Alerta alerta= new Alerta("danger","Opps.. something went wrong");
 			session.setAttribute("alerta",alerta);
 		}finally {
-			
 			response.sendRedirect(urlInicioApp+"/index.jsp");
 		}
 	}
