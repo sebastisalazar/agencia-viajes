@@ -12,11 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import listener.InicioAppListenner;
+
 import modelo.DAOImp.CiudadDAOImp;
-import modelo.DAOImp.PaisDAOImp;
+
 import modelo.pojo.Ciudad;
-import modelo.pojo.Pais;
+
 
 /**
  * Servlet implementation class listadoPaisesController
@@ -25,7 +25,7 @@ import modelo.pojo.Pais;
 public class ListadoCiudadesController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	private final static Logger LOG = Logger.getLogger(InicioAppListenner.class);
+	private final static Logger LOG = Logger.getLogger(ListadoCiudadesController.class);
 
 	public ListadoCiudadesController() {
 		super();
@@ -59,12 +59,15 @@ public class ListadoCiudadesController extends HttpServlet {
 
 		// se obtiene la lista
 		try {
-			LOG.info("Inicio de controlador listado ciudades");
+			LOG.info("Iniciando controlador listado de todas las ciudades registradas");
 			lista = dao.getAll();
 
 		} catch (Exception e) {
+			LOG.error(e);
 			e.printStackTrace();
 		} finally {
+			
+			
 
 			// se pasa la lista guardada en la lista
 			session.setAttribute("lista", lista);

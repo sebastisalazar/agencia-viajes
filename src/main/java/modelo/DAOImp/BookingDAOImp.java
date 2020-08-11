@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import listener.InicioAppListenner;
 import modelo.ConnectionManager;
 import modelo.DAO.BookingDAO;
 import modelo.pojo.Aerolinea;
@@ -16,6 +19,7 @@ import modelo.pojo.Usuario;
 public class BookingDAOImp implements BookingDAO {
 
 	private static BookingDAOImp INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(InicioAppListenner.class);
 
 	private BookingDAOImp(){
 		super();
@@ -174,6 +178,8 @@ public class BookingDAOImp implements BookingDAO {
 		){
 			pst.setInt(1,usu.getId());
 			
+			LOG.debug(pst);
+			
 			try(ResultSet rs= pst.executeQuery()){
 				
 				while (rs.next()) {
@@ -183,6 +189,8 @@ public class BookingDAOImp implements BookingDAO {
 			}
 			
 		} catch (Exception e) {
+			
+			LOG.error(e);
 			throw new Exception("Error, "+e.getMessage());
 		}
 		
@@ -260,6 +268,7 @@ public class BookingDAOImp implements BookingDAO {
 			
 		){
 			pst.setInt(1,usu.getId());
+			LOG.debug(pst);
 			
 			try(ResultSet rs= pst.executeQuery()){
 				
@@ -271,6 +280,7 @@ public class BookingDAOImp implements BookingDAO {
 			}
 			
 		} catch (Exception e) {
+			LOG.error(e);
 			throw new Exception("Error, "+e.getMessage());
 		}
 		
@@ -288,7 +298,7 @@ public class BookingDAOImp implements BookingDAO {
 			
 		){
 			pst.setInt(1,usu.getId());
-			
+			LOG.debug(pst);
 			try(ResultSet rs= pst.executeQuery()){
 				
 				while (rs.next()) {
@@ -299,6 +309,7 @@ public class BookingDAOImp implements BookingDAO {
 			}
 			
 		} catch (Exception e) {
+			LOG.error(e);
 			throw new Exception("Error, "+e.getMessage());
 		}
 		
@@ -316,6 +327,7 @@ public class BookingDAOImp implements BookingDAO {
 			
 		){
 			pst.setInt(1,usu.getId());
+			LOG.debug(pst);
 			
 			try(ResultSet rs= pst.executeQuery()){
 				
@@ -327,6 +339,7 @@ public class BookingDAOImp implements BookingDAO {
 			}
 			
 		} catch (Exception e) {
+			LOG.error(e);
 			throw new Exception("Error, "+e.getMessage());
 		}
 		

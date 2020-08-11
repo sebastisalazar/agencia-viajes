@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import modelo.DAOImp.CiudadDAOImp;
 import modelo.pojo.Ciudad;
 
@@ -19,6 +21,7 @@ import modelo.pojo.Ciudad;
 @WebServlet("/ciudades-pais")
 public class CiudadesPaisController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(CiudadesPaisController.class);
        
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,10 +36,12 @@ public class CiudadesPaisController extends HttpServlet {
 		HttpSession session= request.getSession();
 		
 		try {
+			LOG.info("Iniciando de controlador listado ciudades por pais");
 			ArrayList<Ciudad> ciudades=dao.getAllByPais(id);
 			session.setAttribute("ciudadesPais", ciudades);
 			session.setAttribute("busquedaCiudades", nombre);
 		} catch (Exception e) {
+			LOG.error(e);
 			alerta= new Alerta("danger", e.getMessage());
 			session.setAttribute("alerta", alerta);
 		}

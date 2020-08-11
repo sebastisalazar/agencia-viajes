@@ -20,7 +20,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
-
+import org.apache.log4j.Logger;
 
 import modelo.DAOImp.CiudadDAOImp;
 import modelo.DAOImp.PaisDAOImp;
@@ -36,8 +36,11 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 	private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private static Validator validator = factory.getValidator();
+	
+	
 
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(InsertUpdateCiudadController.class);
 
 	public InsertUpdateCiudadController() {
 		super();

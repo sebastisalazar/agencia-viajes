@@ -7,6 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.log4j.Logger;
+
+import listener.InicioAppListenner;
 import modelo.ConnectionManager;
 import modelo.DAO.PaisDAO;
 import modelo.pojo.Ciudad;
@@ -17,6 +20,7 @@ public class PaisDAOImp implements PaisDAO {
 	
 	
 	private static PaisDAOImp INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(InicioAppListenner.class);
 
 	private PaisDAOImp() {
 		super();
@@ -117,6 +121,8 @@ public class PaisDAOImp implements PaisDAO {
 			
 			){
 				pst.setInt(1, id);
+				LOG.debug(pst);
+				
 				try(ResultSet rs= pst.executeQuery()){
 					
 					while (rs.next()) {
@@ -137,6 +143,8 @@ public class PaisDAOImp implements PaisDAO {
 				}
 				
 			}catch (Exception e) {
+				
+				LOG.error("Error ocurrido en "+PaisDAOImp.class + e);
 				throw new Exception(e.getMessage());
 			}
 			
@@ -184,6 +192,8 @@ public class PaisDAOImp implements PaisDAO {
 			pst.setInt(2, pojo.getContinente().getId());
 			pst.setString(3, pojo.getNombrecorto());
 
+			LOG.debug(pst);
+			
 			try {
 				// insert
 				int filaInsertada = pst.executeUpdate();
@@ -206,11 +216,15 @@ public class PaisDAOImp implements PaisDAO {
 
 				// si captura una excepcion de typo sql la lanza
 			} catch (Exception DBSQLException) {
+				
+				LOG.debug(DBSQLException);
 				throw new Exception("\nLo sentimos, " + (pojo.getNombre()).toUpperCase() + "\n"
 						+ " ya está registrado en el continente seleccionado.");
 			}
 
 		} catch (Exception e) {
+			
+			LOG.debug(e);
 			// este lanzariía el mensaje del catch interno (Erro, ya existe...)
 			throw new Exception(e.getMessage());
 		}
@@ -231,7 +245,7 @@ public class PaisDAOImp implements PaisDAO {
 				pst.setString(3, pojo.getNombrecorto());
 				pst.setInt(4, pojo.getId());
 				
-			
+				LOG.debug(pst);
 				int insertado=pst.executeUpdate();
 				if (insertado==2) {
 					throw new Exception("Lo sentimos pero el pais "+pojo.getNombre()+" con id "+pojo.getId()+"no esta registrado");
@@ -239,6 +253,7 @@ public class PaisDAOImp implements PaisDAO {
 				}
 				
 			}catch (Exception e) {
+				LOG.error(e);
 				throw new Exception("Lo sentimos pero ya existe el pais "+pojo.getNombre().toUpperCase()+" para el continente seleccionado");
 			
 			}
@@ -302,6 +317,8 @@ public class PaisDAOImp implements PaisDAO {
 		
 		){
 			pst.setInt(1, id);
+			
+			LOG.debug(pst);
 			try(ResultSet rs= pst.executeQuery()){
 				
 				while (rs.next()) {
@@ -324,6 +341,8 @@ public class PaisDAOImp implements PaisDAO {
 			}
 			
 		}catch (Exception e) {
+			
+			LOG.error(e);
 			throw new Exception(e.getMessage());
 		}
 		

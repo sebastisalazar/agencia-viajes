@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import modelo.DAOImp.CiudadDAOImp;
-import modelo.DAOImp.PaisDAOImp;
+import org.apache.log4j.Logger;
+
+
 import modelo.DAOImp.UsuarioDAOImp;
-import modelo.pojo.Ciudad;
-import modelo.pojo.Pais;
+
 import modelo.pojo.Usuario;
 
 /**
@@ -24,6 +24,7 @@ import modelo.pojo.Usuario;
 public class ListadoUsuariosController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(ListadoUsuariosController.class);
 
 	public ListadoUsuariosController() {
 		super();
@@ -57,9 +58,12 @@ public class ListadoUsuariosController extends HttpServlet {
 
 		// se obtiene la lista
 		try {
+			
+			LOG.info("Iniciando controlador para obtener todos los usuarios de la base de datos");
 			lista = dao.getAll();
 
 		} catch (Exception e) {
+			LOG.error(e);
 			e.printStackTrace();
 		} finally {
 

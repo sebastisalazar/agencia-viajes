@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import listener.InicioAppListenner;
 import modelo.ConnectionManager;
 import modelo.DAO.UsuarioDAO;
 
@@ -14,6 +17,7 @@ import modelo.pojo.Usuario;
 public class UsuarioDAOImp implements UsuarioDAO {
 
 	private static UsuarioDAOImp INSTANCE = null;
+	private final static Logger LOG = Logger.getLogger(InicioAppListenner.class);
 
 	private UsuarioDAOImp() {
 		super();
@@ -68,6 +72,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				ResultSet rs = pst.executeQuery();
 
 		) {
+			LOG.debug(pst);
 			// lee linea por linea
 			while (rs.next()) {
 						
@@ -86,6 +91,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 		} catch (Exception e) {
 
+			LOG.error(e);
 			e.printStackTrace();
 
 		}
@@ -104,6 +110,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			
 			){
 				pst.setInt(1, id);
+				LOG.debug(pst);
 				try(ResultSet rs= pst.executeQuery()){
 					
 					while (rs.next()) {
@@ -122,6 +129,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				}
 				
 			}catch (Exception e) {
+				LOG.error(e);
 				throw new Exception(e.getMessage());
 			}
 			
@@ -149,10 +157,13 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			pst.setString(1, pojo.getEmail());
 			pst.setString(2, pojo.getPassword());
 
+			LOG.debug(pst);
+			
 			try {
 				// insert
 				int filaInsertada = pst.executeUpdate();
 
+				
 				// si ha insertado correctamente leemos el id asignado
 				if (filaInsertada == 1) {
 
@@ -171,11 +182,15 @@ public class UsuarioDAOImp implements UsuarioDAO {
 
 				// si captura una excepcion de typo sql la lanza
 			} catch (Exception DBSQLException) {
+				
+				LOG.error(DBSQLException);
 				throw new Exception("\nLo sentimos, " + (pojo.getEmail()).toUpperCase() + "\n"
 						+ " ya está registrado como usuario.");
 			}
 
 		} catch (Exception e) {
+			
+			LOG.error(e);
 			// este lanzariía el mensaje del catch interno (Erro, ya existe...)
 			throw new Exception(e.getMessage());
 		}
@@ -196,6 +211,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				pst.setInt(3, pojo.getRol().getId());
 				pst.setInt(4, pojo.getId());
 				
+				LOG.debug(pst);
 			
 				int insertado=pst.executeUpdate();
 				if (insertado==2) {
@@ -204,6 +220,8 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				}
 				
 			}catch (Exception e) {
+				
+				LOG.error(e);
 				throw new Exception("Lo sentimos pero el usuario "+pojo.getEmail().toUpperCase()+" ya está registrado.");
 			
 			}
@@ -229,6 +247,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			pst.setString(1, email);
 			pst.setString(2, password);
 
+			LOG.debug(pst);
 			try (ResultSet rs = pst.executeQuery()) {
 
 				while (rs.next()) {
@@ -255,14 +274,19 @@ public class UsuarioDAOImp implements UsuarioDAO {
 				}
 
 				// si no encuentra registro lo busca por email
+				LOG.info("Usuario y contraseña introducidos no existe en la base de datos");
 				if (u == null) {
+					
 					String sql_buscarEmail = "SELECT id, nombre, password, imagen FROM agencia_viajes.usuarios WHERE nombre='"
 							+ email + "';";
 					try (
 							Connection con2 = ConnectionManager.getConnection();
 							PreparedStatement pst2 = con2.prepareStatement(sql_buscarEmail);
 							ResultSet rs2 = pst2.executeQuery();
+							
 					) {
+						LOG.info("Buscando si existe el usuario");
+						LOG.debug(pst2);
 						// si la busqueda por email devuelve registro significa que se ha introducido
 						// una contraseña erronea
 						if (rs2.next()) {
@@ -271,6 +295,8 @@ public class UsuarioDAOImp implements UsuarioDAO {
 							// si la busqueda por email NO devuelve registro significa que no existe en la
 							// bbdd
 						} else {
+							LOG.info("El usuario NO existe en la base de datos");
+							
 							throw new Exception("Lo sentimos el email " + email + " no está registrado");
 						} // fin if busqueda email
 
@@ -281,6 +307,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			}//fin try catch
 
 		} catch (Exception e) {
+			LOG.error(e);
 			throw new Exception(e.getMessage());
 		}
 

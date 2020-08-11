@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import modelo.DAOImp.BookingDAOImp;
 import modelo.pojo.Booking;
 import modelo.pojo.Usuario;
@@ -19,8 +21,9 @@ import modelo.pojo.Usuario;
  */
 @WebServlet({"/views/frontoffice/inicio","/views/frontoffice/proximos-vuelos","/views/frontoffice/vuelos-cogidos","/views/frontoffice/vuelos-cancelados","/views/frontoffice/mis-datos"})
 public class UsuarioBookingsController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
-       
+	private final static Logger LOG = Logger.getLogger(UsuarioBookingsController.class);   
     
     public UsuarioBookingsController() {
         super();
@@ -43,6 +46,7 @@ public class UsuarioBookingsController extends HttpServlet {
 	
 		if (("/views/frontoffice/inicio").equalsIgnoreCase(url)) {
 			
+			LOG.info("Iniciando controlador /views/frontoffice/inicio");
 			try {
 				
 				
@@ -55,7 +59,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				session.setAttribute("tomados", tomados);
 				session.setAttribute("cancelados", cancelados);
 				
-				
+				LOG.info("Obteniendo listado de vuelos por usuario");
 				listabooking=daoBooking.getAllByUser(usu);
 				
 				if (listabooking.size()==0) {
@@ -64,12 +68,10 @@ public class UsuarioBookingsController extends HttpServlet {
 				}
 				
 				session.setAttribute("listabooking", listabooking);
-				
-				
-				
-				
+			
 			} catch (Exception e) {
 				
+				LOG.error(e);
 				alerta= new Alerta("danger", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				
@@ -80,8 +82,10 @@ public class UsuarioBookingsController extends HttpServlet {
 			
 		}else if (("/views/frontoffice/proximos-vuelos").equalsIgnoreCase(url)) {
 			
+			LOG.info("Iniciando controlador /views/frontoffice/inicio");
 			try {
 				
+				LOG.info("Obteniendo listado de proximos vuelos por usuario");
 				listabooking=daoBooking.getAllFlightsToTake(usu);
 				
 				if (listabooking.size()==0) {
@@ -93,6 +97,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				
 			} catch (Exception e) {
 				
+				LOG.error(e);
 				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				
@@ -103,8 +108,11 @@ public class UsuarioBookingsController extends HttpServlet {
 			
 		}else if (("/views/frontoffice/vuelos-cogidos").equalsIgnoreCase(url)) {
 			
+			
+			LOG.info("Iniciando controlador /views/frontoffice/vuelos-cogidos");
 			try {
 				
+				LOG.info("Obteniendo listado de vuelos cogidos por usuario");
 				listabooking=daoBooking.getAllFlightsTaken(usu);
 				
 				if (listabooking.size()==0) {
@@ -115,7 +123,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				session.setAttribute("listaCogidos", listabooking);
 				
 			} catch (Exception e) {
-				
+				LOG.error(e);
 				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				
@@ -126,8 +134,10 @@ public class UsuarioBookingsController extends HttpServlet {
 			
 		}else if (("/views/frontoffice/vuelos-cancelados").equalsIgnoreCase(url)) {
 			
+			LOG.info("Iniciando controlador /views/frontoffice/vuelos-cancelados ");
 			try {
 				
+				LOG.info("Obteniendo listado de vuelos cancelados por usuario");
 				listabooking=daoBooking.getAllCancelledFlights(usu);
 				
 				if (listabooking.size()==0) {
@@ -139,6 +149,7 @@ public class UsuarioBookingsController extends HttpServlet {
 				
 			} catch (Exception e) {
 				
+				LOG.error(e);
 				alerta= new Alerta("warning", "Lo sentimos, "+e.getMessage());
 				session.setAttribute("alerta", alerta);
 				

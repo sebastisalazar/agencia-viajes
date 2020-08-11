@@ -19,6 +19,7 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import org.apache.log4j.Logger;
 
 import modelo.DAOImp.UsuarioDAOImp;
 import modelo.pojo.Rol;
@@ -34,6 +35,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 	private static Validator validator = factory.getValidator();
 
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(InsertUpdateUsuarioController.class);
 
 	public InsertUpdateUsuarioController() {
 		super();
@@ -56,11 +58,14 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		// si se llama a crear-ciudad se redirecciona
 		if (llamaACrear) {
 
+			LOG.info("LLama al controlador crear-usuario ");
 			// se redirecciona
 			response.sendRedirect("views/usuario/crear-usuario.jsp");
 
 			// si no es que llama a update
 		} else {
+			
+			LOG.debug("LLama al controlador actualizar-usuario ");
 			// Se recoge el id en version string y se guarda en variable
 			String ids = request.getParameter("id");
 			// se transforma el id regido en string y se pasa a int
@@ -73,6 +78,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 			try {
 
 				// obtiene los datos de la base de datos sedun el id recogido
+				LOG.debug("Comprueba si el usuario a editar existe en la BBDD ");
 				Usuario u = daoUsuario.getById(id);
 
 				// se manda los campos escritos para que la vista los conserve y rellene los
@@ -83,7 +89,8 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 				response.sendRedirect("views/usuario/actualizar-usuario.jsp?id=" + id);
 
 			} catch (Exception e) {
-
+				
+				LOG.error(e);
 				// si no encuentra el id envia alerta
 				alerta = new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
@@ -154,6 +161,8 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		try {
 
 			if (llamaACrear) {
+				
+				LOG.info("LLama a crear usuario mediante formulario");
 
 				// se manda los campos escritos para que el usuario no pierda los datos
 				session.setAttribute("emailIntroducidoC", email);
@@ -165,12 +174,14 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 				if (requeridos.size() != 0) {
 
 					// se manda los mensajes para requeridos
+					LOG.info("No se han rellenado todos los campos");
 					session.setAttribute("requeridos", requeridos);
 
 					response.sendRedirect("crear-usuario.jsp");
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
 			
+					LOG.info("Registrando datos del usuario en la BBDD (insert)");
 					daoUsuario.insert(u);
 					
 					session.removeAttribute("emailIntroducidoC");
@@ -189,9 +200,12 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 				
 // UPDATE ***************************************************************************************************				
 			} else {
-
+				
+				LOG.info("LLama a actualizar usuario mediante formulario");
+				
 				if (requeridos.size() != 0) {
-
+					
+					LOG.info("No se han rellenado todos los campos");
 					// se manda los mensajes para requeridos
 					session.setAttribute("requeridos", requeridos);
 
@@ -200,6 +214,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 
 					// por seguridad comprobamos si no es null
 					if (id == null) {
+						LOG.debug("Se ha intentado actualizar con id de usuario no valido en la URL");
 						response.sendRedirect("listado-ciudades");
 					}
 
@@ -209,6 +224,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 					u.setRol( new Rol(Integer.parseInt(id_rol)));
 					
 					// ejecucion update
+					LOG.info("Iniciando actualizacion (update) de usuario");
 					daoUsuario.update(u);
 
 					// si la insert va bien manda el siguiente mensaje
@@ -231,18 +247,25 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		} catch (Exception e) {
 
 			requeridos.add(e.getMessage());
+			
+			LOG.debug(e);
 
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
 			// alli
 			if (llamaACrear) {
+				
+				LOG.info("Error debido a una excepcion en la pagina crear-usuario");
 				response.sendRedirect("crear-usuario.jsp");
-
+				
 				// si no quiere decir que es updte/actualizar ciudad
 			} else {
+				LOG.info("Error debido a una excepcion en la pagina actualizar-usuario");
 				response.sendRedirect("actualizar-usuario?id=" + id);
 			}
 			// por ultimo exista error o no
 		} finally {
+			
+			
 			// se manda el mensaje alerta
 			if (alerta != null) {
 				session.setAttribute("alerta", alerta);

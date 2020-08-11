@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import modelo.DAOImp.PaisDAOImp;
 import modelo.pojo.Pais;
 
@@ -18,7 +20,9 @@ import modelo.pojo.Pais;
  */
 @WebServlet("/paises-continente")
 public class PaisesContinenteController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(PaisesContinenteController.class);
        
     public PaisesContinenteController() {
         super();
@@ -40,6 +44,9 @@ public class PaisesContinenteController extends HttpServlet {
 		
 			
 			try {
+				
+				LOG.info("Iniciando controlador de paises por continente");
+				LOG.info("Obteniendo listado de paises por continentes");
 				HashMap<String,Pais> paisesContinente= daoPais.getAllByContinente(id);
 				//ArrayList<Ciudad> ciudadesPais=daoCiudad.getAllByContinente(id);
 				session.setAttribute("busquedaPaises",nombre);
@@ -54,6 +61,7 @@ public class PaisesContinenteController extends HttpServlet {
 				
 			} catch (Exception e) {
 				
+				LOG.error(e);
 				alerta= new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
 			}finally {

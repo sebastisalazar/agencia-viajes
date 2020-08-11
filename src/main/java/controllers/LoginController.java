@@ -17,6 +17,9 @@ import javax.validation.ValidatorFactory;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
+import org.apache.log4j.Logger;
+
+import listener.InicioAppListenner;
 import modelo.DAOImp.UsuarioDAOImp;
 import modelo.pojo.Continente;
 import modelo.pojo.Rol;
@@ -28,6 +31,7 @@ import modelo.pojo.Usuario;
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private final static Logger LOG = Logger.getLogger(LoginController.class);
        
 	private static ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 	private static Validator validator = factory.getValidator();
@@ -57,6 +61,8 @@ public class LoginController extends HttpServlet {
 		
 		ArrayList<String> requeridos= new ArrayList<String>();
 		
+		
+		//verificacion de campos vacios
 		if (("").equalsIgnoreCase(email)) {
 			requeridos.add("<p><b>Email</b> Introduce un email </p>");
 		}
@@ -65,18 +71,20 @@ public class LoginController extends HttpServlet {
 			requeridos.add("<p><b>Password</b> Introduce un password</p>");
 		}
 		
-		
+		//si hay algun campo vacio se recargará la página indicando que campo/s es/son erroneos
 		if (requeridos.size()!=0) {
 			
 			session.setAttribute("requeridos", requeridos);
 			session.setAttribute("loginEmailErroneo", email);
 			session.setAttribute("loginPasswordErroneo",password);
 			response.sendRedirect("views/login.jsp");
-			
+		
+		//si estan ambos campos rellenador
 		}else {
 			
 			
 			try {
+				LOG.info("Iniciando controlador para comprobar login");
 				u=daoUsuario.getExiste(email, password);
 				alerta= new Alerta("success", "Has Iniciado sesión correctamente.");
 				
@@ -86,14 +94,16 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("alerta",alerta);
 				
 				if (u.getRol().getId()==Rol.ADMINISTRADOR) {
+					LOG.info("Tipo usuario: Admin");
 					response.sendRedirect("views/backoffice/index.jsp");
 				}else {
-					
+					LOG.info("Tipo usuario: Normal");
 					request.getRequestDispatcher("views/frontoffice/inicio").forward(request, response);
 					
 				}
 				
 			} catch (Exception e) {
+				LOG.error(e);
 				requeridos.add(e.getMessage());
 				session.setAttribute("requeridos", requeridos);;
 				session.setAttribute("loginEmailErroneo",email);
