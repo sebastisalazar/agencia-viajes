@@ -46,7 +46,7 @@ public class CiudadDAOImp implements CiudadDAO {
 											"continente.nombre as continente_nombre " + 
 											"FROM agencia_viajes.ciudad " + 
 											"INNER JOIN agencia_viajes.pais ON ciudad.pais = pais.id " + 
-											"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id"+
+											"INNER JOIN agencia_viajes.continente ON ciudad.continente = continente.id "+
 											"ORDER BY ciudad.id DESC LIMIT ? ;";
 	
 	

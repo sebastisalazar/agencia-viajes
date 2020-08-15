@@ -1,14 +1,13 @@
 package controllers;
 
-import java.io.File;
+
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.Set;
 
-import javax.servlet.ServletContext;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -62,6 +61,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		// para poder enviar la lista de paises y continents
 		try {
 
+			
 			// para obtener todos los paises registrados
 			PaisDAOImp daoPais = PaisDAOImp.getInstance();
 			ArrayList<Pais> selectPaises = daoPais.getAll();
@@ -76,11 +76,14 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		// si se llama a crear-ciudad se redirecciona
 		if (llamaACrear) {
 
+			LOG.info("Inicianco controlador crear-ciudad por url");
 			// se redirecciona
 			response.sendRedirect("views/ciudad/crear-ciudad.jsp");
 
 			// si no es que llama a update
 		} else {
+			
+			LOG.info("Inicianco controlador actualizar-ciudad por URL");
 			// Se recoge el id en version string y se guarda en variable
 			String ids = request.getParameter("id");
 			// se transforma el id regido en string y se pasa a int
@@ -92,9 +95,12 @@ public class InsertUpdateCiudadController extends HttpServlet {
 			// select by id
 			try {
 
+				LOG.info("Obteniendo datos de ciudad por ID");
+				
 				// obtiene los datos de la base de datos sedun el id recogido
 				Ciudad ci = daoCiudad.getById(id);
 
+				
 				// se manda los campos escritos para que la vista los conserve y rellene los
 				// campos
 				session.setAttribute("ciudadEditar", ci);
@@ -104,6 +110,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 			} catch (Exception e) {
 
+				LOG.error(e);
 				// si no encuentra el id envia alerta
 				alerta = new Alerta("danger", e.getMessage());
 				session.setAttribute("alerta", alerta);
@@ -131,7 +138,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		
 		//el input que del que recoge contiene value="1,es"
 		String pais = request.getParameter("paisciudad"); //primero cogemos todo el dato
-		String paiscorto=pais.substring(pais.indexOf(",")); //de ese dato recogido solo nos quedamos con lo que hay detras de la coma
+		
 		pais=pais.substring(0,pais.indexOf(","));//nos quedamos solo con el número
 		
 		String continente = request.getParameter("continenteciudad");
@@ -170,6 +177,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		// si existen violaciones para la ciudad se añaden a requeridos
 		if (!violationsCiudad.isEmpty()) {
+			LOG.info("Existen campos rellenados incorrectamente o vacios");
 			// se recogen los mensajes y se añaden al listado de requeridos
 			for (ConstraintViolation<Ciudad> v : violationsCiudad) {
 				requeridos.add("<p><b>Nombre ciudad</b>: " + v.getMessage() + "</p>");
@@ -178,6 +186,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 
 		// validaciones combo box
 		if (("0".equalsIgnoreCase(pais))) {
+			LOG.info("No se ha seleccionado un pais");
 			requeridos.add("<p><b>Pais</b>: Selecciona un pais de la lista</p>");
 		}
 
@@ -188,6 +197,8 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		try {
 
 			if (llamaACrear) {
+				
+				LOG.info("Se ha llamado a crear ciudad por formulario");
 
 				// se manda los campos escritos para que el usuario no pierda los datos
 				session.setAttribute("nombreIntroducidoC", nombre);
@@ -197,14 +208,16 @@ public class InsertUpdateCiudadController extends HttpServlet {
 				session.setAttribute("continenteSeleccionadoC", continente);
 
 				if (requeridos.size() != 0) {
-
+					
+					LOG.info("Existen errores en campos (vacios o incompletos)");
 					// se manda los mensajes para requeridos
 					session.setAttribute("requeridos", requeridos);
 
 					response.sendRedirect("crear-ciudad.jsp");
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
-
+					
+					LOG.info("Iniciando insert en BBDD");
 					daoCiudad.insert(ci);
 					
 
@@ -225,16 +238,20 @@ public class InsertUpdateCiudadController extends HttpServlet {
 // UPDATE ***************************************************************************************************				
 			} else {
 
+				LOG.info("Se ha llamado a actualizar ciudad por formulario"); 
+				
 				if (requeridos.size() != 0) {
-
+					
+					LOG.info("Error, existen campos sin rellenar o con errores");
 					// se manda los mensajes para requeridos
 					session.setAttribute("requeridos", requeridos);
 
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
-
+					
 					// por seguridad comprobamos si no es null
 					if (id == null) {
+						LOG.debug("Se ha intentado actualizar una ciudad sin pasar un id");
 						response.sendRedirect("listado-ciudades");
 					}
 
@@ -243,6 +260,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 					ci.setId(Integer.parseInt(id));
 					// ejecucion update
 
+					LOG.info("Iniciando actualizacion de ciudad(update)");
 					daoCiudad.update(ci);
 
 					// si la insert va bien manda el siguiente mensaje
@@ -267,6 +285,7 @@ public class InsertUpdateCiudadController extends HttpServlet {
 		} catch (Exception e) {
 
 			requeridos.add(e.getMessage());
+			LOG.error(e);
 
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
 			// alli
