@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.30, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.20, for Linux (x86_64)
 --
 -- Host: localhost    Database: agencia_viajes
 -- ------------------------------------------------------
--- Server version	5.7.30-0ubuntu0.18.04.1
+-- Server version	8.0.20-0ubuntu0.19.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -16,12 +16,65 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Current Database: `agencia_viajes`
+-- Table structure for table `aerolinea`
 --
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/ `agencia_viajes` /*!40100 DEFAULT CHARACTER SET latin1 */;
+DROP TABLE IF EXISTS `aerolinea`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `aerolinea` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `aerolinea_UN` (`nombre`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-USE `agencia_viajes`;
+--
+-- Dumping data for table `aerolinea`
+--
+
+LOCK TABLES `aerolinea` WRITE;
+/*!40000 ALTER TABLE `aerolinea` DISABLE KEYS */;
+INSERT INTO `aerolinea` VALUES (4,'Air Europa'),(5,'Iberia'),(3,'Rayanair'),(1,'Volotea'),(2,'Vueling');
+/*!40000 ALTER TABLE `aerolinea` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `booking`
+--
+
+DROP TABLE IF EXISTS `booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `booking` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_usuario` int NOT NULL,
+  `id_ciudad` int NOT NULL,
+  `id_aerolinea` int NOT NULL,
+  `fecha_booking` datetime NOT NULL,
+  `fecha_partida` datetime NOT NULL,
+  `cancelado` tinyint(1) NOT NULL DEFAULT '0',
+  `fecha_vuelta` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `booking_UN` (`id_usuario`,`fecha_partida`,`id_aerolinea`,`id_ciudad`),
+  KEY `booking_FK_1` (`id_ciudad`),
+  KEY `booking_FK_2` (`id_aerolinea`),
+  CONSTRAINT `booking_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `booking_FK_1` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id`),
+  CONSTRAINT `booking_FK_2` FOREIGN KEY (`id_aerolinea`) REFERENCES `aerolinea` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `booking`
+--
+
+LOCK TABLES `booking` WRITE;
+/*!40000 ALTER TABLE `booking` DISABLE KEYS */;
+INSERT INTO `booking` VALUES (1,2,59,5,'2020-10-04 18:32:08','2020-12-21 00:00:00',0,'2021-01-21 00:00:00'),(2,2,3,3,'2020-02-01 00:00:00','2020-09-01 00:00:00',0,'2020-09-30 00:00:00'),(3,2,1,1,'2020-02-01 00:00:00','2020-10-01 00:00:00',1,'2020-11-30 00:00:00');
+/*!40000 ALTER TABLE `booking` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `ciudad`
@@ -29,12 +82,12 @@ USE `agencia_viajes`;
 
 DROP TABLE IF EXISTS `ciudad`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ciudad` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
-  `pais` int(11) NOT NULL,
-  `continente` int(11) NOT NULL,
+  `pais` int NOT NULL,
+  `continente` int NOT NULL,
   `portada` varchar(100) NOT NULL DEFAULT 'https://picsum.photos/200/200',
   PRIMARY KEY (`id`),
   UNIQUE KEY `ciudad_UN` (`nombre`,`pais`),
@@ -61,9 +114,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `continente`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `continente` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `continente_UN` (`nombre`)
@@ -81,18 +134,53 @@ INSERT INTO `continente` VALUES (1,'Africa'),(2,'América'),(3,'Antártida'),(4,
 UNLOCK TABLES;
 
 --
+-- Table structure for table `datos_personales`
+--
+
+DROP TABLE IF EXISTS `datos_personales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `datos_personales` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `ape1` varchar(100) NOT NULL,
+  `ape2` varchar(100) NOT NULL,
+  `DNI_NIE` varchar(9) NOT NULL,
+  `nacionalidad` int NOT NULL,
+  `residencia` varchar(100) NOT NULL,
+  `id_tarjeta` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `datos_personales_UN` (`DNI_NIE`),
+  KEY `datos_personales_FK` (`id_tarjeta`),
+  KEY `datos_personales_FK_1` (`nacionalidad`),
+  CONSTRAINT `datos_personales_FK` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjetas_credito` (`id`),
+  CONSTRAINT `datos_personales_FK_1` FOREIGN KEY (`nacionalidad`) REFERENCES `pais` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `datos_personales`
+--
+
+LOCK TABLES `datos_personales` WRITE;
+/*!40000 ALTER TABLE `datos_personales` DISABLE KEYS */;
+INSERT INTO `datos_personales` VALUES (1,'Admin','Test1','Test2','12345678T',1,'calle indautxu 23, 4 derecha',1),(2,'Sebastian','Salazar','Taraune','12345679T',1,'calle Balejo 23, 5 derecha',2);
+/*!40000 ALTER TABLE `datos_personales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `pais`
 --
 
 DROP TABLE IF EXISTS `pais`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `pais` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) COLLATE latin1_spanish_ci NOT NULL,
-  `bandera` varchar(100) COLLATE latin1_spanish_ci DEFAULT 'https://picsum.photos/60/40',
-  `continente` int(11) NOT NULL DEFAULT '1',
-  `nombre_corto` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci NOT NULL,
+  `bandera` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT 'https://picsum.photos/60/40',
+  `continente` int NOT NULL DEFAULT '1',
+  `nombre_corto` varchar(100) CHARACTER SET latin1 COLLATE latin1_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pais_UN1` (`nombre`,`continente`),
   KEY `pais_FK` (`continente`),
@@ -116,9 +204,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `rol`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `rol` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '1: Usuario normal   2: Administrador',
+  `id` int NOT NULL AUTO_INCREMENT COMMENT '1: Usuario normal   2: Administrador',
   `nombre` varchar(15) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `nombre` (`nombre`)
@@ -136,23 +224,54 @@ INSERT INTO `rol` VALUES (2,'administrador'),(1,'usuario');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `tarjetas_credito`
+--
+
+DROP TABLE IF EXISTS `tarjetas_credito`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tarjetas_credito` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `numero` varchar(11) NOT NULL,
+  `caducidad` date NOT NULL,
+  `num_seguridad` varchar(4) NOT NULL,
+  `titular` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `tarjetas_credito_UN` (`numero`,`titular`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tarjetas_credito`
+--
+
+LOCK TABLES `tarjetas_credito` WRITE;
+/*!40000 ALTER TABLE `tarjetas_credito` DISABLE KEYS */;
+INSERT INTO `tarjetas_credito` VALUES (1,'12345678912','2022-10-04','714','Admin'),(2,'21987654321','2020-10-04','123','Sebastian');
+/*!40000 ALTER TABLE `tarjetas_credito` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `usuarios`
 --
 
 DROP TABLE IF EXISTS `usuarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nombre` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `imagen` varchar(100) DEFAULT 'https://picsum.photos/200',
-  `id_rol` int(11) NOT NULL DEFAULT '1',
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(100) CHARACTER SET latin1 NOT NULL,
+  `imagen` varchar(100) CHARACTER SET latin1 DEFAULT 'https://picsum.photos/200',
+  `id_rol` int NOT NULL DEFAULT '1',
+  `id_datos` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `usuarios_UN` (`nombre`),
   KEY `usuarios_FK` (`id_rol`),
-  CONSTRAINT `usuarios_FK` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  KEY `usuarios_FK_1` (`id_datos`),
+  CONSTRAINT `usuarios_FK` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`),
+  CONSTRAINT `usuarios_FK_1` FOREIGN KEY (`id_datos`) REFERENCES `datos_personales` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -161,7 +280,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin@agencia-viajes.es','admin','https://picsum.photos/200',2);
+INSERT INTO `usuarios` VALUES (1,'admin@agencia-viajes.es','admin','https://picsum.photos/200',2,1),(2,'sebastian@agencia-viajes.es','sebastian','https://picsum.photos/200',1,2);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -174,4 +293,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-07-01 15:20:47
+-- Dump completed on 2020-10-04 18:43:47

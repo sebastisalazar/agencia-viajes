@@ -1,12 +1,12 @@
 package modelo.pojo;
 
-import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
 
-import modelo.pojo.Rol;
+
 
 public class Usuario {
 
@@ -34,7 +34,7 @@ public class Usuario {
 	
 	private String residencia;
 	
-	private int numTarjeta;
+	private String numTarjeta;
 	
 	private String caducidadTarjeta;
 	
@@ -58,7 +58,7 @@ public class Usuario {
 		this.DNI_NIE = "";
 		this.nacionalidad = "";
 		this.residencia = "";
-		this.numTarjeta = 0;
+		this.numTarjeta = "";
 		this.caducidadTarjeta = "";
 		this.numseguridadTarjeta = 0;
 		this.titular = "";
@@ -220,7 +220,7 @@ public class Usuario {
 
 
 
-	public int getNumTarjeta() {
+	public String getNumTarjeta() {
 		return numTarjeta;
 	}
 
@@ -228,7 +228,7 @@ public class Usuario {
 
 
 
-	public void setNumTarjeta(int numTarjeta) {
+	public void setNumTarjeta(String numTarjeta) {
 		this.numTarjeta = numTarjeta;
 	}
 

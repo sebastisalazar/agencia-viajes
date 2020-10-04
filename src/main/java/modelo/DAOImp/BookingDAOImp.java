@@ -67,13 +67,14 @@ public class BookingDAOImp implements BookingDAO {
 			+ "id_usuario,"
 			+ "usuarios.nombre as email_usuario,id_aerolinea,"
 			+ "aerolinea.nombre  as nombre_aerolinea,fecha_booking,"
-			+ "fecha_partida,fecha_vuelta "
+			+ "fecha_partida,fecha_vuelta,cancelado "
 			+ "FROM booking, aerolinea, ciudad,usuarios " + 
 			" WHERE booking.id_aerolinea =aerolinea.id " + 
 			" AND booking.id_ciudad = ciudad.id " + 
 			" AND booking.id_usuario =usuarios.id " + 
 			" AND id_usuario = ? " + 
-			" AND MONTH(fecha_partida) <=MONTH (NOW());";
+			" AND MONTH(fecha_partida) <=MONTH (NOW()) "+
+			" AND cancelado=0;";
 	
 	private final String SQL_GETALL="SELECT booking.id as id_booking," + 
 			"id_ciudad,ciudad.nombre as nombre_ciudad," + 

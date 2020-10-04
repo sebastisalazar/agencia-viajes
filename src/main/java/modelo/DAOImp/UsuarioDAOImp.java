@@ -267,7 +267,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 					u.setDNI_NIE(rs.getString("DNI_NIE"));
 					u.setNacionalidad(rs.getString("nacionalidad"));
 					u.setResidencia(rs.getString("residencia"));
-					u.setNumTarjeta(rs.getInt("numero"));
+					u.setNumTarjeta(rs.getString("numero"));
 					u.setCaducidadTarjeta(rs.getDate("caducidad").toString());
 					u.setNumseguridadTarjeta(rs.getInt("num_seguridad"));
 					u.setTitular(rs.getString("titular"));
