@@ -234,19 +234,21 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		//si no hay sesion iniciada significara que tiene que tiene que elegir un pais
 		if (u2==null) {
 			u.setNacionalidad(paisid);
+			
+			// Recogemos las violaciones si es que las hay
+			Set<ConstraintViolation<Usuario>> violationsUsuario = validator.validate(u);
+
+			// si existen violaciones para la ciudad se añaden a requeridos
+			if (!violationsUsuario.isEmpty()) {
+				// se recogen los mensajes y se añaden al listado de requeridos
+				for (ConstraintViolation<Usuario> v : violationsUsuario) {
+					requeridos.add("<p><b>"+v.getPropertyPath()+"</b>: " + v.getMessage() + "</p>");
+				}
+			}
 		}
 		
 
-		// Recogemos las violaciones si es que las hay
-		Set<ConstraintViolation<Usuario>> violationsUsuario = validator.validate(u);
-
-		// si existen violaciones para la ciudad se añaden a requeridos
-		if (!violationsUsuario.isEmpty()) {
-			// se recogen los mensajes y se añaden al listado de requeridos
-			for (ConstraintViolation<Usuario> v : violationsUsuario) {
-				requeridos.add("<p><b>"+v.getPropertyPath()+"</b>: " + v.getMessage() + "</p>");
-			}
-		}
+		
 
 // INSERT***************************************************************************************************	
 		try {
