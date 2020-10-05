@@ -168,7 +168,7 @@
 
 					</select>
 				</div>
-				<!-- div selec continente -->
+				<!--fin  div selec continente -->
 
 				<div class="col-12 d-flex justify-content-center">
 					<button type="submit" class="btn btn-primary mb-2 mt-5 mr-5 p-3">Actualizar</button>

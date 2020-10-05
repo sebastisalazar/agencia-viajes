@@ -53,8 +53,22 @@ public class UsuarioDAOImp implements UsuarioDAO {
 			"AND u.nombre LIKE ? " + 
 			"AND u.password LIKE ? ";
 	
-	private final String SQL_INSERT="INSERT INTO agencia_viajes.usuarios (nombre, password) "+
-									"VALUES(?,?);"; 
+	
+	private final String SQL_INSERT1="INSERT INTO agencia_viajes.tarjetas_credito\n" + 
+			"(caducidad, num_seguridad, titular)\n" + 
+			"VALUES(NOW(), '1234', 'N/A');\n" + 
+			"";
+	private final String SQL_INSERT2= "INSERT INTO agencia_viajes.datos_personales " + 
+			"(nombre, ape1, ape2, DNI_NIE, nacionalidad, residencia, id_tarjeta) " + 
+			"VALUES(?, ?, ?, ?, ?, ?, ?);"; 
+			
+	
+	private final String SQL_INSERT3="INSERT INTO agencia_viajes.usuarios (nombre, password,id_datos) "+
+									"VALUES(?,?,?);"; 
+	
+	
+	
+	
 	
 	private final String SQL_UPDATE="UPDATE agencia_viajes.usuarios "+
 									"SET nombre=?, "+
@@ -145,17 +159,87 @@ public class UsuarioDAOImp implements UsuarioDAO {
 	@Override
 	public Usuario insert(Usuario pojo) throws Exception {
 		
+		
+		int tarjetacredito=0;
+		int datos=0;
+		
 		try (Connection con = ConnectionManager.getConnection();
 
 				// RETURN_GENERATED_KEYS es para recuperar la ID que asignara la abse de datos
 				// al nuevo registro
-				PreparedStatement pst = con.prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+				PreparedStatement pst = con.prepareStatement(SQL_INSERT1, PreparedStatement.RETURN_GENERATED_KEYS);
+
+		) {
+			pst.executeUpdate();
+			
+			// se lee el id asignado en la base de datos
+			try (ResultSet rs = pst.getGeneratedKeys();) {
+				if (rs.next()) {
+					// se recoge en un int
+					tarjetacredito= rs.getInt(1);
+
+				}
+
+			}
+			
+		}catch (Exception e) {
+			
+			LOG.error(e);
+			// este lanzariía el mensaje del catch interno (Erro, ya existe...)
+			throw new Exception(e.getMessage());
+		}
+		
+		
+		try (
+				Connection con = ConnectionManager.getConnection();
+
+				PreparedStatement pst = con.prepareStatement(SQL_INSERT2,PreparedStatement.RETURN_GENERATED_KEYS);
+
+		) {
+			
+			//nombre, ape1, ape2, DNI_NIE, nacionalidad, residencia, id_tarjeta
+			
+			pst.setString(1, pojo.getNombre());
+			pst.setString(2, pojo.getApe1());
+			pst.setString(3, pojo.getApe2());
+			pst.setString(4, pojo.getDNI_NIE());
+			pst.setInt(5, pojo.getNacionalidad());
+			pst.setString(6, pojo.getResidencia());
+			pst.setInt(7, tarjetacredito);
+			
+			pst.executeUpdate();
+			
+			// se lee el id asignado en la base de datos
+			try (ResultSet rs = pst.getGeneratedKeys();) {
+				if (rs.next()) {
+					// se recoge en un int
+					datos= rs.getInt(1);
+
+				}
+
+			}
+			
+		}catch (Exception e) {
+			
+			LOG.error(e);
+			// este lanzariía el mensaje del catch interno (Erro, ya existe...)
+			throw new Exception(e.getMessage());
+		}
+		
+		
+		
+		try (Connection con = ConnectionManager.getConnection();
+
+				// RETURN_GENERATED_KEYS es para recuperar la ID que asignara la abse de datos
+				// al nuevo registro
+				PreparedStatement pst = con.prepareStatement(SQL_INSERT3, PreparedStatement.RETURN_GENERATED_KEYS);
 
 		) {
 			// se modifica la insert diciendo que el interrogante lo sustituya con el nombre
 			// del objeto
 			pst.setString(1, pojo.getEmail());
 			pst.setString(2, pojo.getPassword());
+			pst.setInt(3, datos);
 
 			LOG.debug(pst);
 			
@@ -265,7 +349,7 @@ public class UsuarioDAOImp implements UsuarioDAO {
 					u.setApe1(rs.getString("ape1"));
 					u.setApe2(rs.getString("ape2"));
 					u.setDNI_NIE(rs.getString("DNI_NIE"));
-					u.setNacionalidad(rs.getString("nacionalidad"));
+					u.setNacionalidad(rs.getInt("nacionalidad"));
 					u.setResidencia(rs.getString("residencia"));
 					u.setNumTarjeta(rs.getString("numero"));
 					u.setCaducidadTarjeta(rs.getDate("caducidad").toString());

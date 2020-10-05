@@ -26,7 +26,7 @@
 <div class="d-flex flex-row justify-content-center border-0  ">
 	
 	
-	<form class="px-5 py-3 border pb-5" action="crear-usuario" method="post">
+	<form class="px-5 py-3 border pb-5" action="crear-usuario" method="POST">
 		<h1 class="text-primary text-center mb-3 mt-5">Registro usuario</h1>
 		
 		<!-- Pinta los mensajes si hay alguno -->
@@ -40,7 +40,74 @@
 			%>
 		</c:if>
 		
+		<div class="form-group pt-2">
+			<label for="nombre">Nombre:</label> <input
+				type="text" class="form-control px-5" id="nombre" name="nombre" value="${nombreIntroducidoC}">
+		</div>
 		
+		<div class="form-group pt-2">
+			<label for="ape1">Primer apellido:</label> <input
+				type="text" class="form-control px-5" id="ape1" name="ape1" value="${ape1IntroducidoC}">
+		</div>
+		
+		<div class="form-group pt-2">
+			<label for="ape2">Segundo apellido:</label> <input
+				type="text" class="form-control px-5" id="ape2" name="ape2" value="${ape2IntroducidoC}">
+		</div>
+		
+		<div class="form-group col">
+					<div class="row row-cols-2">
+
+						<div class="col-6">
+							<label for="pais">Pais: </label>
+						</div>
+						<div class="col-6">
+							<label for="pais" class="pl-2 d-block">Bandera </label>
+						</div>
+						<div class="col-6">
+
+							<select class="form-control" id="pais" name="pais">
+
+								<c:forEach items="${selectPaises}" var="p">
+
+									<c:if test="${empty paisSeleccionado}">
+										<option value="${p.id},${p.nombrecorto}"
+											${(p.id eq 1)? 'selected':'' }>${p.nombre}</option>
+
+									</c:if>
+
+									<c:if test="${not empty paisSeleccionado }">
+										<option value="${p.id}"
+											${(p.id eq paisSeleccionado)? 'selected':'' }>${p.nombre}</option>
+									</c:if>
+									
+								</c:forEach>
+
+							</select>
+
+						</div>
+
+						<div class="col" style="vertical-align: baseline">
+							<div class="country d-block text-center" style="margin: 0px; padding: 8px 6px">
+								<i></i> <b></b>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+		
+		<div class="form-group pt-2">
+			<label for="dnie">DNIE / NIE :</label> <input
+				type="text" class="form-control px-5" id="dnie" name="dnie" value="${dnieIntroducidoC}">
+		</div>
+		
+		<div class="form-group pt-2">
+			<label for="residencia">Direccion :</label> <input
+				type="text" class="form-control px-5" id="direccion" name="direccion" value="${direccionIntroducidoC}">
+		</div>
+				
 		<div class="form-group pt-2">
 			<label for="email">Email:</label> <input
 				type="email" class="form-control px-5" id="email" name="email" value="${emailIntroducidoC}">

@@ -56,5 +56,88 @@ function confirmar(nombre) {
 	
 }
 
+//function para editar password de un usuario existente
+var correcto=true;
+
+function Iguales(){
+	
+	//guarda el dato de los campos password 1 y 2
+    var clave1 = document.getElementById('password1').value;
+    var clave2 = document.getElementById('password2').value;
+    
+    //si se rellena el campo password1 se obliga a que el segundo sea requerido
+    if (clave1) {
+    	$("#password2").attr( "required","true");
+    	
+    	
+	}else{
+		//si no se ha escrito nada se quita el required
+		$("#password2").removeAttr( "required");
+
+		//si el campo esta vacio se da por correcto
+		correcto=true;
+	}
+    
+    
+    
+    //comprobamos si al menos se ha rellenado el segundo campo
+    if (clave2) {
+    	
+    	//se evalua si los datos NO son iguales
+    	if (clave1 != clave2){
+        	
+    		//se pinta el mensaje quitando el style
+        	$("#mensaje").removeAttr("style");
+        	
+        	//se pinta en color los campos que no coincidan
+        	$("#password1").attr( "style", "background-color: rgba(255,0,0,0.2)" );
+        	$("#password2").attr( "style", "background-color: rgba(255,0,0,0.2)" );
+        	
+        	//si los campos no son iguales se avisa que no es correcto
+        	correcto=false;
+        	
+        	
+        	//si son iguales
+        }else{
+        	
+        	//se quita el color rojo a ambos campos
+        	$("#password1").removeAttr("style");
+        	$("#password2").removeAttr("style");
+        	
+        	//se vuelve a pintar en verde para mostrar que ahora si coinciden
+        	$("#password1").attr( "style", "background-color: rgba(0,153,51,0.2)" );
+        	$("#password2").attr( "style", "background-color: rgba(0,153,51,0.2)" );
+        	
+        	//Se oculta el mensaje
+        	$("#mensaje").attr( "style", "visibility:hidden" );
+        	
+        	//si los campos coinciden se da por correcto
+        	correcto=true;
+        	
+        }
+    	
+    	
+    	//si no se ha rellenado el segundo campo o si esta vacio
+	}else{
+		
+		
+		//se quita el color rojo a ambos campos
+		$("#password1").removeAttr("style");
+    	$("#password2").removeAttr("style");
+    	
+    	//Se oculta el mensaje
+		$("#mensaje").attr( "style", "visibility:hidden" );
+		
+		//si el campo esta vacio se da por correcto
+		correcto=true;
+		
+	}
+    
+    
+   
+    
+    
+} 
+
 
 

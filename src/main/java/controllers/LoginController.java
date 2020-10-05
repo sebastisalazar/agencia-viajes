@@ -31,7 +31,26 @@ public class LoginController extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("login.jsp");
+		
+		
+		HttpSession session= request.getSession();
+		
+		if (session.getAttribute("loginUsuario")!=null) {
+			
+			Usuario u= (Usuario) session.getAttribute("loginUsuario");
+			if (u.getRol().getId()==1) {
+				
+				response.sendRedirect("views/frontoffice/index.jsp");
+			}else {
+				response.sendRedirect("views/backoffice/index.jsp");
+			}
+			
+		}else {
+			
+			response.sendRedirect("login.jsp");
+		}
+		
+		
 	}
 
 	/**

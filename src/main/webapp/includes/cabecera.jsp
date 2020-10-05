@@ -174,7 +174,7 @@
 			<c:if test="${empty loginUsuario}">
 			
 				<a class="py-2 d-none d-md-inline-block ${( 'Registro Usuario' eq param.pagina ) ? 'active' : ''}"
-						href="views/usuario/crear-usuario.jsp">Nuevo Usuario</a>
+						href="crear-usuario">Nuevo Usuario</a>
 				<span class="form-inline"> 
 				<a
 					class="nav-link  btn btn-outline-dark bg-dark text-white font-weight-bold"

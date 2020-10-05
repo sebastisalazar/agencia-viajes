@@ -22,16 +22,23 @@ public class Usuario {
 	
 	private String imagen;
 	
+	@NotBlank ( message = "Escribe tu nombre")
 	private String nombre;
 	
+	@NotBlank ( message = "Escribe tu primer apellido")
 	private String ape1;
 	
+	@NotBlank ( message = "Escribe tu segundo apellido")
 	private String ape2;
 	
+	@NotBlank ( message = "Escribe tu documento de identidad")
+	@Size( min = 9, max = 9, message = "La longtitud de ser de 9 caracteres")
 	private String DNI_NIE;
 	
-	private String nacionalidad;
 	
+	private Pais nacionalidad;
+	
+	@NotBlank ( message = "Escribe tu direccion")
 	private String residencia;
 	
 	private String numTarjeta;
@@ -56,7 +63,7 @@ public class Usuario {
 		this.ape1 = "";
 		this.ape2 = "";
 		this.DNI_NIE = "";
-		this.nacionalidad = "";
+		this.nacionalidad = new Pais();;
 		this.residencia = "";
 		this.numTarjeta = "";
 		this.caducidadTarjeta = "";
@@ -188,16 +195,16 @@ public class Usuario {
 
 
 
-	public String getNacionalidad() {
-		return nacionalidad;
+	public int getNacionalidad() {
+		return nacionalidad.getId();
 	}
 
 
 
 
 
-	public void setNacionalidad(String nacionalidad) {
-		this.nacionalidad = nacionalidad;
+	public void setNacionalidad(int nacionalidad) {
+		this.nacionalidad.setId(nacionalidad);
 	}
 
 

@@ -46,12 +46,11 @@
 
 
 					<div class="form-group col">
-						<label for="email">Email:</label> 
-						<input type="text"
+						<label for="email">Email:</label> <input type="text"
 							class="form-control" id="email" name="email"
 							placeholder="${loginUsuario.email}"
 							value="${(not empty passwordIntroducido)? passwordIntroducido: loginUsuario.email}">
-							
+
 
 					</div>
 
@@ -63,35 +62,44 @@
 
 					</div>
 
-					<div class="form-group col">
-						<div class="row row-cols-2">
-
-							<div class="col-12">
-								<label for="rol">Tipo:</label> <select class="form-control"
-									id="rol" name="rol">
-
-									<c:if test="${empty rolSeleccionado}">
-										<option value="1" ${(loginUsuario.rol.id == 1)? 'selected':''}>Usuario</option>
-										<option value="2" ${(loginUsuario.rol.id == 2)? 'selected':''}>Admin</option>
-
-									</c:if>
-
-									<c:if test="${not empty rolSeleccionado }">
-										<option value="1" ${(rolSeleccionado eq '1')? 'selected':''}>Usuario</option>
-										<option value="2" ${(rolSeleccionado eq '2')? 'selected':''}>Admin</option>
-									</c:if>
-
-								</select>
-
+					<div class="accordion" id="accordionExample">
+						<div class="card caja-contrasenia">
+							<div class="card-header btn-contrasenia" id="headingOne">
+								<h2 class="mb-0">
+									<button class="btn btn-link btn-block text-center collapsed"
+										type="button" data-toggle="collapse"
+										data-target="#collapseOne" aria-expanded="false"
+										aria-controls="collapseOne">Cambiar contraseña</button>
+								</h2>
 							</div>
 
+							<div id="collapseOne" class="collapse"
+								aria-labelledby="headingOne" data-parent="#accordionExample">
+								<div class="card-body">
 
+									<label for="password1">Escribe la nueva contraseña: </label><input
+										class="text-center" id="password1" type="password"
+										name="password1" oninput="Iguales()"> <br> <br>
+									<label for="password2">Rescribe la nueva contraseña: </label>
+									
+									<input
+										class="text-center" id="password2" type="password"
+										name="password2" oninput="Iguales()"> 
+									<input
+										class="text-center" id="password1copia" type="hidden"
+										name="password1copia"> 
+									<input class="text-center"
+										id="password2copia" type="hidden" name="password2copia">
+									
+									<small id="mensaje" class="text-danger d-block"
+										style="visibility: hidden">Las contraseñas no
+										coinciden</small>
+								</div>
+							</div>
 						</div>
-
 
 					</div>
 
-					<!-- div selec continente -->
 
 					<div class="col-12 d-flex justify-content-center">
 						<button type="submit" class="btn btn-primary mb-2 mt-5 mr-5 p-3">Actualizar</button>
@@ -139,126 +147,115 @@
 			<div class="col border-right">
 
 				<div class="form-group col">
-					
-						<div class="col-12">
-							<h2 class="text-center mb-5 text-primary">Datos personales</h2>
-						</div>
-			
-						<div class="col-12">
-							
-							<label class="d-block mt-2" for="nombre">Nombre</label> 
-							 <input type="text"
-							class="form-control" id="nombre" name="nombre"
+
+					<div class="col-12">
+						<h2 class="text-center mb-5 text-primary">Datos personales</h2>
+					</div>
+
+					<div class="col-12">
+
+						<label class="d-block mt-2" for="nombre">Nombre</label> <input
+							type="text" class="form-control" id="nombre" name="nombre"
 							placeholder="${loginUsuario.nombre}"
-							value="${loginUsuario.nombre}">
-							
-							<label class="d-block mt-2" for="nombre">Primer Apellido</label> 
-							 <input type="text"
-							class="form-control" id="ape1" name="ape1"
-							placeholder="${loginUsuario.ape1}"
-							value="${loginUsuario.ape1}">
-							
-							<label class="d-block mt-2" for="nombre">Segundo Apellido</label> 
-							  <input type="text"
-							class="form-control" id="ape2" name="ape2"
-							placeholder="${loginUsuario.ape2}"
-							value="${loginUsuario.ape2}">
-							
-							<label class="d-block mt-2" for="nombre">DNI/NIE</label> 
-							<input type="text"
-							class="form-control" id="dni_nie" name="dni_nie"
+							value="${loginUsuario.nombre}"> <label
+							class="d-block mt-2" for="nombre">Primer Apellido</label> <input
+							type="text" class="form-control" id="ape1" name="ape1"
+							placeholder="${loginUsuario.ape1}" value="${loginUsuario.ape1}">
+
+						<label class="d-block mt-2" for="nombre">Segundo Apellido</label>
+						<input type="text" class="form-control" id="ape2" name="ape2"
+							placeholder="${loginUsuario.ape2}" value="${loginUsuario.ape2}">
+
+						<label class="d-block mt-2" for="nombre">DNI/NIE</label> <input
+							type="text" class="form-control" id="dni_nie" name="dni_nie"
 							placeholder="${loginUsuario.DNI_NIE}"
 							value="${loginUsuario.DNI_NIE}">
-							
-							<div class="row row-cols-2  ">
-							
-								<div class="col-12">
-									<label class="d-block mt-2" for="nombre">Nacionalidad</label>
-								</div>
-								<div class="col">
-									 
-									 <input type="text"
-									class="form-control" id="pais" name="nacionalidad"
-									placeholder="${loginUsuario.nacionalidad}"
-									value="${loginUsuario.nacionalidad}">
-								</div>
-								
-								<div class="col">
-									<div class="country d-block text-center" style="margin: 0px; padding: 8px 6px">
-										<i></i> <b></b>
-									</div>
-								</div>
-								
+
+						<div class="row row-cols-2  ">
+
+							<div class="col-12">
+								<label class="d-block mt-2" for="nombre">Nacionalidad</label>
 							</div>
-							
-							
-							<label class="d-block mt-2" for="nombre">Residencia</label> 
-							 <input type="text"
-							class="form-control" id="residencia" name="residencia"
-							placeholder="${loginUsuario.residencia}"
-							value="${loginUsuario.residencia}">
-							
+							<div class="col">
+
+								<input type="text" class="form-control" id="pais"
+									name="nacionalidad" placeholder="${loginUsuario.nacionalidad}"
+									value="${loginUsuario.nacionalidad}">
+							</div>
+
+							<div class="col">
+								<div class="country d-block text-center"
+									style="margin: 0px; padding: 8px 6px">
+									<i></i> <b></b>
+								</div>
+							</div>
+
 						</div>
+
+
+						<label class="d-block mt-2" for="nombre">Residencia</label> <input
+							type="text" class="form-control" id="residencia"
+							name="residencia" placeholder="${loginUsuario.residencia}"
+							value="${loginUsuario.residencia}">
+
+					</div>
 
 				</div>
 
 			</div>
-			
+
 			<div class="col">
-			
+
 				<div class="form-group col">
-					
-						<div class="col-12">
-							<h2 class="text-center mb-5 text-primary">Datos de pago</h2>
-						</div>
-						
-						<div class="col-12">
-							
-							<label class="d-block mt-2" for="numTarjeta">Tarjeta de credito</label> 
-							<input type="text"
-							class="form-control" id="numTarjeta" name="numTarjeta"
-							placeholder="${loginUsuario.numTarjeta}"
+
+					<div class="col-12">
+						<h2 class="text-center mb-5 text-primary">Datos de pago</h2>
+					</div>
+
+					<div class="col-12">
+
+						<label class="d-block mt-2" for="numTarjeta">Tarjeta de
+							credito</label> <input type="text" class="form-control" id="numTarjeta"
+							name="numTarjeta" placeholder="${loginUsuario.numTarjeta}"
 							value="${loginUsuario.numTarjeta}">
-							
-						</div>
-						
-						<div class="col-12">
-							
-							<label class="d-block mt-2" for="numTarjeta">Caducidad</label> 
-							<input type="text"
-							class="form-control" id="numTarjeta" name="numTarjeta"
-							placeholder="${loginUsuario.caducidadTarjeta}"
+
+					</div>
+
+					<div class="col-12">
+
+						<label class="d-block mt-2" for="numTarjeta">Caducidad</label> <input
+							type="text" class="form-control" id="numTarjeta"
+							name="numTarjeta" placeholder="${loginUsuario.caducidadTarjeta}"
 							value="${loginUsuario.caducidadTarjeta}">
-							
-						</div>
-						
-						<div class="col-12">
-							
-							<label class="d-block mt-2" for="numTarjeta">Numero se seguridad</label> 
-							<input type="text"
-							class="form-control" id="numTarjeta" name="numTarjeta"
+
+					</div>
+
+					<div class="col-12">
+
+						<label class="d-block mt-2" for="numTarjeta">Numero se
+							seguridad</label> <input type="text" class="form-control" id="numTarjeta"
+							name="numTarjeta"
 							placeholder="${loginUsuario.numseguridadTarjeta}"
 							value="${loginUsuario.numseguridadTarjeta}">
-							
-						</div>
-						
-						
-						<div class="col-12">
-							
-							<label class="d-block mt-2" for="titular">Titular</label> 
-							<input type="text"
-							class="form-control" id="numTarjeta" name="numTarjeta"
-							placeholder="${loginUsuario.titular}"
+
+					</div>
+
+
+					<div class="col-12">
+
+						<label class="d-block mt-2" for="titular">Titular</label> <input
+							type="text" class="form-control" id="numTarjeta"
+							name="numTarjeta" placeholder="${loginUsuario.titular}"
 							value="${loginUsuario.titular}">
-							
-						</div>
-						
+
+					</div>
+
 				</div>
-			
-			
+
+
 			</div>
-			
-			
+
+
 
 		</div>
 

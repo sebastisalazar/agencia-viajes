@@ -8,7 +8,7 @@
 <base href="${pageContext.request.contextPath}/" />
 
 <c:if test="${not empty loginUsuario}">
-	<c:redirect url="/inicio"/>
+	<c:redirect url="/login"/>
 </c:if>
 
 <jsp:include page="/includes/cabecera.jsp">

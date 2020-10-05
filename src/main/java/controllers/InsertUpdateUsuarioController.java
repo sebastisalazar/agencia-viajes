@@ -21,7 +21,9 @@ import javax.validation.ValidatorFactory;
 
 import org.apache.log4j.Logger;
 
+import modelo.DAOImp.PaisDAOImp;
 import modelo.DAOImp.UsuarioDAOImp;
+import modelo.pojo.Pais;
 import modelo.pojo.Rol;
 import modelo.pojo.Usuario;
 
@@ -59,8 +61,22 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		if (llamaACrear) {
 
 			LOG.info("LLama al controlador crear-usuario ");
-			// se redirecciona
-			response.sendRedirect("views/usuario/crear-usuario.jsp");
+			
+			// para obtener todos los paises registrados
+			PaisDAOImp daoPais = PaisDAOImp.getInstance();
+			ArrayList<Pais> selectPaises;
+			try {
+				LOG.debug("Obteniendo listado de paises");
+				selectPaises = daoPais.getAll();
+				// Se pasan los atributos a la vista
+				session.setAttribute("selectPaises", selectPaises);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}finally {
+				// se redirecciona
+				response.sendRedirect("views/usuario/crear-usuario.jsp");
+			}
 
 			// si no es que llama a update
 		} else {
@@ -109,29 +125,93 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 
 		// se obtiene la session creada
 		HttpSession session = request.getSession();
+		
+		//obtenemos el usuario logeado
+		Usuario u2= (Usuario) session.getAttribute("loginUsuario");
 
 		// creacion de objeto alerta
 		Alerta alerta = null;
+		
+		// Array para mostrar mensajes para campos requeridos
+		ArrayList<String> requeridos = new ArrayList<>();
 
 		// Guardamos los datos recogidos del formulario
 		String email = request.getParameter("email");
 		
 		String password = request.getParameter("password");
 		
+		String direccion= request.getParameter("direccion");
+		
+		String dnie= request.getParameter("dnie");
+		
+		String nombre=request.getParameter("nombre");
+		
+		String ape1=request.getParameter("ape1");
+		
+		String ape2=request.getParameter("ape2");
+		
+		String pais=request.getParameter("pais");
+		
+		int paisid=0;
+		
+		//si no hay sesion iniciada significara que tiene que tiene que elegir un pais
+		if (u2==null) {
+			paisid=Integer.parseInt(pais.substring(0, pais.indexOf(",")));
+		}
+		
 		String id_rol= request.getParameter("rol");
 
 		// recoge el id por url cuando sea para actualizar
 		String id = request.getParameter("id");
+		
+		
+		//campo contraseña
+		String password1=request.getParameter("password1");
+		
+		String password2=request.getParameter("password2");
+		
+		 if (!("").equalsIgnoreCase(password1) && !("").equalsIgnoreCase(password2)) {
+			 
+			 if(password1.equalsIgnoreCase(password2)) {
+				 
+				 if(!password1.equalsIgnoreCase(password)) {
+					 password=password1; 
+				 }
+					 
+			 }else {
+				 
+				requeridos.add("Los campos de nueva contraseña no coinciden");
+				 
+			 }
+			 
+		 }//fin if
 
+		 
+		 
 		// se manda los campos escritos para que el usuario no pierda los datos
+		
+		
+		session.setAttribute("nombreIntroducido", nombre);
+
+		session.setAttribute("ape1Introducido", ape1);
+		
+		session.setAttribute("ape2Introducido", ape2);
+
+		session.setAttribute("paisIntroducido", pais);
+		
+		session.setAttribute("dnieIntroducido", dnie);
+		
 		session.setAttribute("emailIntroducido", email);
+		
+		session.setAttribute("direccionIntroducido", direccion);
 
 		session.setAttribute("passwordIntroducido", password);
 
 		session.setAttribute("rolSeleccionado", id_rol);
-
-		// Array para mostrar mensajes para campos requeridos
-		ArrayList<String> requeridos = new ArrayList<>();
+		
+		
+		
+		
 
 		// crud para operar contra la bbdd
 		UsuarioDAOImp daoUsuario = UsuarioDAOImp.getInstance();
@@ -145,6 +225,17 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		u.setEmail(email);
 		u.setPassword(password);
 		u.setRol(rol);
+		u.setNombre(nombre);
+		u.setApe1(ape1);
+		u.setApe2(ape2);
+		u.setDNI_NIE(dnie);
+		u.setResidencia(direccion);
+		
+		//si no hay sesion iniciada significara que tiene que tiene que elegir un pais
+		if (u2==null) {
+			u.setNacionalidad(paisid);
+		}
+		
 
 		// Recogemos las violaciones si es que las hay
 		Set<ConstraintViolation<Usuario>> violationsUsuario = validator.validate(u);
@@ -170,6 +261,18 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 				session.setAttribute("passwordIntroducidoC", password);
 
 				session.setAttribute("rolSeleccionadoC", id_rol);
+				
+				session.setAttribute("nombreIntroducidoC", nombre);
+
+				session.setAttribute("ape1IntroducidoC", ape1);
+				
+				session.setAttribute("ape2IntroducidoC", ape2);
+
+				session.setAttribute("paisIntroducidoC", paisid);
+				
+				session.setAttribute("dnieIntroducidoC", dnie);
+				
+				session.setAttribute("direccionIntroducidoC", direccion);
 
 				if (requeridos.size() != 0) {
 
@@ -177,23 +280,36 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 					LOG.info("No se han rellenado todos los campos");
 					session.setAttribute("requeridos", requeridos);
 
-					response.sendRedirect("crear-usuario.jsp");
+					response.sendRedirect("views/usuario/crear-usuario.jsp");
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
 			
 					LOG.info("Registrando datos del usuario en la BBDD (insert)");
 					daoUsuario.insert(u);
 					
+					
+					session.removeAttribute("nombreIntroducidoC");
+
+					session.removeAttribute("ape1IntroducidoC");
+					
+					session.removeAttribute("ape2IntroducidoC");
+
+					session.removeAttribute("paisIntroducidoC");
+					
+					session.removeAttribute("dnieIntroducidoC");
+					
 					session.removeAttribute("emailIntroducidoC");
 
 					session.removeAttribute("passwordIntroducidoC");
 
 					session.removeAttribute("rolSeleccionadoC");
+					
+					session.removeAttribute("direccionIntroducidoC");
 
 					// si la insert va bien manda el siguiente mensaje
 					alerta = new Alerta("success", "El usuario se ha creado correctamente.");
 					
-					response.sendRedirect("listado-ciudades");
+					response.sendRedirect("views/login.jsp");
 
 				}
 
@@ -221,7 +337,15 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 					// antes de ejecutar el update cogemos el id pasado por url y se lo asignamos al
 					// objeto
 					u.setId(Integer.parseInt(id));
-					u.setRol( new Rol(Integer.parseInt(id_rol)));
+					
+					//comprobacion si el usuario logeado es admin o usuario normal
+					
+					if (u2.getRol().getId()==2) {
+						u.setRol( new Rol(Integer.parseInt(id_rol)));
+					}else {
+						u.setRol(new Rol(1));
+					}
+					
 					
 					// ejecucion update
 					LOG.info("Iniciando actualizacion (update) de usuario");
