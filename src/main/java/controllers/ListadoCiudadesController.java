@@ -1,3 +1,10 @@
+/**
+ * Controlador que obtiene un listado de todos los registros de ciudades en la base de datos
+ * 
+ * @author sebastian
+ * @version 1.0
+ * 
+ */
 package controllers;
 
 import java.io.IOException;
@@ -32,6 +39,18 @@ public class ListadoCiudadesController extends HttpServlet {
 
 	}
 
+	/**
+	 * Se encarga de obtener el listado completo de ciudades cuando sea llamado por URL (href).
+	 * 
+	 * Atributos
+	 * 
+	 * 			dao: Para poder operar contra la base de datos
+	 * 			lista: Array que almacenará el listado completo
+	 * 			session: Para poder guardar los atributos al hacer un sendRedirect
+	 * 
+	 * 
+	 * 			
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
