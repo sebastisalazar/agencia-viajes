@@ -154,10 +154,7 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		
 		int paisid=0;
 		
-		//si no hay sesion iniciada significara que tiene que tiene que elegir un pais
-		if (u2==null) {
-			paisid=Integer.parseInt(pais.substring(0, pais.indexOf(",")));
-		}
+		
 		
 		String id_rol= request.getParameter("rol");
 
@@ -170,21 +167,33 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 		
 		String password2=request.getParameter("password2");
 		
-		 if (!("").equalsIgnoreCase(password1) && !("").equalsIgnoreCase(password2)) {
-			 
-			 if(password1.equalsIgnoreCase(password2)) {
-				 
-				 if(!password1.equalsIgnoreCase(password)) {
-					 password=password1; 
-				 }
+		//si no hay sesion iniciada significara que tiene que tiene que elegir un pais
+		if (u2==null) {
+					paisid=Integer.parseInt(pais.substring(0, pais.indexOf(",")));
+		}else {
+			
+			if (u2.getRol().getId()==1) {
+				if (!("").equalsIgnoreCase(password1) && !("").equalsIgnoreCase(password2)) {
 					 
-			 }else {
-				 
-				requeridos.add("Los campos de nueva contraseña no coinciden");
-				 
-			 }
-			 
-		 }//fin if
+					 if(password1.equalsIgnoreCase(password2)) {
+						 
+						 if(!password1.equalsIgnoreCase(password)) {
+							 password=password1; 
+						 }
+							 
+					 }else {
+						 
+						requeridos.add("Los campos de nueva contraseña no coinciden");
+						 
+					 }
+					 
+				 }//fin if
+			}
+			
+			
+		}
+		
+		 
 
 		 
 		 
@@ -358,7 +367,12 @@ public class InsertUpdateUsuarioController extends HttpServlet {
 
 				} // fin requeridos INSERT
 
-				response.sendRedirect("actualizar-usuario?id=" + id);
+				if (u2.getRol().getId()==2) {
+					response.sendRedirect("listado-usuarios");
+				}else {
+					response.sendRedirect("views/frontoffice/datos-usuario.jsp");
+				}
+				
 			} // FIN try
 
 			// Si no salta ninguna excepcion al insertar o actualizar, se borran los campos
