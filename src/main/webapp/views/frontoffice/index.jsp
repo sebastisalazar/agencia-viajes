@@ -29,7 +29,8 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                 
-                                    <div class="card-body">Proximos Vuelos <h3>${proximos}</h3></div>
+                                	<div class="card-body text-center"><i class="fas fa-plane-departure h2"></i> </div>
+                                    <div class="card-body text-center">Proximos vuelos<h3>${proximos}</h3></div>
                                     
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="views/frontoffice/proximos-vuelos">Consultar</a>
@@ -39,7 +40,10 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Vuelos cogidos <h3>${tomados}</h3></div>
+                               		
+                               		<div class="card-body text-center"><i class="fas fa-plane-arrival h2"></i></div>
+                               		
+                                    <div class="card-body text-center">Vuelos tomados <h3>${tomados}</h3></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="views/frontoffice/vuelos-cogidos">Consultar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -48,7 +52,10 @@
                             </div>
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-danger text-white mb-4">
-                                    <div class="card-body">Vuelos cancelados<h3>${cancelados}</h3></div>
+                                
+                                	<div class="card-body text-center"><i class="fas fa-plane-slash h2"></i></div>
+                                
+                                    <div class="card-body text-center">Vuelos cancelados<h3>${cancelados}</h3></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="views/frontoffice/vuelos-cancelados">Consultar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>

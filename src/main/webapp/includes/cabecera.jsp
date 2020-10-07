@@ -128,25 +128,12 @@
 						</div>
 					</div>
 				
-				<c:if test="${not empty loginUsuario}">
-					<c:if test="${loginUsuario.rol.id == 2}">
-						
-						<a class="py-2 d-none d-md-inline-block ${( 'Usuarios' eq param.pagina ) ? 'active' : ''}"
-						href="listado-usuarios">Usuarios</a>
-						
-						<a class="py-2 d-none d-md-inline-block ${( 'Registro Ciudad' eq param.pagina ) ? 'active' : ''}"
-						href="crear-ciudad">Nueva Ciudad</a>
-						
-						<a class="py-2 d-none d-md-inline-block ${( 'Registro Pais' eq param.pagina ) ? 'active' : ''}"
-						href="crear-pais">Nuevo Pais</a>
-
-					</c:if>
-				</c:if>
+			
 
 
 			<c:if test="${not empty loginUsuario}">
 
-				<span class="form-inline "> 
+				<span class="form-inline"> 
 				
 					<c:choose>
          

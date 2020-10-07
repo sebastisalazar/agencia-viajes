@@ -70,13 +70,13 @@
 		                            
 		                            
 		                           
-		                            <a class="nav-link" href="">
-		                                <div class="sb-nav-link-icon"><i class="crear-ciudad"></i></div>
+		                            <a class="nav-link" href="crear-ciudad">
+		                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
 		                                Crear ciudad
 		                            </a>
 		                            
-		                            <a class="nav-link" href="">
-		                                <div class="sb-nav-link-icon"><i class="crear-pais"></i></div>
+		                            <a class="nav-link" href="crear-pais">
+		                                <div class="sb-nav-link-icon"><i class="fas fa-plus"></i></div>
 		                                Crear pais
 		                            </a>
 		                            
