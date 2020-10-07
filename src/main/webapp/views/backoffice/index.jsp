@@ -28,8 +28,9 @@
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
-                                
-                                    <div class="card-body">Lista de usuarios </div>
+                                	<div class="card-body text-center"><i class="fas fa-users h2"></i></div>
+                                	
+                                    <div class="card-body text-center">Lista de usuarios</div>
                                     
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="listado-usuarios">Consultar</a>
@@ -41,7 +42,8 @@
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
                                 
-                                    <div class="card-body">Lista de ciudades</div>
+                                	<div class="card-body text-center"><i class="fas fa-city h2"></i></div>
+                                    <div class="card-body text-center">Lista de ciudades</div>
                                     
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="listado-ciudades">Consultar</a>
@@ -53,8 +55,9 @@
                             
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Nueva ciudad</div>
-                                    <i class="fas fa-plus h1 text-center"></i>
+                                	<div class="card-body text-center"> <i class="fas fa-plus h2"></i></div>
+                                    <div class="card-body text-center">Nueva ciudad</div>
+                                   
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="crear-ciudad">Registrar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
@@ -64,8 +67,8 @@
                             
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-success text-white mb-4">
-                                    <div class="card-body">Nuevo<br>pais  <br></div>
-                                    <i class="fas fa-plus h1"></i>
+                                	<div class="card-body text-center"> <i class="fas fa-plus h2"></i></div>
+                                    <div class="card-body text-center">Nuevo<br>pais  <br></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small text-white stretched-link" href="crear-pais">Registrar</a>
                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
