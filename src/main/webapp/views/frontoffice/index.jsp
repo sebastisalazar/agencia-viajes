@@ -21,7 +21,7 @@
             <div id="layoutSidenav_content">
                 
                     <div class="container-fluid">
-                        <h1 class="mt-4"> Mi panel</h1>
+                        <h1 class="mt-4"> Panel FrontOffice</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Panel de administracion</li>
                         </ol>

@@ -193,7 +193,7 @@ public class InsertUpdatePaisController extends HttpServlet {
 					// se manda los mensajes para requeridos
 					session.setAttribute("requeridos", requeridos);
 
-					response.sendRedirect("crear-pais.jsp");
+					response.sendRedirect("views/pais/crear-pais.jsp");
 					// si existen errores pero la url no contiene ningun parametro será para crear
 				} else {
 
@@ -269,7 +269,7 @@ public class InsertUpdatePaisController extends HttpServlet {
 			// si existe excepcion y se llamo por servlet crear-ciudad se redirige de vuelta
 			// alli
 			if (llamaACrear) {
-				response.sendRedirect("crear-pais.jsp");
+				response.sendRedirect("views/pais/crear-pais.jsp");
 
 				// si no quiere decir que es updte/actualizar ciudad
 			} else {
