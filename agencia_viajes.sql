@@ -95,7 +95,7 @@ CREATE TABLE `ciudad` (
   KEY `ciudad_FK_1` (`continente`),
   CONSTRAINT `ciudad_FK` FOREIGN KEY (`pais`) REFERENCES `pais` (`id`),
   CONSTRAINT `ciudad_FK_1` FOREIGN KEY (`continente`) REFERENCES `continente` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `datos_personales` (
   KEY `datos_personales_FK_1` (`nacionalidad`),
   CONSTRAINT `datos_personales_FK` FOREIGN KEY (`id_tarjeta`) REFERENCES `tarjetas_credito` (`id`),
   CONSTRAINT `datos_personales_FK_1` FOREIGN KEY (`nacionalidad`) REFERENCES `pais` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -164,7 +164,7 @@ CREATE TABLE `datos_personales` (
 
 LOCK TABLES `datos_personales` WRITE;
 /*!40000 ALTER TABLE `datos_personales` DISABLE KEYS */;
-INSERT INTO `datos_personales` VALUES (1,'Admin','Test1','Test2','12345678T',1,'calle indautxu 23, 4 derecha',1),(2,'Sebastian','Salazar','Taraune','12345679T',1,'calle Balejo 23, 5 derecha',2);
+INSERT INTO `datos_personales` VALUES (1,'Admin','Test1','Test2','12345678T',1,'calle indautxu 23, 4 derecha',1),(2,'Sebastian','Salazar','Taraune','12345679T',1,'calle Balejo 23, 5 derecha',2),(8,'invitado','test','test','testtestR',1,'test test tes',10),(9,'Ander','test','test','56473847T',1,'Moyua 23 1izq',11);
 /*!40000 ALTER TABLE `datos_personales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -194,7 +194,7 @@ CREATE TABLE `pais` (
 
 LOCK TABLES `pais` WRITE;
 /*!40000 ALTER TABLE `pais` DISABLE KEYS */;
-INSERT INTO `pais` VALUES (1,'España','https://picsum.photos/200/200',5,'es'),(2,'Portugal','https://picsum.photos/200/200',5,'pt'),(3,'Francia','https://picsum.photos/200/200',5,'fr'),(4,'Italia','https://picsum.photos/200/200',5,'it'),(5,'Alemania','https://picsum.photos/200/200',5,'de'),(6,'Austria','https://picsum.photos/200/200',5,'at'),(7,'Polonia','https://picsum.photos/200/200',5,'pl'),(8,'Chequia','https://picsum.photos/200/200',5,'cz'),(9,'Belgica','https://picsum.photos/200/200',5,'be'),(10,'Bulgaria','https://picsum.photos/200/200',5,'bg'),(11,'Chipre','https://picsum.photos/200/200',5,'cy'),(12,'Crocacia','https://picsum.photos/200/200',5,'hr'),(13,'Dinamarca','https://picsum.photos/200/200',5,'dk'),(14,'Eslovaquia','https://picsum.photos/200/200',5,'sk'),(15,'Eslovenia','https://picsum.photos/200/200',5,'si'),(16,'Estonia','https://picsum.photos/200/200',5,'ee'),(17,'Finlandia','https://picsum.photos/200/200',5,'fi'),(18,'Grecia','https://picsum.photos/200/200',5,'gr'),(19,'hungria','https://picsum.photos/200/200',5,'hu'),(20,'Irlanda','https://picsum.photos/200/200',5,'ie'),(21,'Letonia','https://picsum.photos/200/200',5,'lv'),(22,'Lituania','https://picsum.photos/200/200',5,'lt'),(23,'Luxemburgo','https://picsum.photos/200/200',5,'lu'),(24,'Malta','https://picsum.photos/200/200',5,'mt'),(25,'Paises Bajos','https://picsum.photos/200/200',5,'nl'),(26,'Rumania','https://picsum.photos/200/200',5,'ro'),(27,'Suecia','https://picsum.photos/200/200',5,'se'),(28,'Reino Unido','https://picsum.photos/200/200',5,'gb'),(29,'China','https://picsum.photos/60/40',4,'cn'),(32,'Japon','https://picsum.photos/60/40',4,'jp');
+INSERT INTO `pais` VALUES (1,'España','https://picsum.photos/200/200',5,'es'),(2,'Portugal','https://picsum.photos/200/200',5,'pt'),(3,'Francia','https://picsum.photos/200/200',5,'fr'),(4,'Italia','https://picsum.photos/200/200',5,'it'),(5,'Alemania','https://picsum.photos/200/200',5,'de'),(6,'Austria','https://picsum.photos/200/200',5,'at'),(7,'Polonia','https://picsum.photos/200/200',5,'pl'),(8,'Chequia','https://picsum.photos/200/200',5,'cz'),(9,'Belgica','https://picsum.photos/200/200',5,'be'),(10,'Bulgaria','https://picsum.photos/200/200',5,'bg'),(11,'Chipre','https://picsum.photos/200/200',5,'cy'),(12,'Crocacia','https://picsum.photos/200/200',5,'hr'),(13,'Dinamarca','https://picsum.photos/200/200',5,'dk'),(14,'Eslovaquia','https://picsum.photos/200/200',5,'sk'),(15,'Eslovenia','https://picsum.photos/200/200',5,'si'),(16,'Estonia','https://picsum.photos/200/200',5,'ee'),(17,'Finlandia','https://picsum.photos/200/200',5,'fi'),(18,'Grecia','https://picsum.photos/200/200',5,'gr'),(19,'hungria','https://picsum.photos/200/200',5,'hu'),(20,'Irlanda','https://picsum.photos/200/200',5,'ie'),(21,'Letonia','https://picsum.photos/200/200',5,'lv'),(22,'Lituania','https://picsum.photos/200/200',5,'lt'),(23,'Luxemburgo','https://picsum.photos/200/200',5,'lu'),(24,'Malta','https://picsum.photos/200/200',5,'mt'),(25,'Paises Bajos','https://picsum.photos/200/200',5,'nl'),(26,'Rumania','https://picsum.photos/200/200',5,'ro'),(27,'Suecia','https://picsum.photos/200/200',5,'se'),(28,'Reino Unido','https://picsum.photos/200/200',5,'gb'),(29,'China','https://picsum.photos/60/40',4,'cn'),(30,'Japon','https://picsum.photos/60/40',4,'jp');
 /*!40000 ALTER TABLE `pais` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -232,13 +232,12 @@ DROP TABLE IF EXISTS `tarjetas_credito`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `tarjetas_credito` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `numero` varchar(11) NOT NULL,
+  `numero` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '11111111111',
   `caducidad` date NOT NULL,
-  `num_seguridad` varchar(4) NOT NULL,
-  `titular` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `tarjetas_credito_UN` (`numero`,`titular`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `num_seguridad` varchar(4) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '1234',
+  `titular` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'N/A',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -247,7 +246,7 @@ CREATE TABLE `tarjetas_credito` (
 
 LOCK TABLES `tarjetas_credito` WRITE;
 /*!40000 ALTER TABLE `tarjetas_credito` DISABLE KEYS */;
-INSERT INTO `tarjetas_credito` VALUES (1,'12345678912','2022-10-04','714','Admin'),(2,'21987654321','2020-10-04','123','Sebastian');
+INSERT INTO `tarjetas_credito` VALUES (1,'12345678912','2022-10-04','714','Admin'),(2,'21987654321','2020-10-04','123','Sebastian'),(10,'11111111111','2020-10-05','1234','N/A'),(11,'11111111111','2020-10-05','1234','N/A');
 /*!40000 ALTER TABLE `tarjetas_credito` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -271,7 +270,7 @@ CREATE TABLE `usuarios` (
   KEY `usuarios_FK_1` (`id_datos`),
   CONSTRAINT `usuarios_FK` FOREIGN KEY (`id_rol`) REFERENCES `rol` (`id`),
   CONSTRAINT `usuarios_FK_1` FOREIGN KEY (`id_datos`) REFERENCES `datos_personales` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -280,7 +279,7 @@ CREATE TABLE `usuarios` (
 
 LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'admin@agencia-viajes.es','admin','https://picsum.photos/200',2,1),(2,'sebastian@agencia-viajes.es','sebastian','https://picsum.photos/200',1,2);
+INSERT INTO `usuarios` VALUES (1,'admin@agencia-viajes.es','admin','https://picsum.photos/200',2,1),(2,'sebastian@agencia-viajes.es','sebastian','https://picsum.photos/200',1,2),(3,'invitado@agencia-viajes.es','invitado','https://picsum.photos/200',1,8),(4,'ander@agencia-viajes.es','ander','https://picsum.photos/200',1,9);
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -293,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-10-04 18:43:47
+-- Dump completed on 2020-10-07 19:41:55
